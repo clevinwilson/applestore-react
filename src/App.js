@@ -1,4 +1,5 @@
 import {Route,Routes,BrowserRouter} from 'react-router-dom'
+import Footer from './Components/Footer/Footer';
 import Header from './Components/Header/Header';
 import Home from './Components/Home/Home';
 function App() {
@@ -8,6 +9,8 @@ function App() {
     <Routes>
       <Route path='/' element={<Home/>} />
     </Routes>
+
+    <Footer/>
     </BrowserRouter>
   );
 }
