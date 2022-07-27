@@ -19,7 +19,7 @@ body {
 }
 
 .content {
-    max-width: 980px;
+    max-width: 100%;
     pointer-events: auto
 }
 
@@ -398,13 +398,13 @@ hr.hamburger-hr {
     height: 367px;
 }
 
-.wwdc-logo-image {
+/* .wwdc-logo-image {
     height: 90px;
     background-repeat: no-repeat;
     background-position: center;
     height: 49px;
     background-image: url(/images/promo_tile_logo__fois684wh1ym_large.png);
-}
+} */
 
 .wwdc-link {
     font-size: 17px;
@@ -1232,7 +1232,7 @@ hr.hamburger-hr {
 
 /* ios banner */
 
-.ios-banner {
+/* .ios-banner {
     background: url(../images/ios15_preview__f7lrpcnc3eum_large_2x.jpg) repeat 0 0;
     object-fit: cover;
     height: 560px;
@@ -1241,7 +1241,7 @@ hr.hamburger-hr {
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center center
-}
+} */
 
 .ios-header {
     display: grid;
@@ -1262,7 +1262,7 @@ hr.hamburger-hr {
 }
 
 @media screen and (max-width: 768px) {
-    .ios-banner {
+    /* .ios-banner {
         background: url(../images/ios15_preview__f7lrpcnc3eum_small_2x.jpg) repeat 0 0;
         object-fit: cover;
         width: 100%;
@@ -1271,7 +1271,7 @@ hr.hamburger-hr {
         background-repeat: no-repeat;
         background-size: cover;
         background-position: center center;
-    }
+    } */
 
     .ios-container {
         margin-left: 30px !important;
@@ -1602,7 +1602,7 @@ hr.hamburger-hr {
     }
 }
 
-.support-section {
+/* .support-section {
     background-size: 100%;
     background-repeat: no-repeat;
     object-fit: cover;
@@ -1610,7 +1610,7 @@ hr.hamburger-hr {
     background-image: url(images/hero-banner-baker-homepage.image.large_2x.jpg);
     height: 500px;
     width: 100%;
-}
+} */
 
 /* signup page */
 
