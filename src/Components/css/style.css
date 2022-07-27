@@ -365,6 +365,14 @@ hr.hamburger-hr {
     border-top: 0.2px solid #343434;
 }
 
+
+/* sidenave */
+.sidenav-open {
+    height: 100%;
+    opacity: 1.5;
+    background-color: black;
+}
+
 /* navbar for md and xl devices */
 
 @media (max-width:768px) {
@@ -659,7 +667,7 @@ hr.hamburger-hr {
     position: fixed;
 }
 
-.content-hide{
+.content-hide {
     display: none !important;
 }
 

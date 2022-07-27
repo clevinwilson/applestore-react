@@ -3,27 +3,24 @@ import {useState} from 'react'
 
 function Header() {
   const [bag,setBag]=useState(false);
-  const opensmBag=()=>{
-    console.log('pos');
-    setBag(!bag);
-  }
+  const [nav,setNav]=useState(false);
+
   return (
     <div>
       <header style={{ lineHeight: "0.8" }}>
         <div className="row">
           <div className="col-md-12">
             {/* <!-- hamburger menu for small devices --> */}
-            <div id="mySidenav" className="sidenav">
-              <a id="closebtn" className="closebtn" onclick="openNav()"><i
-                style={{ fontSize: "26px", fontWeight: "100" }} className="fas fa-equals"></i></a>
+            <div id="mySidenav" className={nav ? "sidenav sidenav-open" : "sidenav "}>
+              <a id="closebtn" className="closebtn" onClick={() => { setNav(!nav) }}><i
+                style={{ fontSize: "26px" }} className={!nav ? "text-white fas fa-equals " : "text-white fa-solid fa-xmark"}></i></a>
 
               <div className="sm-header">
                 <a id="apple-logo" href="index.html" className="apple-logo"><img
                   src="https://www.apple.com/ac/globalnav/6/en_IN/images/be15095f-5a20-57d0-ad14-cf4c638e223a/globalnav_apple_image__cxwwnrj0urau_large.svg"
                   style={{ height: "53px " }} alt="" /></a>
 
-                <a onClick={()=>{setBag(!bag)}} id="sm-bag"  className="text-light bag"><i
-                  style={{ fontWeight: "100", fontSize: "20px " }} className="nav-icon fas fa-shopping-bag"></i></a>
+                <a onClick={() => { setBag(!bag) }} id="sm-bag" className="text-light bag"><i class="fa-solid fa-bag-shopping"></i></a>
               </div>
 
               <input className="search-bar mb-3 p-3 mr-3 ml-3" type="text" placeholder="  🔍 Search apple.com" />
@@ -52,7 +49,7 @@ function Header() {
               <p className="bag-items-list m-4 p-1" style={{ color: "#6e6e73", fontSize: "13px" }}>Your Bag is empty.</p>
               <div className="bag-options p-1  pl-4 pr-4">
                 <hr />
-                <a className="content-align" href="/"><i style={{ fontWeight: "100" }} className="mr-2 fas fa-shopping-bag"></i>Bag</a>
+                <a className="content-align" href="/"><i className="mr-2 fa-solid fa-bag-shopping"></i>Bag</a>
                 <hr />
                 <a className="content-align" href="/"><i style={{ fontWeight: "100" }} className="mr-2 far fa-heart"></i>
                   Favourites</a>
@@ -117,8 +114,7 @@ function Header() {
                   {/* <!-- //bag section --> */}
                   <li class="nav-item-box nav-item" >
                     <div className=" dropdown">
-                      <i id="bag" onclick="openBag()" style={{ fontWeight: "100" }}
-                        className="text-white nav-icon fas fa-shopping-bag"></i>
+                      <i class="text-white fa-solid fa-bag-shopping"></i>
                       <div id="dropdown-content" className="p-3 mb-2 dropdown-content">
                         <p className="m-4 p-1" style={{ color: "#6e6e73", fontSize: "13px" }}>Your Bag is empty.</p>
                         <hr />
