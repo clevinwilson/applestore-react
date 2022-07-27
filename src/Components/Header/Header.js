@@ -1,7 +1,12 @@
 import React from 'react';
-import '../css/style.css'
+import {useState} from 'react'
 
 function Header() {
+  const [bag,setBag]=useState(false);
+  const opensmBag=()=>{
+    console.log('pos');
+    setBag(!bag);
+  }
   return (
     <div>
       <header style={{ lineHeight: "0.8" }}>
@@ -9,7 +14,7 @@ function Header() {
           <div className="col-md-12">
             {/* <!-- hamburger menu for small devices --> */}
             <div id="mySidenav" className="sidenav">
-              <a href="javascript:void(0)" id="closebtn" className="closebtn" onclick="openNav()"><i
+              <a id="closebtn" className="closebtn" onclick="openNav()"><i
                 style={{ fontSize: "26px", fontWeight: "100" }} className="fas fa-equals"></i></a>
 
               <div className="sm-header">
@@ -17,7 +22,7 @@ function Header() {
                   src="https://www.apple.com/ac/globalnav/6/en_IN/images/be15095f-5a20-57d0-ad14-cf4c638e223a/globalnav_apple_image__cxwwnrj0urau_large.svg"
                   style={{ height: "53px " }} alt="" /></a>
 
-                <a id="sm-bag" onclick="opensmBag()" className="text-light bag"><i
+                <a onClick={()=>{setBag(!bag)}} id="sm-bag"  className="text-light bag"><i
                   style={{ fontWeight: "100", fontSize: "20px " }} className="nav-icon fas fa-shopping-bag"></i></a>
               </div>
 
@@ -43,7 +48,7 @@ function Header() {
             </div>
 
             {/* <!-- Bag for sm devices --> */}
-            <div id="dropdown-content-sm" class=" p-3 mb-2 dropdown-content-sm">
+            <div id="dropdown-content-sm" class={bag ? " p-3 mb-2 dropdown-content-sm " : " p-3 mb-2 dropdown-content-sm content-hide "} >
               <p className="bag-items-list m-4 p-1" style={{ color: "#6e6e73", fontSize: "13px" }}>Your Bag is empty.</p>
               <div className="bag-options p-1  pl-4 pr-4">
                 <hr />
@@ -141,6 +146,7 @@ function Header() {
         </div >
       </header >
     </div >
+    
   )
 }
 
