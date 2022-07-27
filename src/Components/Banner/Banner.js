@@ -37,7 +37,7 @@ function Banner() {
 
 
       {/* <!-- third banner imac --> */}
-      <section class="mt-3 mb-3 banner-three">
+      <section class="mt-3 mb-3 text-center banner-three">
         <div class="row">
           <div class="col-md-12 text-center">
             <img class="banners-image banners-image-three" id="banner-three" src="images/hero_imac__dqh65mwjj04m_large.jpg" width="100%"
@@ -55,7 +55,7 @@ function Banner() {
 
       {/* <!-- //section 4 wwdc and watch  --> */}
       <section>
-        <div class="row">
+        <div style={{width:"100%"}} class="row">
 
           {/* <!-- wwdc banner --> */}
           <div style={{background:'black'}} class=" col-md-6 mt-2">
@@ -104,7 +104,7 @@ function Banner() {
 
       {/* <!-- air tag banner --> */}
       <section>
-        <div class="row">
+        <div style={{ width: "100%" }} class="row">
           <div class="col-md-6">
             <div class="mt-3 box-margin ">
               <img class=" banners-image" id="banner-three" src="/images/promo_airtag__e6b73a64nno2_large.jpg" width="100%"
