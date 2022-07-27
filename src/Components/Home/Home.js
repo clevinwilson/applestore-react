@@ -1,9 +1,12 @@
 import React from 'react';
 import '../css/style.css';
+import Ribborn from '../Ribborn/Ribborn';
 
 function Home() {
   return (
-    <div>Home</div>
+    <div>
+      <Ribborn/>
+    </div>
   )
 }
 
