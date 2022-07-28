@@ -18,7 +18,7 @@ function Header() {
                 style={{ fontSize: "26px" }} className={!nav ? "text-white fas fa-equals " : "text-white fa-solid fa-xmark"}></i></a>
 
               <div className="sm-header">
-                <a id="apple-logo" href="/" className="apple-logo"><img
+                <a id="apple-logo" onClick={() => { navigate('/') }} className="apple-logo"><img
                   src="https://www.apple.com/ac/globalnav/6/en_IN/images/be15095f-5a20-57d0-ad14-cf4c638e223a/globalnav_apple_image__cxwwnrj0urau_large.svg"
                   style={{ height: "53px " }} alt="" /></a>
 
@@ -31,7 +31,7 @@ function Header() {
               <hr style={{ marginLleft: "20px", marginRight: "20px " }} />
               <hr className="ml-4 mr-4 hamburger-hr" />
 
-              <a href="/iphone">iPhone</a>
+              <a style={{ color:"#818181"}} onClick={() => { navigate('/iphone'); setNav(!nav) }}>iPhone</a>
               <hr style={{ marginLeft: "20px", marginRight: "20px" }} />
               <hr className="ml-4 mr-4 hamburger-hr" />
 
@@ -78,7 +78,7 @@ function Header() {
               <div className=" content collapse navbar-collapse" id="collapsibleNavbar">
                 <ul style={{ alignItems: "center" }} class="center navbar-nav" >
                   <li className="nav-item-box nav-item">
-                    <a className=" nav-link" href="/">
+                    <a className=" nav-link" onClick={() => { navigate('/') }}>
                       <img
                         src="https://www.apple.com/ac/globalnav/6/en_IN/images/be15095f-5a20-57d0-ad14-cf4c638e223a/globalnav_apple_image__cxwwnrj0urau_large.svg"
                         alt="" /></a>
@@ -90,7 +90,7 @@ function Header() {
                   </li>
 
                   <li className="nav-item-box nav-item">
-                    <a className="nav-link" href="/iphone"><img
+                    <a className="nav-link" onClick={()=>{navigate('/iphone')}}><img
                       src="https://www.apple.com/ac/globalnav/6/en_IN/images/be15095f-5a20-57d0-ad14-cf4c638e223a/globalnav_links_iphone_image__dhepc4hn14cy_large.svg"
                       alt="" /></a>
                   </li>
