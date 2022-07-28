@@ -113,8 +113,8 @@ function Signup() {
                       <span className='ml-1'>Google</span>
                   </Wrap>
                   <Wrap>
-                      <img src='/images/icons8-google-35.png' />
-                      <span>Google</span>
+                      <img src='/images/124010.png' />
+                      <span className='ml-1'>Facebook</span>
                   </Wrap>
             </SignupButtons>
           </SignupWraper>
@@ -148,6 +148,11 @@ color: #000000;
 overflow: hidden;
 transition: all 250ms cubic-bezier(0.25, 0.46, 0.45, 0.94) 0s;
 cursor:pointer;
+img{
+    height: 28px;
+    width: 28px;
+    border-radius: 4px;
+}
 `
 
 export default Signup
