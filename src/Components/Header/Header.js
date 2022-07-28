@@ -31,7 +31,7 @@ function Header() {
               <hr style={{ marginLleft: "20px", marginRight: "20px " }} />
               <hr className="ml-4 mr-4 hamburger-hr" />
 
-              <a href="iphone.html">iPhone</a>
+              <a href="/iphone">iPhone</a>
               <hr style={{ marginLeft: "20px", marginRight: "20px" }} />
               <hr className="ml-4 mr-4 hamburger-hr" />
 
@@ -90,7 +90,7 @@ function Header() {
                   </li>
 
                   <li className="nav-item-box nav-item">
-                    <a className="nav-link" href="iphone.html"><img
+                    <a className="nav-link" href="/iphone"><img
                       src="https://www.apple.com/ac/globalnav/6/en_IN/images/be15095f-5a20-57d0-ad14-cf4c638e223a/globalnav_links_iphone_image__dhepc4hn14cy_large.svg"
                       alt="" /></a>
                   </li>

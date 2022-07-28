@@ -2,6 +2,7 @@ import {Route,Routes,BrowserRouter} from 'react-router-dom'
 import Footer from './Components/Footer/Footer';
 import Header from './Components/Header/Header';
 import Home from './Components/Home/Home';
+import Iphone from './Components/Iphone/Iphone';
 import Signin from './Components/Signin/Signin';
 import Signup from './Components/Signup/Signup';
 function App() {
@@ -16,6 +17,9 @@ function App() {
     </Routes>
     <Routes>
       <Route path='/signup' element={<Signup/>} />
+    </Routes>
+    <Routes>
+      <Route path='/iphone' element={<Iphone/>}/>
     </Routes>
     <Footer/>
     </BrowserRouter>
