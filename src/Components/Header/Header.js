@@ -1,7 +1,9 @@
 import React from 'react';
-import {useState} from 'react'
+import {useState} from 'react';
+import { useNavigate } from 'react-router-dom'
 
 function Header() {
+  const navigate=useNavigate();
   const [bag,setBag]=useState(false);
   const [nav,setNav]=useState(false);
 
@@ -16,7 +18,7 @@ function Header() {
                 style={{ fontSize: "26px" }} className={!nav ? "text-white fas fa-equals " : "text-white fa-solid fa-xmark"}></i></a>
 
               <div className="sm-header">
-                <a id="apple-logo" href="index.html" className="apple-logo"><img
+                <a id="apple-logo" href="/" className="apple-logo"><img
                   src="https://www.apple.com/ac/globalnav/6/en_IN/images/be15095f-5a20-57d0-ad14-cf4c638e223a/globalnav_apple_image__cxwwnrj0urau_large.svg"
                   style={{ height: "53px " }} alt="" /></a>
 
@@ -60,7 +62,7 @@ function Header() {
                 <a className="content-align" href="/"><i style={{ fontWeight: "100" }} className="mr-2 fas fa-cog"></i>
                   Account</a>
                 <hr />
-                <a className="content-align" href="/"><i style={{ fontWeight: "100" }} className="mr-2 fas fa-user-circle"></i>Sign
+                <a className="content-align" onClick={() => { navigate('/signin'); setBag(!bag); }}><i style={{ fontWeight: "100" }} className="mr-2 fas fa-user-circle"></i>Sign
                   in</a>
               </div>
             </div>
@@ -76,7 +78,7 @@ function Header() {
               <div className=" content collapse navbar-collapse" id="collapsibleNavbar">
                 <ul style={{ alignItems: "center" }} class="center navbar-nav" >
                   <li className="nav-item-box nav-item">
-                    <a className=" nav-link" href="index.html">
+                    <a className=" nav-link" href="/">
                       <img
                         src="https://www.apple.com/ac/globalnav/6/en_IN/images/be15095f-5a20-57d0-ad14-cf4c638e223a/globalnav_apple_image__cxwwnrj0urau_large.svg"
                         alt="" /></a>
@@ -130,7 +132,7 @@ function Header() {
                         <a className="content-align" href="#"><i tyle={{ fontWeight: "100" }} className="mr-2 fas fa-cog"></i>
                           Account</a>
                         <hr />
-                        <a className="content-align" href="signin.html"><i tyle={{ fontWeight: "100" }}
+                        <a className="content-align" href="/signin"><i tyle={{ fontWeight: "100" }}
                           className="mr-2 fas fa-user-circle"></i>Sign in</a>
                       </div>
                     </div>
