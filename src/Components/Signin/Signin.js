@@ -14,7 +14,7 @@ function Signin() {
                               <h1 className="signin-header-text p-3 mb-4"> Please sign in. </h1>
                           </div>
                           <div className="signin-form-container ">
-                              <form action="">
+                              <form className='mb-4' action="">
                                   <div className="form-group ">
                                       <input type="email" className="form-control signin-input  " id="email" placeholder="Apple ID"
                                           name="email" />
@@ -28,10 +28,24 @@ function Signin() {
                                       <p className="pl-1">Your Apple ID is the email address or mobile phone number you use to sign in to iTunes,
                                           the App Store, and iCloud.</p>
                                   </div>
-                                  <div className="button-submit">
+                                  <div className="button-submit ">
                                       <button type="submit" className="btn btn-primary signin-btn">Sign In</button>
                                   </div>
+                                 
                               </form>
+                              <hr />
+                              <SigninWraper>
+                                  <SigninButtons>
+                                      <Wrap>
+                                          <img src='/images/icons8-google-35.png' />
+                                          <span className='ml-1'>Google</span>
+                                      </Wrap>
+                                      <Wrap>
+                                          <img src='/images/124010.png' />
+                                          <span className='ml-1'>Facebook</span>
+                                      </Wrap>
+                                  </SigninButtons>
+                              </SigninWraper>
                           </div>
                       </div>
                       <div className="create-account-text-container mt-4 ">
@@ -52,6 +66,8 @@ function Signin() {
               </div>
           </section>
 
+         
+
 
 
       </Contaniner >
@@ -60,5 +76,36 @@ function Signin() {
 
 const Contaniner=styled.div`
 
+`
+
+const SigninWraper = styled.div`
+display:block;
+margin-top:22px;
+`
+const SigninButtons = styled.div`
+display:flex;
+justify-content: center;
+align-items: center;
+`
+const Wrap = styled.div`
+display: flex;
+justify-content: center;
+align-items: center;
+margin:10px;
+display:inline;
+border: 1px solid #a0a0a0;
+padding: 8px 10px 8px 10px;
+min-width: 112px;
+font-size: 14px;
+border-radius: 6px;
+color: #000000;
+overflow: hidden;
+transition: all 250ms cubic-bezier(0.25, 0.46, 0.45, 0.94) 0s;
+cursor:pointer;
+img{
+    height: 28px;
+    width: 28px;
+    border-radius: 4px;
+}
 `
 export default Signin
