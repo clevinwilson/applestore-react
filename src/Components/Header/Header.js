@@ -67,7 +67,7 @@ function Header() {
 
 
             <nav id="navbar" style={{ position: "fixed", width: "100%", zIndex: "1" }}
-              className="navdbar navbar-expand-md nav-bg  navbar-dark">
+              className={bag ? "navdbar navbar-expand-md nav-bg  navbar-dark nav-background" :"navdbar navbar-expand-md nav-bg  navbar-dark"}>
               {/* <!-- Toggler/collapsibe Button --> */}
               <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
                 <span className="navbar-toggler-icon"></span>
@@ -108,14 +108,14 @@ function Header() {
                       alt="" /></a>
                   </li>
                   <li className="nav-item-box nav-item">
-                    <a className="text-white nav-icon nav-link " href="#"><i tyle={{ fontWeight: "100" }}
+                    <a  className="text-white nav-icon nav-link " href="#"><i tyle={{ fontWeight: "100" }}
                       className=" fa fa-search"></i></a>
                   </li>
                   {/* <!-- //bag section --> */}
-                  <li class="nav-item-box nav-item" >
+                  <li onClick={() => { setBag(!bag) }} class="nav-item-box nav-item" >
                     <div className=" dropdown">
                       <i class="text-white fa-solid fa-bag-shopping"></i>
-                      <div id="dropdown-content" className="p-3 mb-2 dropdown-content">
+                      <div id="dropdown-content" className={bag ? "p-3 mb-2 dropdown-content display-content" :"p-3 mb-2 dropdown-content"}>
                         <p className="m-4 p-1" style={{ color: "#6e6e73", fontSize: "13px" }}>Your Bag is empty.</p>
                         <hr />
                         <a className="content-align" href="#"><i tyle={{ fontWeight: "100" }}

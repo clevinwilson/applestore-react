@@ -13,6 +13,10 @@ body {
     overflow-x: hidden;
 }
 
+.display-content {
+    display: block !important;
+}
+
 .nav-bg {
     opacity: 0.8;
     background-color: black;
@@ -456,14 +460,16 @@ hr.hamburger-hr {
     text-align: center;
     height: 307px;
 }
-.watch-header{
+
+.watch-header {
     position: relative;
 }
 
-.watch-banner{
+.watch-banner {
     display: block;
     position: relative;
 }
+
 .watch-header-content {
     margin-right: 10px;
 }
@@ -674,12 +680,23 @@ hr.hamburger-hr {
     position: fixed;
 }
 
+@media (min-width:768px) {
+    .dropdown-content-sm {
+        display: none !important;
+    }
+}
+
+
 .content-hide {
     display: none !important;
 }
 
 .bag-items-list {
     text-align: center;
+}
+
+.nav-background {
+    opacity: 1.8 !important;
 }
 
 @media screen and (max-width: 768px) {
