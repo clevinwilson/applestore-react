@@ -9,9 +9,9 @@ function Banner() {
         <div className="text-center text-light text">
           <h2 className="banner-header-text">iPad Pro</h2>
           <h3 className="banner-text">Supercharged by the Apple M1 chip.</h3>
-          <div className="mt-1 banner-links">
-            <a href="iphone-12.html">Learn more <i className="banner-links-icons font-weight-normal fas fa-chevron-right"></i></a>
-            <a className=" pl-2" href="">Buy <i className="banner-links-icons font-weight-normal fas fa-chevron-right"></i></a>
+          <div className="mt-1 banner-links ">
+            <a className='text-decoration-none' href="iphone-12.html">Learn more <i className="banner-links-icons fa-solid fa-angle-right"></i></a>
+            <a className="text-decoration-none pl-2" href="">Buy <i className="banner-links-icons fa-solid fa-angle-right"></i></a>
           </div>
           <div className="banner-image-box">
             <img id="myImg" className="banner1 banner-image" src="" alt="" />
@@ -27,10 +27,10 @@ function Banner() {
             <h2 className="banners-header-text">iPhone 12</h2>
             <h3 className="banners-text">Blast past fast.</h3>
             <h3 className="banners-sub-text">From ₹69900* before&nbsp;trade‑in</h3>
-            <a className="ml-3 pr-5 mr-5 banners-links" href="iphone-12.html">Learn more <i
-              className="banner-links-icons font-weight-normal fas fa-chevron-right"></i></a>
-            <a className=" banners-links pl-5 ml-5 " href="buy-product.html">Buy <i
-              className="banner-links-icons font-weight-normal fas fa-chevron-right"></i></a>
+            <a className="text-decoration-none ml-3 pr-5 mr-5 banners-links" href="iphone-12.html">Learn more <i
+              className="banner-links-icons fa-solid fa-angle-right"></i></a>
+            <a className="text-decoration-none banners-links pl-5 ml-5 " href="buy-product.html">Buy <i
+              className="banner-links-icons fa-solid fa-angle-right"></i></a>
           </div>
         </div>
       </section>
@@ -44,10 +44,10 @@ function Banner() {
               height="600px" alt="" />
             <h2 class="banners-header-text">iMac</h2>
             <h3 class="banners-text">Say hello.</h3>
-            <a style={{ height: "252px" }} class="ml-3 pr-5 mr-5 banners-links" href="iphone-12.html">Learn more <i
-              class="banner-links-icons font-weight-normal fas fa-chevron-right"></i></a>
-            <a style={{ height: "252px" }} class=" banners-links pl-5 ml-5 " href="">Buy <i
-              class="banner-links-icons font-weight-normal fas fa-chevron-right"></i></a>
+            <a style={{ height: "252px" }} class="text-decoration-none ml-3 pr-5 mr-5 banners-links" href="iphone-12.html">Learn more <i
+              class="banner-links-icons fa-solid fa-angle-right"></i></a>
+            <a style={{ height: "252px" }} class="text-decoration-none banners-links pl-5 ml-5 " href="">Buy <i
+              class="banner-links-icons fa-solid fa-angle-right"></i></a>
           </div>
         </div>
       </section>
@@ -55,7 +55,7 @@ function Banner() {
 
       {/* <!-- //section 4 wwdc and watch  --> */}
       <section>
-        <div style={{width:"100%"}} class="row">
+        <div style={{width:"100%"}} class="section4 row">
 
           {/* <!-- wwdc banner --> */}
           <div style={{background:'black'}} class="wwdc-wrap col-md-6 mt-2">
@@ -69,7 +69,7 @@ function Banner() {
                   <h5 class="wwdc-text">Join us for the Worldwide Developer <br/> Conference, 7-11 June.</h5>
                 </div>
                 <div class="wwdc-link">
-                  <a href="">Learn more <i style={{fontSize: "13px"}} class="fas fa-arrow-right"></i></a>
+                  <a className='text-decoration-none' href="">Learn more <i style={{ fontSize: "13px" }} class="fas fa-arrow-right"></i></a>
                 </div>
               </div>
               <div style={{overflow:"hidden", display:"block"}} class="banner-wrapper">
@@ -89,10 +89,9 @@ function Banner() {
                 <h5 class="wwdc-text">The future of health is on your wrist.</h5>
               </div>
               <div class="watch-content watch-links">
-                <a class="mr-3" href="">Learn more <i style={{ fontSize: "13px" }}
-                  class="banner-links-icons font-weight-normal fas fa-chevron-right"></i></a>
-                <a href="buy-product.html">Buy <i style={{ fontSize: "13px" }}
-                  class="banner-links-icons font-weight-normal fas fa-chevron-right"></i></a>
+                <a className='text-decoration-none' href="">Learn more <i style={{ fontSize: "13px" }} class="mr-2 fa-solid fa-angle-right"></i></a>
+                <a className='text-decoration-none' href="buy-product.html">Buy <i style={{ fontSize: "13px" }}
+                  class="banner-links-icons  fa-solid fa-angle-right"></i></a>
               </div>
             </div>
           </div>
@@ -114,10 +113,10 @@ function Banner() {
                 <h5 class="text-center text-dark twwdc-text">Lose your knack for losing things.</h5>
               </div>
               <div class="watch-content watch-links">
-                <a class="mr-3" href="">Learn more <i style={{ fontSize: "13px" }}
-                  class="banner-links-icons font-weight-normal fas fa-chevron-right"></i></a>
-                <a href="">Buy <i style={{ fontSize: "13px" }}
-                  class="banner-links-icons font-weight-normal fas fa-chevron-right"></i></a>
+                <a class="text-decoration-none mr-3" href="">Learn more <i style={{ fontSize: "13px" }}
+                  class="banner-links-icons fa-solid fa-angle-right"></i></a>
+                <a className='text-decoration-none' href="">Buy <i style={{ fontSize: "13px" }}
+                  class="banner-links-icons fa-solid fa-angle-right"></i></a>
               </div>
             </div>
           </div>
@@ -133,10 +132,10 @@ function Banner() {
                 <h5 class="text-dark tv-text">A higher <br /> definition of TV.</h5>
               </div>
               <div style={{ height: "191px" }} class="watch-content watch-links">
-                <a class="mr-3" href="">Learn more <i style={{ fontSize: "13px" }}
-                  class="banner-links-icons font-weight-normal fas fa-chevron-right"></i></a>
-                <a href="">Buy <i style={{ fontSize: "13px" }}
-                  class="banner-links-icons font-weight-normal fas fa-chevron-right"></i></a>
+                <a class="text-decoration-none mr-3" href="">Learn more <i style={{ fontSize: "13px" }}
+                  class="banner-links-icons fa-solid fa-angle-right"></i></a>
+                <a className='text-decoration-none' href="">Buy <i style={{ fontSize: "13px" }}
+                  class="banner-links-icons fa-solid fa-angle-right"></i></a>
               </div>
             </div>
           </div>
@@ -147,6 +146,7 @@ function Banner() {
 }
 
 const Container = styled.div`
+text-decoration:"none";
 img{
 object-fit: cover;
 }
