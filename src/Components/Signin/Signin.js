@@ -1,7 +1,9 @@
 import React from 'react'
 import styled from 'styled-components';
+import {useNavigate} from 'react-router-dom';
 
 function Signin() {
+    const navigate=useNavigate();
   return (
       <Contaniner>
           <section style={{ marginTop: "60px", marginBottom: "100px" }}>
@@ -33,7 +35,7 @@ function Signin() {
                           </div>
                       </div>
                       <div className="create-account-text-container mt-4 ">
-                          <a className="pl-1" href="signup.html">Don’t have an Apple ID? Create one now.</a>
+                          <a className="pl-1" onClick={()=>{navigate('/signup')}} >Don’t have an Apple ID? Create one now.</a>
                       </div>
                   </div>
               </div>
