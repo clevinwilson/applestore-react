@@ -456,7 +456,14 @@ hr.hamburger-hr {
     text-align: center;
     height: 307px;
 }
+.watch-header{
+    position: relative;
+}
 
+.watch-banner{
+    display: block;
+    position: relative;
+}
 .watch-header-content {
     margin-right: 10px;
 }

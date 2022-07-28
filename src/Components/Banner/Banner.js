@@ -38,7 +38,7 @@ function Banner() {
 
       {/* <!-- third banner imac --> */}
       <section class="mt-3 mb-3 text-center banner-three">
-        <div style={{width:"100%"}} class="row">
+        <div style={{ width: "100%" }} class="row">
           <div class="col-md-12 text-center">
             <img class="banners-image banners-image-three" id="banner-three" src="images/hero_imac__dqh65mwjj04m_large.jpg" width="100%"
               height="600px" alt="" />
@@ -55,48 +55,50 @@ function Banner() {
 
       {/* <!-- //section 4 wwdc and watch  --> */}
       <section>
-        <div style={{width:"100%"}} class="section4 row">
-
-          {/* <!-- wwdc banner --> */}
-          <div style={{background:'black'}} class="wwdc-wrap col-md-6 mt-2">
-            <div class=" wrapper">
-              <div class="logo-wrapper">
-                <div class="wwdc-logo">
-                  <h4 class="wwdc-logo-image"
-                    style={{backgroundImage: "url(/images/promo_tile_logo__fois684wh1ym_large.png)"}}> </h4>
+        <Wrap>
+          <BannerContainer>
+            {/* <!-- wwdc banner --> */}
+            <div style={{ background: 'black' }} class="wwdc-wrap  mt-2">
+              <div class=" wrapper">
+                <div class="logo-wrapper">
+                  <div class="wwdc-logo">
+                    <h4 class="wwdc-logo-image"
+                      style={{ backgroundImage: "url(/images/promo_tile_logo__fois684wh1ym_large.png)" }}> </h4>
+                  </div>
+                  <div class="wwdc-logo-text">
+                    <h5 class="wwdc-text">Join us for the Worldwide Developer <br /> Conference, 7-11 June.</h5>
+                  </div>
+                  <div class="wwdc-link">
+                    <a className='text-decoration-none' href="">Learn more <i style={{ fontSize: "13px" }} class="fas fa-arrow-right"></i></a>
+                  </div>
                 </div>
-                <div class="wwdc-logo-text">
-                  <h5 class="wwdc-text">Join us for the Worldwide Developer <br/> Conference, 7-11 June.</h5>
+                <div style={{ overflow: "hidden", display: "block" }} class="banner-wrapper">
+                  <video id="myVideo" class="wwdc-video" src="/videos/large_2x.mp4" type="video/mp4" width="100%"
+                    muted={true} autoPlay={true}  playInline={true} height="auto"></video>
                 </div>
-                <div class="wwdc-link">
-                  <a className='text-decoration-none' href="">Learn more <i style={{ fontSize: "13px" }} class="fas fa-arrow-right"></i></a>
-                </div>
-              </div>
-              <div style={{overflow:"hidden", display:"block"}} class="banner-wrapper">
-                <video id="myVideo" class="wwdc-video" src="/videos/large_2x.mp4" type="video/mp4" width="100%" 
-                  muted={true} autoPlay={true} loop={true} playInline={true} height="auto"></video>
               </div>
             </div>
-          </div>
 
-          {/* <!-- watch banner --> */}
-          <div class="col-md-6 mt-2 watch-banner">
-            <div class=" watch-header-content">
-              <img class=" banners-image" id="banner-three" src="images/promo_watch_series_6_lte__f8lrasjnry2y_large_2x.jpg"
-                width="100%" height="580px" alt="" />
-              <img class="watch-logo" src="images/promo_logo_watch_series_6__gdadxakat1iu_large.png" alt="" />
-              <div class="watch-content watch-text">
-                <h5 class="wwdc-text">The future of health is on your wrist.</h5>
+            {/* <!-- watch banner --> */}
+            <div class=" mt-2 watch-banner">
+              <div class=" watch-header">
+                <img class=" banners-image" id="banner-three" src="images/promo_watch_series_6_lte__f8lrasjnry2y_large_2x.jpg"
+                  width="100%" height="580px" alt="" />
               </div>
-              <div class="watch-content watch-links">
-                <a className='text-decoration-none' href="">Learn more <i style={{ fontSize: "13px" }} class="mr-2 fa-solid fa-angle-right"></i></a>
-                <a className='text-decoration-none' href="buy-product.html">Buy <i style={{ fontSize: "13px" }}
-                  class="banner-links-icons  fa-solid fa-angle-right"></i></a>
+              <div className='content-wrap'>
+                <img class="watch-logo" src="images/promo_logo_watch_series_6__gdadxakat1iu_large.png" alt="" />
+                <div class="watch-content watch-text">
+                  <h5 class="wwdc-text">The future of health is on your wrist.</h5>
+                </div>
+                <div class="watch-content watch-links">
+                  <a className='text-decoration-none' href="">Learn more <i style={{ fontSize: "13px" }} class="mr-2 fa-solid fa-angle-right"></i></a>
+                  <a className='text-decoration-none' href="buy-product.html">Buy <i style={{ fontSize: "13px" }}
+                    class="banner-links-icons  fa-solid fa-angle-right"></i></a>
+                </div>
               </div>
             </div>
-          </div>
-          
-        </div>
+          </BannerContainer>
+        </Wrap>
       </section>
 
 
@@ -126,9 +128,9 @@ function Banner() {
           <div class="col-md-6">
             <div class="mt-3 box-header-content">
               <img class=" banners-image" id="banner-three" src="/images/promo_tile_tv4k__cbz6fpnn6kz6_large.jpg"
-                width="100%" height="580px"  alt="" />
+                width="100%" height="580px" alt="" />
               <img style={{ height: "34px" }} class="box-logo" src="/images/tv4k_logo__bwn2kbgd6ixe_large.png" alt="" />
-              <div  class="text-center watch-content watch-text">
+              <div class="text-center watch-content watch-text">
                 <h5 class="text-dark tv-text">A higher <br /> definition of TV.</h5>
               </div>
               <div style={{ height: "191px" }} class="watch-content watch-links">
@@ -173,12 +175,6 @@ object-fit: cover;
 .banners-image-three{
 content:url("/images/hero_imac__dqh65mwjj04m_small_2x.jpg");
 }
-.watch-banner{
-  margin-left:10px;
-}
-.wwdc-wrap{
-  margin-left: 12px;
-}
  
 }
 
@@ -191,6 +187,22 @@ content:url("/images/hero_imac__dqh65mwjj04m_small_2x.jpg");
 }
 .banner2{
   background-color:#fbfbfd;
+}
+`
+const Wrap=styled.div`
+
+
+`
+const BannerContainer = styled.div`
+display:grid;
+width:100%;
+position:relative;
+gap: 9px;
+grid-template-columns: repeat(2, minmax(0px, 1fr));
+
+@media (max-width: 768px){
+
+    grid-template-columns: repeat(1, minmax(0px, 1fr));
 }
 `
 export default Banner
