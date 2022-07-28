@@ -105,12 +105,49 @@ function Signup() {
                   </div>
               </div>
           </section>
+          
+          <SignupWraper>
+            <SignupButtons>
+                <Wrap>
+                      <img src='/images/icons8-google-35.png' />
+                      <span className='ml-1'>Google</span>
+                  </Wrap>
+                  <Wrap>
+                      <img src='/images/icons8-google-35.png' />
+                      <span>Google</span>
+                  </Wrap>
+            </SignupButtons>
+          </SignupWraper>
 
     </Container>
   )
 }
 const Container=styled.div`
-
+display:block;
+`
+const SignupWraper=styled.div`
+display:block;
+margin-top:22px;
+`
+const SignupButtons=styled.div`
+display:flex;
+justify-content: center;
+align-items: center;
+`
+const Wrap =styled.div`
+display: flex;
+justify-content: center;
+align-items: center;
+margin:10px;
+display:inline;
+border: 1px solid #a0a0a0;
+padding: 5px 10px 5px 10px;
+font-size: 14px;
+border-radius: 6px;
+color: #000000;
+overflow: hidden;
+transition: all 250ms cubic-bezier(0.25, 0.46, 0.45, 0.94) 0s;
+cursor:pointer;
 `
 
 export default Signup
