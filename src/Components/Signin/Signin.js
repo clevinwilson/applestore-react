@@ -1,4 +1,4 @@
-import React from 'react'
+import React,{useState} from 'react'
 import styled from 'styled-components';
 import {useNavigate} from 'react-router-dom';
 import { auth, provider } from '../Firebase/Firebase';
@@ -9,6 +9,8 @@ function Signin() {
     const navigate = useNavigate();
     const dispatch = useDispatch();
     const username = useSelector(selectUserName);
+    const [email,setEmail]=useState();
+    const [password,setPassword]=useState();
     
 
     function setUser(user) {
@@ -32,6 +34,29 @@ function Signin() {
                 alert("Error");
             });
     }
+    function handleAuthWithEmail(e){
+        e.preventDefault();
+        auth.signInWithEmailAndPassword(email, password)
+            .then((userCredential) => {
+                // Signed in
+                var userd = userCredential.user;
+                console.log(userd);
+                console.log("success");
+                let user={
+                    name: userCredential.user._delegate.displayName,
+                    email: userCredential.user._delegate.email,
+                    photo: "",
+                }
+                setUser(user);
+                navigate('/');
+                // ...
+            })
+            .catch((error) => {
+                var errorCode = error.code;
+                var errorMessage = error.message;
+            });
+
+    }
 
   return (
       <Contaniner>
@@ -43,14 +68,14 @@ function Signin() {
                               <h1 className="signin-header-text p-3 mb-4"> Please sign in. </h1>
                           </div>
                           <div className="signin-form-container ">
-                              <form className='mb-4' action="">
+                              <form className='mb-4' onSubmit={handleAuthWithEmail}>
                                   <div className="form-group ">
-                                      <input type="email" className="form-control signin-input  " id="email" placeholder="Apple ID"
+                                      <input type="email" onChange={(e)=>{setEmail(e.target.value)}} className="form-control signin-input  " id="email" placeholder="Apple ID"
                                           name="email" />
                                   </div>
 
                                   <div className="form-group ">
-                                      <input type="password" className="form-control signin-input" id="pwd" placeholder="Password"
+                                      <input type="password" onChange={(e)=>{setPassword(e.target.value)}} className="form-control signin-input" id="pwd" placeholder="Password"
                                           name="password" />
                                   </div>
                                   <div className="form-group form-itune-text">

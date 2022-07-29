@@ -42,19 +42,21 @@ function Signup() {
         e.preventDefault();
         console.log(firstName, '  ', lastName, "  ", phone);
         auth.createUserWithEmailAndPassword(email, password).then((userCredential) => {
-            // Signed in 
-            console.log(firstName,'  ',lastName,"  ",phone);
-            db.collection("users").add({
-                id: userCredential.user._delegate.uid,
-                firstName: firstName,
-                lastName: lastName,
-                phone: phone
-            }).then((docRef) => {
-                console.log("Document written with ID: ", docRef.id);
-                navigate('/signin')
-            }).catch((error) => {
-                console.error("Error adding document: ", error);
-            });
+          userCredential.user.updateProfile({displayName:firstName}).then(()=>{
+              // Signed in 
+              console.log(firstName, '  ', lastName, "  ", phone);
+              db.collection("users").add({
+                  id: userCredential.user._delegate.uid,
+                  firstName: firstName,
+                  lastName: lastName,
+                  phone: phone
+              }).then((docRef) => {
+                  console.log("Document written with ID: ", docRef.id);
+                  navigate('/signin')
+              }).catch((error) => {
+                  console.error("Error adding document: ", error);
+              });
+          })
         })
             .catch((error) => {
                 var errorCode = error.code;
