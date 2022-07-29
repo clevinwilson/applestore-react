@@ -1,12 +1,15 @@
 import React from 'react';
-import {useState} from 'react';
-import { useNavigate } from 'react-router-dom'
+import {useEffect,useState} from 'react';
+import { useNavigate } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { setUserLoginDetails, setSignoutState, selectUserEmail, selectUserName, selectUserPhoto } from '../../features/user/userSlice';
 
 function Header() {
   const navigate=useNavigate();
   const [bag,setBag]=useState(false);
   const [nav,setNav]=useState(false);
-
+  const username = useSelector(selectUserName);
+  
   return (
     <div>
       <header style={{ lineHeight: "0.8" }}>
@@ -62,8 +65,8 @@ function Header() {
                 <a className="content-align" href="/"><i style={{ fontWeight: "100" }} className="mr-2 fas fa-cog"></i>
                   Account</a>
                 <hr />
-                <a className="content-align" onClick={() => { navigate('/signin'); setBag(!bag); }}><i style={{ fontWeight: "100" }} className="mr-2 fas fa-user-circle"></i>Sign
-                  in</a>
+                <a className="content-align" onClick={() => { navigate('/signin'); setBag(!bag); }}><i style={{ fontWeight: "100" }} className="mr-2 fas fa-user-circle"></i>
+                  {username ? `Sign out ${username}` : "Sign in"}</a>
               </div>
             </div>
 
@@ -133,7 +136,9 @@ function Header() {
                           Account</a>
                         <hr />
                         <a className="content-align" href="/signin"><i tyle={{ fontWeight: "100" }}
-                          className="mr-2 fas fa-user-circle"></i>Sign in</a>
+                          className="mr-2 fas fa-user-circle"></i>
+                          {username ? `Sign out ${username}`  : "Sign in"}
+                          </a>
                       </div>
                     </div>
                   </li>

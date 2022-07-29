@@ -1,9 +1,40 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import styled from 'styled-components';
-import {useNavigate} from 'react-router-dom'
+import {useNavigate} from 'react-router-dom';
+import {auth,provider} from '../Firebase/Firebase';
+import {useDispatch,useSelector} from 'react-redux';
+import { setUserLoginDetails, setSignoutState, selectUserEmail, selectUserName, selectUserPhoto } from '../../features/user/userSlice';
+
 
 function Signup() {
     const navigate=useNavigate();
+    const dispatch = useDispatch();
+    const username = useSelector(selectUserName);
+
+    function setUser(user) {
+        dispatch(
+            setUserLoginDetails({
+                name: user.displayName,
+                email: user.email,
+                photo: user.photoURL,
+            })
+        )
+    }
+    function handleAuthWithGoogle() {
+        auth
+            .signInWithPopup(provider)
+            .then((result) => {
+
+                setUser(result.user)
+                navigate('/');
+
+            }).catch((error) => {
+               alert("Error");
+            });
+    }
+
+    
+   
   return (
     <Container>
           {/* <!-- sighn up ribborn --> */}
@@ -41,7 +72,7 @@ function Signup() {
                       <div style={{paddingTop: "30px"}}  class="col-md-12 ">
                           <div class="intro text-center">
                               <h6 class="intro-text  ">One Apple ID is all you need to access all Apple services. <br/>
-                                  You already have an Apple ID? <a href="">Find it here<i class="bi bi-chevron-right"></i>
+                                  You already have an Apple ID? <a >Find it here<i class="bi bi-chevron-right"></i>
                                   </a></h6>
                           </div>
                       </div>
@@ -95,7 +126,7 @@ function Signup() {
                                           enter a phone number you can always access.</p>
                                   </div>
                                   <div class="form-btn-container  col-md-12">
-                                      <button href="" type="submit" name="submit"
+                                      <button  type="submit" name="submit"
                                           class="form-submit-btn-style  btn btn-primary">Continue</button>
                                   </div>
 
@@ -108,8 +139,8 @@ function Signup() {
           
           <SignupWraper>
             <SignupButtons>
-                <Wrap>
-                      <img src='/images/icons8-google-35.png' />
+                  <Wrap onClick={handleAuthWithGoogle}>
+                      <img src='/images/icons8-google-35.png' alt='' />
                       <span className='ml-1'>Google</span>
                   </Wrap>
                   <Wrap>
