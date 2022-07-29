@@ -1,9 +1,38 @@
 import React from 'react'
 import styled from 'styled-components';
 import {useNavigate} from 'react-router-dom';
+import { auth, provider } from '../Firebase/Firebase';
+import { useDispatch, useSelector } from 'react-redux';
+import { setUserLoginDetails, setSignoutState, selectUserEmail, selectUserName, selectUserPhoto } from '../../features/user/userSlice';
 
 function Signin() {
-    const navigate=useNavigate();
+    const navigate = useNavigate();
+    const dispatch = useDispatch();
+    const username = useSelector(selectUserName);
+    
+
+    function setUser(user) {
+        dispatch(
+            setUserLoginDetails({
+                name: user.displayName,
+                email: user.email,
+                photo: user.photoURL,
+            })
+        )
+    }
+    function handleAuthWithGoogle() {
+        auth
+            .signInWithPopup(provider)
+            .then((result) => {
+
+                setUser(result.user)
+                navigate('/');
+
+            }).catch((error) => {
+                alert("Error");
+            });
+    }
+
   return (
       <Contaniner>
           <section style={{ marginTop: "60px", marginBottom: "100px" }}>
@@ -36,7 +65,7 @@ function Signin() {
                               <hr />
                               <SigninWraper>
                                   <SigninButtons>
-                                      <Wrap>
+                                      <Wrap onClick={handleAuthWithGoogle}>
                                           <img src='/images/icons8-google-35.png' />
                                           <span className='ml-1'>Google</span>
                                       </Wrap>

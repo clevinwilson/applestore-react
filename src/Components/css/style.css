@@ -665,7 +665,7 @@ hr.hamburger-hr {
 .dropdown-content a {
     color: black;
     font-size: 15px;
-    color: #06c;
+    color: #06c !important;
     text-decoration: none;
     display: block;
 }

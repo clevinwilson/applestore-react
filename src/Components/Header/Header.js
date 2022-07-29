@@ -21,6 +21,23 @@ function Header() {
       alert('Error')
     });
   }
+  function setUser(user) {
+    dispatch(
+      setUserLoginDetails({
+        name: user.displayName,
+        email: user.email,
+        photo: user.photoURL,
+      })
+    )
+  }
+
+  useEffect(() => {
+    auth.onAuthStateChanged(async (user) => {
+      if (user) {
+        setUser(user);
+      }
+    })
+  }, [username])
 
   return (
     <div>
