@@ -1,15 +1,27 @@
 import React from 'react';
-import {useEffect,useState} from 'react';
+import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { setUserLoginDetails, setSignoutState, selectUserEmail, selectUserName, selectUserPhoto } from '../../features/user/userSlice';
+import { auth } from '../Firebase/Firebase'
 
 function Header() {
-  const navigate=useNavigate();
-  const [bag,setBag]=useState(false);
-  const [nav,setNav]=useState(false);
+  const navigate = useNavigate();
+  const [bag, setBag] = useState(false);
+  const [nav, setNav] = useState(false);
   const username = useSelector(selectUserName);
-  
+  const dispatch = useDispatch();
+
+
+  function signOut() {
+    auth.signOut().then(() => {
+      dispatch(setSignoutState());
+      navigate('/');
+    }).catch((error) => {
+      alert('Error')
+    });
+  }
+
   return (
     <div>
       <header style={{ lineHeight: "0.8" }}>
@@ -34,7 +46,7 @@ function Header() {
               <hr style={{ marginLleft: "20px", marginRight: "20px " }} />
               <hr className="ml-4 mr-4 hamburger-hr" />
 
-              <a style={{ color:"#818181"}} onClick={() => { navigate('/iphone'); setNav(!nav) }}>iPhone</a>
+              <a style={{ color: "#818181" }} onClick={() => { navigate('/iphone'); setNav(!nav) }}>iPhone</a>
               <hr style={{ marginLeft: "20px", marginRight: "20px" }} />
               <hr className="ml-4 mr-4 hamburger-hr" />
 
@@ -65,14 +77,24 @@ function Header() {
                 <a className="content-align" href="/"><i style={{ fontWeight: "100" }} className="mr-2 fas fa-cog"></i>
                   Account</a>
                 <hr />
-                <a className="content-align" onClick={() => { navigate('/signin'); setBag(!bag); }}><i style={{ fontWeight: "100" }} className="mr-2 fas fa-user-circle"></i>
-                  {username ? `Sign out ${username}` : "Sign in"}</a>
+              
+                  {username ?
+
+                  <a className="content-align" onClick={() => { navigate('/signin'); setBag(!bag); }}>
+                    <i style={{ fontWeight: "100" }} className="mr-2 fas fa-user-circle"></i> Sign out {username} 
+                  </a>
+                  : 
+                  
+                  <a className="content-align" onClick={() => { navigate('/signin'); setBag(!bag); }}>
+                    <i style={{ fontWeight: "100" }} className="mr-2 fas fa-user-circle"></i>Sign in
+                  </a>
+                  }
               </div>
             </div>
 
 
             <nav id="navbar" style={{ position: "fixed", width: "100%", zIndex: "1" }}
-              className={bag ? "navdbar navbar-expand-md nav-bg  navbar-dark nav-background" :"navdbar navbar-expand-md nav-bg  navbar-dark"}>
+              className={bag ? "navdbar navbar-expand-md nav-bg  navbar-dark nav-background" : "navdbar navbar-expand-md nav-bg  navbar-dark"}>
               {/* <!-- Toggler/collapsibe Button --> */}
               <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
                 <span className="navbar-toggler-icon"></span>
@@ -93,7 +115,7 @@ function Header() {
                   </li>
 
                   <li className="nav-item-box nav-item">
-                    <a className="nav-link" onClick={()=>{navigate('/iphone')}}><img
+                    <a className="nav-link" onClick={() => { navigate('/iphone') }}><img
                       src="https://www.apple.com/ac/globalnav/6/en_IN/images/be15095f-5a20-57d0-ad14-cf4c638e223a/globalnav_links_iphone_image__dhepc4hn14cy_large.svg"
                       alt="" /></a>
                   </li>
@@ -113,20 +135,20 @@ function Header() {
                       alt="" /></a>
                   </li>
                   <li className="nav-item-box nav-item">
-                    <a  className="text-white nav-icon nav-link " href="#"><i tyle={{ fontWeight: "100" }}
+                    <a className="text-white nav-icon nav-link " href="#"><i tyle={{ fontWeight: "100" }}
                       className=" fa fa-search"></i></a>
                   </li>
                   {/* <!-- //bag section --> */}
                   <li onClick={() => { setBag(!bag) }} class="nav-item-box nav-item" >
                     <div className=" dropdown">
                       <i class="text-white fa-solid fa-bag-shopping"></i>
-                      <div id="dropdown-content" className={bag ? "p-3 mb-2 dropdown-content display-content" :"p-3 mb-2 dropdown-content"}>
+                      <div id="dropdown-content" className={bag ? "p-3 mb-2 dropdown-content display-content" : "p-3 mb-2 dropdown-content"}>
                         <p className="m-4 p-1" style={{ color: "#6e6e73", fontSize: "13px" }}>Your Bag is empty.</p>
                         <hr />
                         <a className="content-align" href="#"><i tyle={{ fontWeight: "100" }}
                           className="mr-2 fas fa-shopping-bag"></i>Bag</a>
                         <hr />
-                        <a className="content-align" href="#"><i style={{fontWeight: "100"}} className="mr-2 far fa-heart"></i>
+                        <a className="content-align" href="#"><i style={{ fontWeight: "100" }} className="mr-2 far fa-heart"></i>
                           Favourites</a>
                         <hr />
                         <a className="content-align" href="#"><i tyle={{ fontWeight: "100" }} className="mr-2 fas fa-box"></i>
@@ -135,10 +157,19 @@ function Header() {
                         <a className="content-align" href="#"><i tyle={{ fontWeight: "100" }} className="mr-2 fas fa-cog"></i>
                           Account</a>
                         <hr />
-                        <a className="content-align" href="/signin"><i tyle={{ fontWeight: "100" }}
-                          className="mr-2 fas fa-user-circle"></i>
-                          {username ? `Sign out ${username}`  : "Sign in"}
+
+                        {username ?
+
+                          < a className="content-align" href="/signin"><i tyle={{ fontWeight: "100" }}
+                            className="mr-2 fas fa-user-circle"></i>Sign out {username} 
                           </a>
+
+                          :
+
+                          <a className="content-align" href="/signin"><i tyle={{ fontWeight: "100" }}
+                            className="mr-2 fas fa-user-circle"></i>Sign in
+                          </a>
+                        }
                       </div>
                     </div>
                   </li>
@@ -149,7 +180,7 @@ function Header() {
         </div >
       </header >
     </div >
-    
+
   )
 }
 
