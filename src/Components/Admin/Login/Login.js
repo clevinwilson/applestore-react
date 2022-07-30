@@ -1,8 +1,46 @@
-import React from 'react';
-
+import React,{useState} from 'react';
+import {db} from '../../Firebase/Firebase';
+import { useDispatch, useSelector } from 'react-redux';
+import { setAdminLogin,selectAdmin,setSignoutState} from '../../../features/admin/adminSlice';
+import {useNavigate} from 'react-router-dom';
 
 
 function Login() {
+    const [username,setUserName]=useState();
+    const [password,setPassword]=useState();
+    const navigate = useNavigate();
+    const dispatch = useDispatch();
+    const admin = useSelector(selectAdmin);
+
+    function setAdmin() {
+        dispatch(
+            setAdminLogin({
+                admin:true
+            })
+        )
+    }
+
+    function handleAdminLogin(e){
+        e.preventDefault();
+        console.log(username," ",password);
+        db.collection("admin").where("username", "==", username).where("password", "==", password)
+            .get()
+            .then((querySnapshot) => {
+                console.log(querySnapshot);
+                querySnapshot.forEach((doc) => {
+                    // setMovieDetails(doc.data())
+                    console.log(doc.data());
+                    localStorage.setItem('admin', JSON.stringify(true));
+                    setAdmin();
+                    navigate('/admin/dashboard');
+                });
+            })
+            .catch((error) => {
+                console.log("Error getting documents: ", error);
+            });
+
+    }
+    
     return (
         <div>
             <title>Admin Login</title>
@@ -35,13 +73,13 @@ function Login() {
                                             <div class="text-center">
                                                 <h1 class="h4 text-gray-900 mb-4 mt-3">Admin login</h1>
                                             </div>
-                                            <form class="user">
+                                            <form onSubmit={handleAdminLogin} class="user">
                                                 <div class="form-group">
-                                                    <input style={{ padding: "21px", borderRadius: "8px" }} type="text" class="form-control form-control-user" id="username"
+                                                    <input onChange={(e)=>{setUserName(e.target.value)}} style={{ padding: "21px", borderRadius: "8px" }} type="text" class="form-control form-control-user" id="username"
                                                         name="username" aria-describedby="emailHelp" placeholder="User name" required />
                                                 </div>
                                                 <div class="form-group">
-                                                    <input style={{padding: "21px" ,borderRadius: "8px"}} type="password" name="password"
+                                                    <input onChange={(e)=>{setPassword(e.target.value)}} style={{padding: "21px" ,borderRadius: "8px"}} type="password" name="password"
                                                         class="form-control form-control-user" id="exampleInputPassword"
                                                         placeholder="Password" required />
                                                 </div>

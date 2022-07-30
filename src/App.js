@@ -1,4 +1,5 @@
 import {Route,Routes,BrowserRouter} from 'react-router-dom'
+import Dashboard from './Components/Admin/Dashboard/Dashboard';
 import Login from './Components/Admin/Login/Login';
 import Footer from './Components/Footer/Footer';
 import Header from './Components/Header/Header';
@@ -24,6 +25,9 @@ function App() {
     </Routes>
     <Routes>
       <Route path='/admin' element={<Login/>}  />
+    </Routes>
+    <Routes>
+        <Route path='/admin/dashboard' element={<Dashboard/>} />
     </Routes>
     <Footer/>
     </BrowserRouter>
