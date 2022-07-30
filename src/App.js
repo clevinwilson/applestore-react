@@ -1,4 +1,5 @@
 import {Route,Routes,BrowserRouter} from 'react-router-dom'
+import Login from './Components/Admin/Login/Login';
 import Footer from './Components/Footer/Footer';
 import Header from './Components/Header/Header';
 import Home from './Components/Home/Home';
@@ -20,6 +21,9 @@ function App() {
     </Routes>
     <Routes>
       <Route path='/iphone' element={<Iphone/>}/>
+    </Routes>
+    <Routes>
+      <Route path='/admin' element={<Login/>}  />
     </Routes>
     <Footer/>
     </BrowserRouter>
