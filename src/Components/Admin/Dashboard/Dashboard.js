@@ -1,17 +1,25 @@
-import React from 'react'
+import React from 'react';
+import Header from '../Header/Header';
+import SideBar from '../SideBar/SideBar';
 
 function Dashboard() {
     return (
-        <div>
+        
+        <div style={{ marginTop: "60px" }}>
+            
+                <Header/>
             {/* <!-- Page Wrapper --> */}
+            
             <div id="wrapper">
+              
                 {/* <!-- Sidebar -->
+                
               {{> admin - sidebar}} */}
-
-
+             
                 {/* <!-- Content Wrapper --> */}
                 <div id="content-wrapper" class="d-flex flex-column">
                     {/* <!-- Main Content --> */}
+                    
                     <div id="content">
                         {/* <!-- Begin Page Content --> */}
 
