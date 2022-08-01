@@ -1,4 +1,5 @@
 import {Route,Routes,BrowserRouter} from 'react-router-dom'
+import AddProduct from './Components/Admin/AddProduct/AddProduct';
 import Dashboard from './Components/Admin/Dashboard/Dashboard';
 import Login from './Components/Admin/Login/Login';
 import Footer from './Components/Footer/Footer';
@@ -29,6 +30,9 @@ function App() {
     <Routes>
         <Route path='/admin/dashboard' element={<Dashboard/>} />
     </Routes>
+      <Routes>
+        <Route path='/admin/add-product'  element={<AddProduct/>} />
+      </Routes>
     <Footer/>
     </BrowserRouter>
   );

@@ -20,21 +20,21 @@ function Header() {
        <Container>
             
             <nav style={{ border:" 1px solid #eaeaea",marginBottom:"30px"}} class="navbar navbar-expand-lg navbar-light bg-light">
-                <a class="navbar-brand" href="#">Admin</a>
+                <a class="navbar-brand" onClick={() => { navigate('/admin/dashboard') }}>Admin</a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="collapse navbar-collapse" id="navbarText">
                     <ul class="navbar-nav mr-auto">
                         <li class="nav-item">
-                            <a class="nav-link" href="#">Dashboard</a>
+                            <a class="nav-link" onClick={()=>{navigate('/admin/dashboard')}}>Dashboard</a>
                         </li>
                         <li class="Products nav-item dropdown">
                             <a class="  nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 Products
                             </a>
                             <div class="Products-dropdown dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                                <a class="dropdown-item" href="#">Add Product</a>
+                                <a class="dropdown-item" onClick={() => { navigate('/admin/add-product') }}>Add Product</a>
                                 <a class="dropdown-item" href="#">Manage Product</a>
                             </div>
                         </li>
@@ -44,7 +44,7 @@ function Header() {
                                 Orders
                             </a>
                             <div class="Orders-dropdown dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                                <a class="dropdown-item" href="#">Orders</a>
+                                <a class="dropdown-item" onClick={()=>{navigate('/admin/add-product')}}>Orders</a>
                                 <a class="dropdown-item" href="#">Manage Orders</a>
                             </div>
                         </li>
