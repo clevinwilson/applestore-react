@@ -2,6 +2,7 @@ import {Route,Routes,BrowserRouter} from 'react-router-dom'
 import AddProduct from './Components/Admin/AddProduct/AddProduct';
 import Dashboard from './Components/Admin/Dashboard/Dashboard';
 import Login from './Components/Admin/Login/Login';
+import BuyProduct from './Components/BuyProduct/BuyProduct';
 import Footer from './Components/Footer/Footer';
 import Header from './Components/Header/Header';
 import Home from './Components/Home/Home';
@@ -24,6 +25,9 @@ function App() {
     <Routes>
       <Route path='/iphone' element={<Iphone/>}/>
     </Routes>
+      <Routes>
+        <Route path='buy-product' element={<BuyProduct />} />
+      </Routes>
     <Routes>
       <Route path='/admin' element={<Login/>}  />
     </Routes>
@@ -33,6 +37,7 @@ function App() {
       <Routes>
         <Route path='/admin/add-product'  element={<AddProduct/>} />
       </Routes>
+      
     <Footer/>
     </BrowserRouter>
   );
