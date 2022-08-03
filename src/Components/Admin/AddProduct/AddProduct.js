@@ -3,6 +3,7 @@ import Header from '../Header/Header';
 
 function AddProduct() {
     const [colorCount, setColorCount] = useState([1]);
+    const [storageCount,setStorageCount]=useState([1]);
     return (
         <div style={{ marginTop: "60px" }}>
 
@@ -102,10 +103,10 @@ function AddProduct() {
                                                 {/* {{!-- Color --}} */}
                                                 <div style={{ borderStyle: "solid", borderColor: "#67c2d6" }} class="row m-1"
                                                     id="color">
-                                                    <div class="form-group mt-1 col-md-12 text-white">
+                                                    <div class="form-group mt-1 col-md-12 ">
                                                         <label for="color">Color</label>
                                                        
-                                                        <a style={{ borderRadius: "20px" }} class="m-1 btn btn-success"
+                                                        <a style={{ borderRadius: "20px" }} class="ml-4 text-white btn btn-success"
                                                             id="add" onClick={() => { setColorCount([...colorCount, parseInt(colorCount.slice(-1)) + 1]); }}>+</a>
                                                     </div>
 
@@ -236,6 +237,64 @@ function AddProduct() {
                                                         class="form-control col-md-12 mt-2" id="ram"
                                                         name="ram" required />
                                                 </div>
+
+                                                {/* add storage */}
+
+                                                {/* {{!-- Color --}} */}
+                                                <div style={{ borderStyle: "solid", borderColor: "#67c2d6" }} class="row m-1"
+                                                    id="color">
+                                                    <div class="form-group mt-1 col-md-12 ">
+                                                        <label for="color ">Storage </label>
+
+                                                        <a style={{ borderRadius: "20px" }} class="ml-4 text-white m-1 btn btn-success"
+                                                            id="add" onClick={() => { setStorageCount([...storageCount, parseInt(storageCount.slice(-1)) + 1]); }}>+</a>
+                                                    </div>
+
+                                                    
+
+                                                    {
+                                                        storageCount.map((value) => {
+                                                            return (
+                                                                <div class='row'>
+                                                                    <div class="form-group mt-3 col-md-4">
+                                                                        <label for="processor">Add Storage {value} </label>
+                                                                        <input style={{ borderColor: "#b4e3eb" }} type="text"
+                                                                            class="form-control col-md-12 mt-2" id="color" name="color"
+                                                                            required />
+                                                                    </div>
+                                                                    <div class="form-group mt-3 col-md-5">
+                                                                        <label for="Trailer Link" class="col-md-12">Storage Price {value}</label>
+                                                                        <div class="row">
+                                                                            <input style={{ borderColor: "#b4e3eb" }} type="text"
+                                                                                class="form-control col-md-12 mt-2" id="color" name="color"
+                                                                                required />
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="pt-5 col-md-1">
+                                                                        <a onClick={() => {
+                                                                            setStorageCount(
+                                                                                storageCount.filter(num => {
+
+                                                                                    return num !== value;
+                                                                                })
+                                                                            )
+                                                                        }}
+
+                                                                            style={{ borderRadius: "50%", height: "41px" }}
+                                                                            class="m-1 ml-5 btn btn-danger" id="remove">
+                                                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="text-white bi bi-archive-fill" viewBox="0 0 16 16">
+                                                                                <path d="M12.643 15C13.979 15 15 13.845 15 12.5V5H1v7.5C1 13.845 2.021 15 3.357 15h9.286zM5.5 7h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1 0-1zM.8 1a.8.8 0 0 0-.8.8V3a.8.8 0 0 0 .8.8h14.4A.8.8 0 0 0 16 3V1.8a.8.8 0 0 0-.8-.8H.8z" />
+                                                                            </svg></a>
+                                                                    </div>
+
+
+                                                                </div>
+                                                            )
+                                                        })
+                                                    }
+
+                                                </div>
+
 
                                                 <div class="form-group mt-3 col-md-10">
                                                     <label for="storage">Weight</label>
