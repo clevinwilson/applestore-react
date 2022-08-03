@@ -2,9 +2,7 @@ import React, { useState } from 'react';
 import Header from '../Header/Header';
 
 function AddProduct() {
-    const [colorCount, setColorCount] = useState([1]);
-    const [storageCount, setStorageCount] = useState([1]);
-    const [storageDetails, setStorageDetails] = useState({});
+    const [color,setColor]=useState([]);
     const [storage, setStorage] = useState([]);
     return (
         <div style={{ marginTop: "60px" }}>
@@ -109,7 +107,7 @@ function AddProduct() {
                                                         <label for="color">Color</label>
 
                                                         <a style={{ borderRadius: "20px" }} class="ml-4 text-white btn btn-success"
-                                                            id="add" onClick={() => { setColorCount([...colorCount, parseInt(colorCount.slice(-1)) + 1]); }}>+</a>
+                                                            id="add" onClick={() => { setColor([...color, { id: Date.now() }]) }}>+</a>
                                                     </div>
 
                                                     <div class="form-group m-3 col-md-12">
@@ -125,17 +123,26 @@ function AddProduct() {
                                                     </div>
 
                                                     {
-                                                        colorCount.map((value) => {
+                                                        color.map((value) => {
                                                             return (
                                                                 <div class='row'>
                                                                     <div class="form-group mt-3 col-md-4">
-                                                                        <label for="processor">Color {value} </label>
-                                                                        <input style={{ borderColor: "#b4e3eb" }} type="text"
+                                                                        <label for="processor">Color</label>
+                                                                        <input onChange={(e) => {
+                                                                            color.filter((obj) => {
+                                                                                if (value.id == obj.id) {
+                                                                                    obj.color = e.target.value;
+                                                                                    return true;
+                                                                                }
+                                                                            })
+                                                                        }} 
+                                                                        value={value.color}
+                                                                        style={{ borderColor: "#b4e3eb" }} type="text"
                                                                             class="form-control col-md-12 mt-2" id="color" name="color"
                                                                             required />
                                                                     </div>
                                                                     <div class="form-group mt-3 col-md-5">
-                                                                        <label for="Trailer Link" class="col-md-12">Image {value}</label>
+                                                                        <label for="Trailer Link" class="col-md-12">Image </label>
                                                                         <div class="row">
                                                                             <input style={{ borderColor: "#b4e3eb" }} type="file"
                                                                                 class="form-control col-md-9 mt-2" name="colorimage"
@@ -148,10 +155,9 @@ function AddProduct() {
                                                                     </div>
                                                                     <div class="pt-5 col-md-1">
                                                                         <a onClick={() => {
-                                                                            setColorCount(
-                                                                                colorCount.filter(num => {
-
-                                                                                    return num !== value;
+                                                                            setColor(
+                                                                                color.filter((obj) => {
+                                                                                    return obj.id !== value.id;
                                                                                 })
                                                                             )
                                                                         }}
