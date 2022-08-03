@@ -1777,3 +1777,29 @@ input::-webkit-inner-spin-button {
         margin-left: 50px;
     }
 }
+
+/* buy product page */
+.poduct-container input:checked~.device-model-select {
+    border-color: #2196F3;
+    border-width: 2px;
+}
+
+#navbar.mySidenav {
+    position: absolute !important;
+}
+
+.radio-btn {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+}
+
+.div-opacity-none {
+    pointer-events: none;
+    opacity: 0.4;
+}
+
+.div-opacity-visible {
+    pointer-events: visible;
+    opacity: 1;
+}

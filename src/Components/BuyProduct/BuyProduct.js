@@ -1,13 +1,18 @@
-import React from 'react'
-import styled from 'styled-components'
+import React, { useRef, useState } from 'react'
+import styled from 'styled-components';
+import ScrollIntoView from 'react-scroll-into-view';
 
 function BuyProduct() {
+  const [modelDiv, setModelDiv] = useState(false);
+  const [colorDiv,setColorDiv] =useState(false);
+  const [storageDiv,setStorageDiv]=useState(false);
+
   return (
     <Container>
       {/* <!-- title price listing --> */}
-      <section style={{borderBottom: "1px solid #c5c5c5"}} class="title-price-nav ribbon">
+      <section style={{ borderBottom: "1px solid #c5c5c5" }} class="title-price-nav ribbon">
         <div class="bg-light title-containers p-1 ml-5 mr-5">
-          <div style={{padding: "2px",backgroundColor: "white"}} class="row   ">
+          <div style={{ padding: "2px", backgroundColor: "white" }} class="row   ">
             <div class=" title-divider col-md-6 col-6">
               <h2 class="text-center product-title-name">Iphone 12</h2>
             </div>
@@ -23,7 +28,7 @@ function BuyProduct() {
         <div class="bg-light container">
           <div class="row ">
             <div class="pt-3 ribbon-covid-19 col-md-12">
-              <p style={{fontSize: "14px"}} class="text-center ribbon-text">See all the flexible ways to pay and
+              <p style={{ fontSize: "14px" }} class="text-center ribbon-text">See all the flexible ways to pay and
                 save on your new iPhone. <a href="#"> Learn more <i class="fas fa-chevron-right"></i></a></p>
             </div>
           </div>
@@ -43,11 +48,11 @@ function BuyProduct() {
               </div>
               <div class=" product-image-cotainer">
                 <img class="product-spc-image" src="/images/iphone-12-pro-family-hero.jpg" alt="" />
-                  <div class="text-center buystrip">
+                <div class="text-center buystrip">
                   <p class="product-sm-name" style={{ fontSize: "14px" }}> iPhone 12 </p>
-                    <hr class="produc-hr"/>
-                      <p class="need-help-tag"> Need some help? </p>
-                  </div>
+                  <hr class="produc-hr" />
+                  <p class="need-help-tag"> Need some help? </p>
+                </div>
               </div>
             </div>
 
@@ -62,10 +67,11 @@ function BuyProduct() {
               <form id="device-details" action="/add-to-bag" method="POST">
                 <div onclick="divScroll('device-color')" id="model" class="mt-4 model">
                   <h2 class="model-title">Choose your model.</h2>
-                  <a style={{fontSize: "14px"}} href="#">Which model is right for you?</a>
-                  <label class="mt-3 poduct-container col-md-12 p-0 ">
-                    <input type="radio" class="radio-btn" id="device" name="deviceId"
-                      value="{{productDetails._id}}" required />
+                  <a style={{ fontSize: "14px" }} href="#">Which model is right for you?</a>
+                  <ScrollIntoView selector="#model" onClick={() => { setModelDiv(true) }}>
+                    <label id='device-model' class="mt-3 poduct-container col-md-12 p-0 ">
+                      <input type="radio" class="radio-btn" id="device" name="deviceId"
+                        value="{{productDetails._id}}" required />
                       <div class="device-model-select product-model">
                         <div class="device-radio">
                           <span class="model-title">IPhone</span>
@@ -73,7 +79,8 @@ function BuyProduct() {
                           <span class="device-price-right">From ₹ 54000</span>
                         </div>
                       </div>
-                  </label>
+                    </label>
+                  </ScrollIntoView>
                   {/* {{!-- < label class="mt-3 poduct-container col-md-12 p-0 ">
                   <input type="radio" class="radio-btn" id="device" name="device">
                     <div class="device-model-select product-model">
@@ -88,53 +95,57 @@ function BuyProduct() {
                 {/* <script>
                   var colorIndex = 0;
                 </script> */}
-                <div style={{pointerEvents: "none",opacity: "0.4"}} onclick="divScroll('device-storage')"
-                  id="device-color" class="mt-4 border-size model">
-                  <h2 class="model-title  mt-4">Choose your finish.</h2>
-                  <div class="row">
-                    {/* {{ #each productDetails.color }} */}
-                    <label class="mt-3 poduct-container text-center col-md-6 col-6 ">
-                      <input type="radio" class="radio-btn" id="color" name="color" value="{{this}}" required />
-                        <div style={{padding: "20px"}} class="device-model-select product-model">
+
+                <ScrollIntoView selector='#device-color' onClick={() => { setColorDiv(true) }} className={modelDiv ? "div-opacity-visible t-4 border-size model" : "div-opacity-none t-4 border-size model"}>
+                  <div id="device-color">
+                    <h2 class="model-title  mt-4">Choose your finish.</h2>
+                    <div class="row">
+                      {/* {{ #each productDetails.color }} */}
+                      <label class="mt-3 poduct-container text-center col-md-6 col-6 ">
+                        <input type="radio" class="radio-btn" id="color" name="color" value="{{this}}" required />
+                        <div style={{ padding: "20px" }} class="device-model-select product-model">
                           <div class="device-radio">
                             <img class="product-color"
                               src="/device-colors/{{../productDetails._id}}{{this}}.jpg" alt="" />
-                              <span class="form-label-small m-1"></span>
+                            <span class="form-label-small m-1"></span>
                           </div>
 
                         </div>
-                    </label>
-                    {/* {{/ each}} */}
+                      </label>
+                      {/* {{/ each}} */}
 
 
+                    </div>
                   </div>
-                </div>
+                </ScrollIntoView>
 
                 {/* <!-- device storage --> */}
-                <div style={{pointerEvents: "none" ,opacity:" 0.4"}} onclick="divScroll('total-price-section')"
-                  id="device-storage" class="mt-4 border-size model">
-                  <h2 class="model-title  mt-4">Choose your capacity.</h2>
-                  <a style={{fontSize: "14px"}} href="#">How much capacity is right for you?</a>
-                  <div class="row">
+                <ScrollIntoView selector='#device-storage' onClick={() => { setStorageDiv(true) }} className={colorDiv ? "div-opacity-visible mt-4 border-size mode" : "div-opacity-none  mt-4 border-size mode"} onclick="divScroll('total-price-section')"
+                       >
+                  <div id="device-storage" >
+                      <h2 class="model-title  mt-4">Choose your capacity.</h2>
+                      <a style={{ fontSize: "14px" }} href="#">How much capacity is right for you?</a>
+                      <div class="row">
 
-                    {/* {{ #each productDetails.storageOptions }} */}
-                    <label class="mt-3 poduct-container text-center col-md-6  col-6 ">
-                      <input type="radio" class="radio-btn" onclick="calculateTotalPrice('{{this.storageprice}}')" id="storage" name="storage"
-                        value="{{this.storagesize}}" />
-                        <div style= {{padding: "20px"}} class="p-4 device-model-select product-model">
-                          <div class="device-radio">
-                            <span class="form-selector-title">128 GB</span>
-                            <span class="small-text">+ ₹ 5000</span>
+                        {/* {{ #each productDetails.storageOptions }} */}
+                        <label class="mt-3 poduct-container text-center col-md-6  col-6 ">
+                          <input type="radio" class="radio-btn" onclick="calculateTotalPrice('{{this.storageprice}}')" id="storage" name="storage"
+                            value="{{this.storagesize}}" />
+                          <div style={{ padding: "20px" }} class="p-4 device-model-select product-model">
+                            <div class="device-radio">
+                              <span class="form-selector-title">128 GB</span>
+                              <span class="small-text">+ ₹ 5000</span>
+                            </div>
                           </div>
-                        </div>
-                    </label>
-                    {/* {{/ each}} */}
-                  </div>
-                </div>
+                        </label>
+                        {/* {{/ each}} */}
+                      </div>
+                    </div>
+                  </ScrollIntoView>
 
-                <div style={{pointerEvents: "none",opacity: "0.4"}} id="total-price-section" class="footer-section">
+                <div id="total-price-section" class={storageDiv ? "div-opacity-visible footer-section " :"div-opacity-none footer-section "}   >
                   <div class="total-price  mt-5">
-                    <h2 style={{fontSize: "32px" ,fontWeight:" 100"}} class="mt-5 price  product-name">Toal Price :
+                    <h2 style={{ fontSize: "32px", fontWeight: " 100" }} class="mt-5 price  product-name">Toal Price :
                       ₹ <span id="total-device-price">78000</span></h2>
                   </div>
                   <div class="bag-btn-container mt-4 mb-3">
@@ -145,7 +156,7 @@ function BuyProduct() {
                         class="col-md-2 col-2 bi bi-heart"></i>
 
                       <i onclick="removeFromFavorite('{{productDetails._id}}')" id="favorite-icon-added"
-                        style={{display:" none" ,color:" #0066cc"}} class="col-md-2 col-2  fas fa-heart "></i>
+                        style={{ display: " none", color: " #0066cc" }} class="col-md-2 col-2  fas fa-heart "></i>
                     </div>
                   </div>
                 </div>
@@ -156,27 +167,13 @@ function BuyProduct() {
       </section>
 
 
-      {/* <!-- ipad banner --> */}
-      <section className="pt-4 banner">
-        <div className="text-center text-light text">
-          <h2 className="banner-header-text">iPad Pro</h2>
-          <h3 className="banner-text">Supercharged by the Apple M1 chip.</h3>
-          <div className="mt-1 banner-links ">
-            <a className='text-decoration-none' href="iphone-12.html">Learn more <i className="banner-links-icons fa-solid fa-angle-right"></i></a>
-            <a className="text-decoration-none pl-2" href="">Buy <i className="banner-links-icons fa-solid fa-angle-right"></i></a>
-          </div>
-          <div className="banner-image-box">
-            <img id="myImg" className="banner1 banner-image" src="" alt="" />
-          </div>
-        </div>
-      </section>
 
 
-      <section style={{backgroundColor: "#fafafa"}}>
+      <section style={{ backgroundColor: "#fafafa" }}>
         <div class="container">
           <div class="row">
             <div class="col-md-5 m-3">
-              <img src="/images/iphone-compare-models-202010_GEO_EMEA.jpg" alt=""/>
+              <img src="/images/iphone-compare-models-202010_GEO_EMEA.jpg" alt="" />
             </div>
             <div class="col-md-5 banner-right-section  text-center">
               <h2 class="product-name">Blast past fast.</h2>
@@ -186,7 +183,7 @@ function BuyProduct() {
       </section>
 
       {/* <!-- third banner imac --> */}
-      <section class="mt-3 mb-3 text-center banner-three">
+      <section id='third-banner' class="mt-3 mb-3 text-center banner-three">
         <div style={{ width: "100%" }} class="row">
           <div class="col-md-12 text-center">
             <img class="banners-image banners-image-three" id="banner-three" src="images/hero_imac__dqh65mwjj04m_large.jpg" width="100%"
@@ -204,7 +201,9 @@ function BuyProduct() {
     </Container>
   )
 }
-const Container=styled.div`
+
+
+const Container = styled.div`
 text-decoration:"none";
 img{
 object-fit: cover;
