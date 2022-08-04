@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
 import Header from '../Header/Header';
 import {storage,db} from '../../Firebase/Firebase'
+import { async } from '@firebase/util';
 
 function AddProduct() {
-    const [color, setColor] = useState([]);
+    const [productColor, setProductColor] = useState([]);
     const [phoneStorage, setPhoneStorage] = useState([]);
     const [productName, setProductName] = useState("");
     const [productPrice, setProductPrice] = useState("");
@@ -16,46 +17,73 @@ function AddProduct() {
     const [allColorImage,setAllColorImage]=useState();
     const [processorImage,setProcessorImage]=useState();
     const [productImage,setProductImage]=useState();
+    const date=new Date();
+
     const handleSubmit =async (event)=>{
         event.preventDefault();
+
         let colorObj=await uploadColorImages();
-        // console.log(colorObj);
-         console.log(color);
-        storage.ref(`/all-color-image/${allColorImage.name}`).put(allColorImage).then(({ ref }) => {
-            ref.getDownloadURL().then((allColorImageUrl) => {
+        console.log(productColor);
+        let insetData =  insertData(productColor);
+    }
+    const insertData =  (data)=>{
+      
 
-                storage.ref(`/processor-image/${processorImage.name}`).put(processorImage).then(({ ref }) => {
-                    ref.getDownloadURL().then((processorImageUrl) => {
+            
+            storage.ref(`/all-color-image/${allColorImage.name}`).put(allColorImage).then(({ ref }) => {
+                ref.getDownloadURL().then((allColorImageUrl) => {
 
-                        storage.ref(`/product-image/${productImage.name}`).put(productImage).then(({ ref }) => {
-                            ref.getDownloadURL().then((productImageUrl) => {
+                    storage.ref(`/processor-image/${processorImage.name}`).put(processorImage).then(({ ref }) => {
+                        ref.getDownloadURL().then((processorImageUrl) => {
 
-                                console.log(allColorImageUrl);
-                                console.log(processorImageUrl);
-                                console.log(productImageUrl);
+                            storage.ref(`/product-image/${productImage.name}`).put(productImage).then(({ ref }) => {
+                                ref.getDownloadURL().then((productImageUrl) => {
+
+                        console.log(data);
+                                    db.collection('products').add({
+                                        productName,
+                                        productPrice,
+                                        display,
+                                        battery,
+                                        processor,
+                                        camera, 
+                                        ram,
+                                        weight,
+                                        allColorImage: allColorImageUrl,
+                                        processorImage: processorImageUrl,
+                                        productImage: productImageUrl,
+                                        storageOptions: phoneStorage,
+                                        colorOptions: data,
+                                        createdAt: date.toDateString(date),
+                                        
+                                    }).then((data)=>{
+                                       console.log('done');
+                                    })
+                                })
                             })
                         })
                     })
                 })
             })
-        })
 
     }
+
     const uploadColorImages=()=>{
         return new Promise((resolve)=>{
-            color.map((obj)=>{
-               color.filter((value)=>{
+            productColor.map((obj)=>{
+                productColor.filter((value)=>{
                 if(obj.id== value.id){
                     storage.ref(`/color-images/${obj.image.name}`).put(obj.image).then(({ ref }) => {
                         ref.getDownloadURL().then((url) => {
                             value.imageurl = url;
+                            return true;
                         })
                     })
                 }
                })
             })
-            
-             resolve()
+            console.log('haa o');
+            resolve();
            
         })
     }
@@ -183,7 +211,7 @@ function AddProduct() {
                                                         <label for="color">Color</label>
 
                                                         <a style={{ borderRadius: "20px" }} className="ml-4 text-white btn btn-success"
-                                                            id="add" onClick={() => { setColor([...color, { id: Date.now() }]) }}>+</a>
+                                                            id="add" onClick={() => { setProductColor([...productColor, { id: Date.now() }]); }}>+</a>
                                                     </div>
 
                                                     <div className="form-group m-3 col-md-12">
@@ -203,13 +231,13 @@ function AddProduct() {
                                                     </div>
 
                                                     {
-                                                        color.map((value) => {
+                                                        productColor.map((value) => {
                                                             return (
                                                                 <div className='row'>
                                                                     <div className="form-group mt-3 col-md-4">
                                                                         <label for="processor">Color</label>
                                                                         <input onChange={(e) => {
-                                                                            color.filter((obj) => {
+                                                                            productColor.filter((obj) => {
                                                                                 if (value.id == obj.id) {
                                                                                     obj.color = e.target.value;
                                                                                     return true;
@@ -226,13 +254,14 @@ function AddProduct() {
                                                                         <div className="row">
                                                                             <input 
                                                                                 onChange={(e) => {
-                                                                                    color.filter((obj) => {
+                                                                                    productColor.filter((obj) => {
                                                                                         if (value.id == obj.id) {
                                                                                             obj.image = e.target.files[0];
                                                                                             return true;
                                                                                         }
                                                                                     })
                                                                                 }}
+                                                                                
                                                                             style={{ borderColor: "#b4e3eb" }} type="file"
                                                                                 className="form-control col-md-9 mt-2" name="colorimage"
                                                                                 onchange="viewImage(event,1)" required />
@@ -255,8 +284,8 @@ function AddProduct() {
                                                                     </div> */}
                                                                     <div className="pt-5 col-md-1">
                                                                         <a onClick={() => {
-                                                                            setColor(
-                                                                                color.filter((obj) => {
+                                                                            setProductColor(
+                                                                                productColor.filter((obj) => {
                                                                                     return obj.id !== value.id;
                                                                                 })
                                                                             )
@@ -469,7 +498,7 @@ function AddProduct() {
                                                 <hr />
                                                 <label className="ml-3" for=" Trailer Link col-md-12">Product Image</label>
                                                 <div className="form-group mt-3 col-md-10">
-                                                    <img src={productImage ? URL.createObjectURL(productImage) : ""} id="product-image" />
+                                                    <img style={{width:"100%",objecFit:"contain"}} src={productImage ? URL.createObjectURL(productImage) : ""} id="product-image" />
                                                     <input 
                                                         onChange={(e) => {
                                                             setProductImage(e.target.files[0])
