@@ -17,73 +17,69 @@ function AddProduct() {
     const [allColorImage,setAllColorImage]=useState();
     const [processorImage,setProcessorImage]=useState();
     const [productImage,setProductImage]=useState();
-    const [productColorOptions,setProductColorOptions]=useState([]);
     const date=new Date();
 
     const handleSubmit =async (event)=>{
         event.preventDefault();
-
-        let colorObj=await uploadColorImages();
-        console.log(productColorOptions);
-        let insetData =  insertData();
+        let uploadcolordetails = await uploadColorImages();
+        let insetData = await insertData(uploadcolordetails);
     }
-    const insertData =  ()=>{
+    const insertData = (uploadcolordetails)=>{
+       return new Promise((resolve)=>{
+           storage.ref(`/all-color-image/${allColorImage.name}`).put(allColorImage).then(({ ref }) => {
+               ref.getDownloadURL().then((allColorImageUrl) => {
 
-            storage.ref(`/all-color-image/${allColorImage.name}`).put(allColorImage).then(({ ref }) => {
-                ref.getDownloadURL().then((allColorImageUrl) => {
+                   storage.ref(`/processor-image/${processorImage.name}`).put(processorImage).then(({ ref }) => {
+                       ref.getDownloadURL().then((processorImageUrl) => {
 
-                    storage.ref(`/processor-image/${processorImage.name}`).put(processorImage).then(({ ref }) => {
-                        ref.getDownloadURL().then((processorImageUrl) => {
+                           storage.ref(`/product-image/${productImage.name}`).put(productImage).then(({ ref }) => {
+                               ref.getDownloadURL().then((productImageUrl) => {
 
-                            storage.ref(`/product-image/${productImage.name}`).put(productImage).then(({ ref }) => {
-                                ref.getDownloadURL().then((productImageUrl) => {
+                                   db.collection('products').add({
+                                       productName,
+                                       productPrice,
+                                       display,
+                                       battery,
+                                       processor,
+                                       camera,
+                                       ram,
+                                       weight,
+                                       allColorImage: allColorImageUrl,
+                                       processorImage: processorImageUrl,
+                                       productImage: productImageUrl,
+                                       storageOptions: phoneStorage,
+                                       productColorOptions: uploadcolordetails,
+                                       createdAt: date.toDateString(date),
 
-                                    db.collection('products').add({
-                                        productName,
-                                        productPrice,
-                                        display,
-                                        battery,
-                                        processor,
-                                        camera, 
-                                        ram,
-                                        weight,
-                                        allColorImage: allColorImageUrl,
-                                        processorImage: processorImageUrl,
-                                        productImage: productImageUrl,
-                                        storageOptions: phoneStorage,
-                                        productColorOptions,
-                                        createdAt: date.toDateString(date),
-                                        
-                                    }).then((data)=>{
+                                   }).then((data) => {
                                        console.log('done');
-                                    })
-                                })
-                            })
-                        })
-                    })
-                })
-            })
+                                       resolve();
+                                   })
+                               })
+                           })
+                       })
+                   })
+               })
+           })
+       })
 
     }
 
     const uploadColorImages=()=>{
         return new Promise((resolve)=>{
-            productColor.map((obj)=>{
-                productColor.filter((value)=>{
-                if(obj.id== value.id){
-                    storage.ref(`/color-images/${obj.image.name}`).put(obj.image).then(({ ref }) => {
-                        ref.getDownloadURL().then((url) => {
-                            value.imageurl = url;
-                            console.log(obj);
-                            setProductColorOptions([...productColorOptions, {color:value.color ,image:url}])
-                            
-                        })
+            let array=[];
+            productColor.map((obj,i) => {
+                storage.ref(`/color-images/${obj.image.name}`).put(obj.image).then(({ ref }) => {
+                    ref.getDownloadURL().then((url) => {
+                        obj.imageurl = url;
+                        console.log(obj,'d');
+                        array.push({ id: obj.id, color: obj.color, image: url })
+                        if(i==productColor.length-1){
+                            resolve(array);
+                        }
                     })
-                }
-               })
+                })
             })
-            console.log('haa o');
-            resolve();
            
         })
     }
