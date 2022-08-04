@@ -17,19 +17,18 @@ function AddProduct() {
     const [allColorImage,setAllColorImage]=useState();
     const [processorImage,setProcessorImage]=useState();
     const [productImage,setProductImage]=useState();
+    const [productColorOptions,setProductColorOptions]=useState([]);
     const date=new Date();
 
     const handleSubmit =async (event)=>{
         event.preventDefault();
 
         let colorObj=await uploadColorImages();
-        console.log(productColor);
-        let insetData =  insertData(productColor);
+        console.log(productColorOptions);
+        let insetData =  insertData();
     }
-    const insertData =  (data)=>{
-      
+    const insertData =  ()=>{
 
-            
             storage.ref(`/all-color-image/${allColorImage.name}`).put(allColorImage).then(({ ref }) => {
                 ref.getDownloadURL().then((allColorImageUrl) => {
 
@@ -39,7 +38,6 @@ function AddProduct() {
                             storage.ref(`/product-image/${productImage.name}`).put(productImage).then(({ ref }) => {
                                 ref.getDownloadURL().then((productImageUrl) => {
 
-                        console.log(data);
                                     db.collection('products').add({
                                         productName,
                                         productPrice,
@@ -53,7 +51,7 @@ function AddProduct() {
                                         processorImage: processorImageUrl,
                                         productImage: productImageUrl,
                                         storageOptions: phoneStorage,
-                                        colorOptions: data,
+                                        productColorOptions,
                                         createdAt: date.toDateString(date),
                                         
                                     }).then((data)=>{
@@ -76,7 +74,9 @@ function AddProduct() {
                     storage.ref(`/color-images/${obj.image.name}`).put(obj.image).then(({ ref }) => {
                         ref.getDownloadURL().then((url) => {
                             value.imageurl = url;
-                            return true;
+                            console.log(obj);
+                            setProductColorOptions([...productColorOptions, {color:value.color ,image:url}])
+                            
                         })
                     })
                 }
