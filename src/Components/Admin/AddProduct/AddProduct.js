@@ -26,7 +26,6 @@ function AddProduct() {
     }
     const uploadColorImages=()=>{
         return new Promise((resolve)=>{
-            let colorDetails = []
             color.map((obj)=>{
                color.filter((value)=>{
                 if(obj.id== value.id){
