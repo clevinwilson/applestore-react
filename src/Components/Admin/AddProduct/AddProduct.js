@@ -16,12 +16,29 @@ function AddProduct() {
     const [allColorImage,setAllColorImage]=useState();
     const [processorImage,setProcessorImage]=useState();
     const [productImage,setProductImage]=useState();
-
     const handleSubmit =async (event)=>{
         event.preventDefault();
         let colorObj=await uploadColorImages();
         // console.log(colorObj);
          console.log(color);
+        storage.ref(`/all-color-image/${allColorImage.name}`).put(allColorImage).then(({ ref }) => {
+            ref.getDownloadURL().then((allColorImageUrl) => {
+
+                storage.ref(`/processor-image/${processorImage.name}`).put(processorImage).then(({ ref }) => {
+                    ref.getDownloadURL().then((processorImageUrl) => {
+
+                        storage.ref(`/product-image/${productImage.name}`).put(productImage).then(({ ref }) => {
+                            ref.getDownloadURL().then((productImageUrl) => {
+
+                                console.log(allColorImageUrl);
+                                console.log(processorImageUrl);
+                                console.log(productImageUrl);
+                            })
+                        })
+                    })
+                })
+            })
+        })
 
     }
     const uploadColorImages=()=>{
