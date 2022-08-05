@@ -1,26 +1,30 @@
-import React, { useState,useEffect } from 'react'
+import React, { useState, useEffect } from 'react'
 import styled from 'styled-components';
 import Ribborn from '../Ribborn/Ribborn';
-import {db} from '../Firebase/Firebase';
+import { db } from '../Firebase/Firebase';
 import BeatLoader from "react-spinners/BeatLoader";
+import { Link } from 'react-router-dom';
 
 function Iphone() {
-    const [phones,setphones]=useState([]);
+    const [phones, setphones] = useState([]);
 
     useEffect(() => {
         db.collection('products').get().then((snapshort) => {
             const allPhones = snapshort.docs.map((product) => {
-                if (product.data().category == "phone"){
-                    console.log(product.data());
+                if (product.data().category == "phone") {
                     return (
-                        product.data()
+                        {
+                            ...product.data(),
+                            id: product.id
+
+                        }
                     )
                 }
             })
-             setphones(allPhones)
+            setphones(allPhones)
         })
-    },[])
-    
+    }, [])
+
     return (
         <Container>
             <Ribborn />
@@ -75,18 +79,18 @@ function Iphone() {
                                 <h2 class="typography-headline">Which iPhone is right for you?</h2>
                                 <div style={{ fontSize: "19px" }} class="m-4 banner-links text-center  ">
                                     <a href="">Compare all iPhone models   <i style={{ fontSize: "13px" }} class="mr-2 fa-solid fa-angle-right"></i></a>
-                                        
+
                                 </div>
                             </div>
 
                         </div>
                     </div>
                     <div id="iphones" class="row m-1">
-                       {
-                        phones[0]?
-                                phones.map((phone) => {
+                        {
+                            phones[0] ?
+                                phones.map((phone, key) => {
                                     return (
-                                        <div class="col-md-3 m-3 col-6 p-0 ">
+                                        <div key={key} class="col-md-3 m-3 col-6 p-0 ">
                                             <div class="product-image-outer text-center">
                                                 <img class="product-image image-compare-iphone-12-pro" src={phone.productImage} />
                                                 <div class="device-title ">
@@ -95,7 +99,9 @@ function Iphone() {
                                                     <img class="device-colors" src={phone.allColorImage}
                                                         alt="" />
                                                     <div class="product-buy">
-                                                        <a href="" class="device-buy-btn  btn btn-primary">Buy</a>
+                                                        <Link to={'/buy-product/' + phone.id}>
+                                                            <a class="device-buy-btn text-white  btn btn-primary">Buy </a>
+                                                        </Link>
                                                     </div>
                                                 </div>
                                                 <div class="mt-5 device-details">
@@ -133,8 +139,10 @@ function Iphone() {
                                                     <p class="device-subtext">MagSafe accessories </p>
                                                 </div>
                                                 <div class="product-link">
-                                                    <a style={{ fontSize: "14px", letterSpacing: "0.02em" }} href="iphone-12.html"> Learn more <span
-                                                        style={{ fontSize: "9px" }} class="fas fa-chevron-right"></span></a>
+                                                    <Link to={'/buy-product/' + phone.id}>
+                                                        <a style={{ fontSize: "14px", letterSpacing: "0.02em" }} > Learn more <span
+                                                            style={{ fontSize: "9px" }} class="fas fa-chevron-right"></span></a>
+                                                    </Link>
                                                 </div>
 
                                             </div>
@@ -143,10 +151,10 @@ function Iphone() {
                                 })
                                 :
                                 <span style={{ textAlign: "center" }}>
-                                    <BeatLoader  color={"#0066cc"} loading={phones} size={17} />
+                                    <BeatLoader color={"#0066cc"} loading={phones} size={17} />
                                 </span>
-                       }
-                        
+                        }
+
                     </div>
                 </div>
             </section>

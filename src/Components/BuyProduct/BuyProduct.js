@@ -1,12 +1,34 @@
-import React, { useRef, useState } from 'react'
+import React, { useRef, useState, useEffect } from 'react'
 import styled from 'styled-components';
 import ScrollIntoView from 'react-scroll-into-view';
+import { useParams } from 'react-router-dom';
+import {db} from "../Firebase/Firebase"
 
 function BuyProduct() {
+  const { id } = useParams();
+  const [productDetails,setProductDetails]=useState({});
   const [modelDiv, setModelDiv] = useState(false);
   const [colorDiv,setColorDiv] =useState(false);
   const [storageDiv,setStorageDiv]=useState(false);
 
+  useEffect(() => {
+
+    db.collection("products").doc(id)
+      .get()
+      .then((doc) => {
+       if(doc.exists){
+         console.log(doc.data());
+         setProductDetails(doc.data())
+       }else{
+        console.log("Not exists");
+       }
+      })
+      .catch((error) => {
+        console.log("Error getting documents: ", error);
+      });
+
+
+  }, [id])
   return (
     <Container>
       {/* <!-- title price listing --> */}
@@ -14,10 +36,10 @@ function BuyProduct() {
         <div class="bg-light title-containers p-1 ml-5 mr-5">
           <div style={{ padding: "2px", backgroundColor: "white" }} class="row   ">
             <div class=" title-divider col-md-6 col-6">
-              <h2 class="text-center product-title-name">Iphone 12</h2>
+              <h2 class="text-center product-title-name">{productDetails.productName}</h2>
             </div>
             <div class="p-2 text-center product-title-price col-md-6 col-6">
-              <span>From ₹14111/mo. with EMI,** or ₹786554</span>
+              <span>From ₹14111/mo. with EMI,** or ₹{productDetails.productPrice}</span>
             </div>
           </div>
         </div>
@@ -29,7 +51,7 @@ function BuyProduct() {
           <div class="row ">
             <div class="pt-3 ribbon-covid-19 col-md-12">
               <p style={{ fontSize: "14px" }} class="text-center ribbon-text">See all the flexible ways to pay and
-                save on your new iPhone. <a href="#"> Learn more <i class="fas fa-chevron-right"></i></a></p>
+                save on your new iPhone. <a > Learn more <i class="fas fa-chevron-right"></i></a></p>
             </div>
           </div>
         </div>
@@ -41,15 +63,15 @@ function BuyProduct() {
             <div class="col-md-7  ">
               <div class="text-center p-3 mt-3 product-header-sm">
                 <h3 class="violator-frameless">New</h3>
-                <h2 class="product-name">Buy Iphone 12</h2>
+                <h2 class="product-name">Buy {productDetails.productName}</h2>
                 <div class="product-offer">
                   <p>Get 10% on your Apple devices</p>
                 </div>
               </div>
               <div class=" product-image-cotainer">
-                <img class="product-spc-image" src="/images/iphone-12-pro-family-hero.jpg" alt="" />
+                <img class="product-spc-image" style={{objectFit:"none"}} src={productDetails.productImage} alt="" />
                 <div class="text-center buystrip">
-                  <p class="product-sm-name" style={{ fontSize: "14px" }}> iPhone 12 </p>
+                  <p class="product-sm-name" style={{ fontSize: "14px" }}> {productDetails.productName} </p>
                   <hr class="produc-hr" />
                   <p class="need-help-tag"> Need some help? </p>
                 </div>
@@ -59,7 +81,7 @@ function BuyProduct() {
             <div class="col-md-5 p-3 mt-4">
               <div class="product-header">
                 <h3 class="violator-frameless">New</h3>
-                <h2 class="product-name">Buy iPhone 12</h2>
+                <h2 class="product-name">Buy {productDetails.productName}</h2>
                 <div class="product-offer">
                   <p>Get 10% on your Apple devices</p>
                 </div>
@@ -74,9 +96,9 @@ function BuyProduct() {
                         value="{{productDetails._id}}" required />
                       <div class="device-model-select product-model">
                         <div class="device-radio">
-                          <span class="model-title">IPhone</span>
-                          <span class="screen-size">iPHone</span>
-                          <span class="device-price-right">From ₹ 54000</span>
+                          <span class="model-title">{productDetails.productName}</span>
+                          <span class="screen-size">{productDetails.display}</span>
+                          <span class="device-price-right">From ₹ {productDetails.productPrice}</span>
                         </div>
                       </div>
                     </label>
@@ -101,17 +123,26 @@ function BuyProduct() {
                     <h2 class="model-title  mt-4">Choose your finish.</h2>
                     <div class="row">
                       {/* {{ #each productDetails.color }} */}
-                      <label class="mt-3 poduct-container text-center col-md-6 col-6 ">
-                        <input type="radio" class="radio-btn" id="color" name="color" value="{{this}}" required />
-                        <div style={{ padding: "20px" }} class="device-model-select product-model">
-                          <div class="device-radio">
-                            <img class="product-color"
-                              src="/device-colors/{{../productDetails._id}}{{this}}.jpg" alt="" />
-                            <span class="form-label-small m-1"></span>
-                          </div>
+                     {
+                        productDetails.productColorOptions ?
+                          productDetails.productColorOptions.map((color) => {
+                            return (
+                              <label class="mt-3 poduct-container text-center col-md-6 col-6 ">
+                                <input type="radio" class="radio-btn" id="color" name="color" value="{{this}}" required />
+                                <div style={{ padding: "20px" }} class="device-model-select product-model">
+                                  <div style={{display:"flex", justifyContent:"center",alignItems:"center"}} class="device-radio ">
+                                    <img class="product-color"
+                                      src={color.image} alt="" />
+                                    {/* <span class="form-label-small m-1"></span> */}
+                                  </div>
 
-                        </div>
-                      </label>
+                                </div>
+                              </label>
+                            )
+                          })
+                          :
+                          ""
+                     }
                       {/* {{/ each}} */}
 
 
@@ -128,16 +159,25 @@ function BuyProduct() {
                       <div class="row">
 
                         {/* {{ #each productDetails.storageOptions }} */}
-                        <label class="mt-3 poduct-container text-center col-md-6  col-6 ">
-                          <input type="radio" class="radio-btn" onclick="calculateTotalPrice('{{this.storageprice}}')" id="storage" name="storage"
-                            value="{{this.storagesize}}" />
-                          <div style={{ padding: "20px" }} class="p-4 device-model-select product-model">
-                            <div class="device-radio">
-                              <span class="form-selector-title">128 GB</span>
-                              <span class="small-text">+ ₹ 5000</span>
-                            </div>
-                          </div>
-                        </label>
+                       {
+                        productDetails.storageOptions ?
+                          productDetails.storageOptions.map((storage)=>{
+                          return(
+                            <label class="mt-3 poduct-container text-center col-md-6  col-6 ">
+                              <input type="radio" class="radio-btn" onclick="calculateTotalPrice('{{this.storageprice}}')" id="storage" name="storage"
+                                value="{{this.storagesize}}" />
+                              <div style={{ padding: "20px" }} class="p-4 device-model-select product-model">
+                                <div class="device-radio">
+                                  <span class="form-selector-title">{storage.storage}</span>
+                                  <span class="small-text">+ ₹ {storage.price}</span>
+                                </div>
+                              </div>
+                            </label>
+                          )
+                         })
+                          :
+                          ""
+                       }
                         {/* {{/ each}} */}
                       </div>
                     </div>
@@ -146,7 +186,7 @@ function BuyProduct() {
                 <div id="total-price-section" class={storageDiv ? "div-opacity-visible footer-section " :"div-opacity-none footer-section "}   >
                   <div class="total-price  mt-5">
                     <h2 style={{ fontSize: "32px", fontWeight: " 100" }} class="mt-5 price  product-name">Toal Price :
-                      ₹ <span id="total-device-price">78000</span></h2>
+                      ₹ <span style={{fontSize:"24px"}} id="total-device-price">{productDetails.productPrice}</span></h2>
                   </div>
                   <div class="bag-btn-container mt-4 mb-3">
                     <div class="mt-4">
@@ -186,7 +226,7 @@ function BuyProduct() {
       <section id='third-banner' class="mt-3 mb-3 text-center banner-three">
         <div style={{ width: "100%" }} class="row">
           <div class="col-md-12 text-center">
-            <img class="banners-image banners-image-three" id="banner-three" src="images/hero_imac__dqh65mwjj04m_large.jpg" width="100%"
+            <img class="banners-image banners-image-three" id="banner-three" src="/images/hero_imac__dqh65mwjj04m_large.jpg" width="100%"
               height="600px" alt="" />
             <h2 class="banners-header-text">iMac</h2>
             <h3 class="banners-text">Say hello.</h3>

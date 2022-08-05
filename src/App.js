@@ -26,7 +26,7 @@ function App() {
       <Route path='/iphone' element={<Iphone/>}/>
     </Routes>
       <Routes>
-        <Route path='buy-product' element={<BuyProduct />} />
+        <Route path='buy-product/:id' element={<BuyProduct />} />
       </Routes>
     <Routes>
       <Route path='/admin' element={<Login/>}  />
