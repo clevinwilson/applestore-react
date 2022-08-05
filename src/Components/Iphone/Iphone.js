@@ -142,7 +142,9 @@ function Iphone() {
                                     )
                                 })
                                 :
-                                <BeatLoader style={{justifyContent: "center"}} color={"#0066cc"} loading={phones} size={17} />
+                                <span style={{ textAlign: "center" }}>
+                                    <BeatLoader  color={"#0066cc"} loading={phones} size={17} />
+                                </span>
                        }
                         
                     </div>

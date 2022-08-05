@@ -821,7 +821,7 @@ hr.hamburger-hr {
     margin-left: auto;
     margin-right: auto;
     margin-bottom: 46px;
-    object-fit: cover;
+    object-fit: contain;
     width: 100%;
 }
 
