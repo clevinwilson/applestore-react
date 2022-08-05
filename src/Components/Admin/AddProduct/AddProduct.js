@@ -18,6 +18,7 @@ function AddProduct() {
     const [processorImage,setProcessorImage]=useState();
     const [productImage,setProductImage]=useState();
     const date=new Date();
+    const [category, setCategory]=useState();
 
     const handleSubmit =async (event)=>{
         event.preventDefault();
@@ -42,6 +43,7 @@ function AddProduct() {
                                        battery,
                                        processor,
                                        camera,
+                                       category,
                                        ram,
                                        weight,
                                        allColorImage: allColorImageUrl,
@@ -191,14 +193,19 @@ function AddProduct() {
                                                     </div>
                                                 </div>
 
-                                                {/* <div className="form-group mt-3 col-md-5">
+                                                <div className="form-group mt-3 col-md-5">
                                                     <div className="form-group">
-                                                        <label for="Category">Select Category</label>
-                                                        <input style={{ borderColor: "#b4e3eb" }} type="text"
+                                                        <label for="Category">Product Category</label>
+                                                        <input
+                                                        onChange={(e)=>{
+                                                            setCategory(e.target.value);
+                                                        }} 
+                                                            value={category}
+                                                         style={{ borderColor: "#b4e3eb" }} type="text"
                                                             className="form-control col-md-12 mt-2" id="category" name="category"
                                                             required />
                                                     </div>
-                                                </div> */}
+                                                </div>
 
                                                 {/* {{!-- Color --}} */}
                                                 <div style={{ borderStyle: "solid", borderColor: "#67c2d6" }} className="row m-1"
