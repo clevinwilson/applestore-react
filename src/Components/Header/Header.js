@@ -27,6 +27,7 @@ function Header() {
         name: user.displayName,
         email: user.email,
         photo: user.photoURL,
+        userId: user.uid
       })
     )
   }

@@ -2,33 +2,76 @@ import React, { useRef, useState, useEffect } from 'react'
 import styled from 'styled-components';
 import ScrollIntoView from 'react-scroll-into-view';
 import { useParams } from 'react-router-dom';
-import {db} from "../Firebase/Firebase"
+import { db } from "../Firebase/Firebase";
+import { useDispatch, useSelector } from 'react-redux';
+import { selectUserEmail, selectUserName, selectuserId } from '../../features/user/userSlice';
 
 function BuyProduct() {
   const { id } = useParams();
-  const [productDetails,setProductDetails]=useState({});
+  const username = useSelector(selectUserName);
+  const userid = useSelector(selectuserId);
+  const [productDetails, setProductDetails] = useState({});
   const [modelDiv, setModelDiv] = useState(false);
-  const [colorDiv,setColorDiv] =useState(false);
-  const [storageDiv,setStorageDiv]=useState(false);
+  const [colorDiv, setColorDiv] = useState(false);
+  const [storageDiv, setStorageDiv] = useState(false);
+  const [price, setPrice] = useState("");
+  const [color, setColor] = useState("");
+  const [storagePrice,setStoragePrice]=useState("");
+  const date = new Date();
 
   useEffect(() => {
-
     db.collection("products").doc(id)
       .get()
       .then((doc) => {
-       if(doc.exists){
-         console.log(doc.data());
-         setProductDetails(doc.data())
-       }else{
-        console.log("Not exists");
-       }
+        if (doc.exists) {
+          console.log(doc.data());
+          setProductDetails(doc.data())
+          setPrice(doc.data().productPrice);
+        } else {
+          console.log("Not exists");
+        }
       })
       .catch((error) => {
         console.log("Error getting documents: ", error);
       });
-
-
+   
   }, [id])
+
+  const addToBag = (e) => {
+    e.preventDefault();
+    console.log(userid);
+    db.collection('bag').add({
+      productId:id,
+      userid:userid,
+      price,
+      color,
+      storagePrice,
+      createdAt: date.toDateString(date),
+    }).then((data) => {
+      console.log('added');
+    })
+
+
+    // db.collection("products").doc(id)
+    //   .get()
+    //   .then((doc) => {
+    //     if (doc.exists) {
+    //       console.log(doc.data());
+    //       const  status= doc.data().storageOptions.some((storage) => {
+    //         if (storage.price === storagePrice) {
+    //           return true
+    //         }
+    //       })
+    //       console.log(status);
+    //     } else {
+    //       console.log("Not exists");
+    //     }
+    //   })
+    //   .catch((error) => {
+    //     console.log("Error getting documents: ", error);
+    //   });
+  }
+
   return (
     <Container>
       {/* <!-- title price listing --> */}
@@ -69,7 +112,7 @@ function BuyProduct() {
                 </div>
               </div>
               <div class=" product-image-cotainer">
-                <img class="product-spc-image" style={{objectFit:"none"}} src={productDetails.productImage} alt="" />
+                <img class="product-spc-image" style={{ objectFit: "none" }} src={productDetails.productImage} alt="" />
                 <div class="text-center buystrip">
                   <p class="product-sm-name" style={{ fontSize: "14px" }}> {productDetails.productName} </p>
                   <hr class="produc-hr" />
@@ -86,12 +129,12 @@ function BuyProduct() {
                   <p>Get 10% on your Apple devices</p>
                 </div>
               </div>
-              <form id="device-details" action="/add-to-bag" method="POST">
+              <form id="device-details" onSubmit={addToBag} >
                 <div onclick="divScroll('device-color')" id="model" class="mt-4 model">
                   <h2 class="model-title">Choose your model.</h2>
                   <a style={{ fontSize: "14px" }} href="#">Which model is right for you?</a>
                   <ScrollIntoView selector="#model" onClick={() => { setModelDiv(true) }}>
-                    <label id='device-model' class="mt-3 poduct-container col-md-12 p-0 ">
+                    <label id='device-model' class="mt-3  poduct-container col-md-12 p-0 pb-4 ">
                       <input type="radio" class="radio-btn" id="device" name="deviceId"
                         value="{{productDetails._id}}" required />
                       <div class="device-model-select product-model">
@@ -123,14 +166,16 @@ function BuyProduct() {
                     <h2 class="model-title  mt-4">Choose your finish.</h2>
                     <div class="row">
                       {/* {{ #each productDetails.color }} */}
-                     {
+                      {
                         productDetails.productColorOptions ?
                           productDetails.productColorOptions.map((color) => {
                             return (
-                              <label class="mt-3 poduct-container text-center col-md-6 col-6 ">
+                              <label onClick={() => {
+                                setColor(color.color);
+                              }} class="mt-3 poduct-container text-center col-md-6 col-6 ">
                                 <input type="radio" class="radio-btn" id="color" name="color" value="{{this}}" required />
                                 <div style={{ padding: "20px" }} class="device-model-select product-model">
-                                  <div style={{display:"flex", justifyContent:"center",alignItems:"center"}} class="device-radio ">
+                                  <div style={{ display: "flex", justifyContent: "center", alignItems: "center" }} class="device-radio ">
                                     <img class="product-color"
                                       src={color.image} alt="" />
                                     {/* <span class="form-label-small m-1"></span> */}
@@ -142,7 +187,7 @@ function BuyProduct() {
                           })
                           :
                           ""
-                     }
+                      }
                       {/* {{/ each}} */}
 
 
@@ -152,46 +197,50 @@ function BuyProduct() {
 
                 {/* <!-- device storage --> */}
                 <ScrollIntoView selector='#device-storage' onClick={() => { setStorageDiv(true) }} className={colorDiv ? "div-opacity-visible mt-4 border-size mode" : "div-opacity-none  mt-4 border-size mode"} onclick="divScroll('total-price-section')"
-                       >
+                >
                   <div id="device-storage" >
-                      <h2 class="model-title  mt-4">Choose your capacity.</h2>
-                      <a style={{ fontSize: "14px" }} href="#">How much capacity is right for you?</a>
-                      <div class="row">
+                    <h2 class="model-title  mt-4">Choose your capacity.</h2>
+                    <a style={{ fontSize: "14px" }} href="#">How much capacity is right for you?</a>
+                    <div class="row">
 
-                        {/* {{ #each productDetails.storageOptions }} */}
-                       {
+                      {/* {{ #each productDetails.storageOptions }} */}
+                      {
                         productDetails.storageOptions ?
-                          productDetails.storageOptions.map((storage)=>{
-                          return(
-                            <label class="mt-3 poduct-container text-center col-md-6  col-6 ">
-                              <input type="radio" class="radio-btn" onclick="calculateTotalPrice('{{this.storageprice}}')" id="storage" name="storage"
-                                value="{{this.storagesize}}" />
-                              <div style={{ padding: "20px" }} class="p-4 device-model-select product-model">
-                                <div class="device-radio">
-                                  <span class="form-selector-title">{storage.storage}</span>
-                                  <span class="small-text">+ ₹ {storage.price}</span>
+                          productDetails.storageOptions.map((storage) => {
+                            return (
+                              <label onClick={() => {
+                                setPrice(parseInt(storage.price) + parseInt(productDetails.productPrice));
+                                setStoragePrice(storage.price)
+                                console.log(price);
+                                console.log(color);
+                              }} class="mt-3 poduct-container text-center col-md-6  col-6 ">
+                                <input type="radio" class="radio-btn" onclick="calculateTotalPrice('{{this.storageprice}}')" id="storage" name="storage"
+                                  value="{{this.storagesize}}" />
+                                <div style={{ padding: "20px" }} class="p-4 device-model-select product-model">
+                                  <div class="device-radio">
+                                    <span class="form-selector-title">{storage.storage}</span>
+                                    <span class="small-text">+ ₹ {storage.price}</span>
+                                  </div>
                                 </div>
-                              </div>
-                            </label>
-                          )
-                         })
+                              </label>
+                            )
+                          })
                           :
                           ""
-                       }
-                        {/* {{/ each}} */}
-                      </div>
+                      }
+                      {/* {{/ each}} */}
                     </div>
-                  </ScrollIntoView>
+                  </div>
+                </ScrollIntoView>
 
-                <div id="total-price-section" class={storageDiv ? "div-opacity-visible footer-section " :"div-opacity-none footer-section "}   >
+                <div id="total-price-section" class={storageDiv ? "div-opacity-visible footer-section " : "div-opacity-none footer-section "}   >
                   <div class="total-price  mt-5">
                     <h2 style={{ fontSize: "32px", fontWeight: " 100" }} class="mt-5 price  product-name">Toal Price :
-                      ₹ <span style={{fontSize:"24px"}} id="total-device-price">{productDetails.productPrice}</span></h2>
+                      ₹ <span style={{ fontSize: "24px" }} id="total-device-price">{price}</span></h2>
                   </div>
                   <div class="bag-btn-container mt-4 mb-3">
                     <div class="mt-4">
-                      <button class="col-md-10 col-10 bag-btn btn btn-primary" type="submit">Add to
-                        Bag</button>
+                      <button class="col-md-10 col-10 bag-btn btn btn-primary" type="submit">Add to Bag</button>
                       <i onclick="addToFavorite('{{productDetails._id}}')" id="favorite-icon"
                         class="col-md-2 col-2 bi bi-heart"></i>
 
