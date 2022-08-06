@@ -34,7 +34,6 @@ function Header() {
     )
   }
   const getBag = () => {
-    console.log(userid);
 
     db.collection('bag').where("userid", "==", userid).get().then((snapshort) => {
       const allPhones = snapshort.docs.map((product) => {
