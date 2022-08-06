@@ -102,27 +102,27 @@ function Header() {
             {/* <!-- Bag for sm devices --> */}
             <div id="dropdown-content-sm" className={bagState ? " p-3 mb-2 dropdown-content-sm " : " p-3 mb-2 dropdown-content-sm content-hide "} >
               {
-                bag[0] ?
-                  bag.map((items) => {
-                    return (
-                      <div style={{ marginLeft: "20px" }} className="mt-3  dag-items row">
-
-                        <div className="col-md-3 col-3">
-                          <img style={{ objectFit: "contain", height: "100%", width: "46px" }} src={items.productDetails.productImage}
-                            alt="" />
-                        </div>
-                        <div style={{ display: "flex", justifyContent: "center", alignItems: "center" }} className="col-md-9 col-9 bag-items-spec">
-                          <span>{items.productDetails.productName}</span><span className="ml-1">{items.selectedStorage.storage}
-                          </span>
-                          <span className='ml-1' >{items.color} </span>
-                        </div>
-                      </div>
-                    )
-                  })
-                  :
+                username ?
                   <div>
                     {
-                      username ?
+                      bag[0] ?
+                        bag.map((items) => {
+                          return (
+                            <div style={{ marginLeft: "20px" }} className="mt-3  dag-items row">
+
+                              <div className="col-md-3 col-3">
+                                <img style={{ objectFit: "contain", height: "100%", width: "46px" }} src={items.productDetails.productImage}
+                                  alt="" />
+                              </div>
+                              <div style={{ display: "flex", justifyContent: "center", alignItems: "center" }} className="col-md-9 col-9 bag-items-spec">
+                                <span>{items.productDetails.productName}</span><span className="ml-1">{items.selectedStorage.storage}
+                                </span>
+                                <span className='ml-1' >{items.color} </span>
+                              </div>
+                            </div>
+                          )
+                        })
+                        :
                         <div>
                           {
                             bag[0] ?
@@ -133,15 +133,15 @@ function Header() {
 
                               :
                               <div className='mb-4' style={{ display: "flex", justifyContent: "center", alignItems: "center" }}>
-                                <PropagateLoader color={"#0066cc"} loading={bag[1]} size={10} />
+                                <PropagateLoader color={"#0066cc"} loading={bag[0]} size={10} />
                                 <hr />
                               </div>
                           }
                         </div>
-                        :
-                        ""
                     }
                   </div>
+                  :
+                  ""
               }
 
               <div className="bag-options p-1  pl-4 pr-4">
@@ -233,34 +233,34 @@ function Header() {
                       <div id="dropdown-content" className={bagState ? "p-3 mb-2 dropdown-content display-content" : "p-3 mb-2 dropdown-content"}>
                         <div class="account">
                           {
-                            bag ?
-                              bag.map((items, key) => {
-                                return (
-                                  <div key={key}>
-                                    <div style={{ display: "flex", alignItems: "center" }} class="mt-3 dag-items row">
-
-                                      <div class="col-md-3">
-                                        <img style={{ objectFit: "contain", height: "100%", width: "32px" }}
-                                          src={items.productDetails.productImage} alt="" />
-                                      </div>
-                                      <div style={{ textAlign: "start", fontSize: "16px" }} class="pl-3 col-md-9 bag-items-spec">
-                                        <div>
-                                          <span>{items.productDetails.productName}</span><span class="ml-1">{items.selectedStorage.storage}
-                                          </span>
-                                        </div>
-                                        <span className='d-block mt-1'>{items.color} </span>
-                                      </div>
-
-                                    </div>
-                                    <hr />
-                                    <div style={{ width: "100%", color: "white !important" }} className="mb-4 btn btn-primary text-white checkout-btn">Check Out</div>
-                                  </div>
-                                )
-                              })
-                              :
+                            username ?
                               <div>
                                 {
-                                  username ?
+                                  bag[0] ?
+                                    bag.map((items, key) => {
+                                      return (
+                                        <div key={key}>
+                                          <div style={{ display: "flex", alignItems: "center" }} class="mt-3 dag-items row">
+
+                                            <div class="col-md-3">
+                                              <img style={{ objectFit: "contain", height: "100%", width: "32px" }}
+                                                src={items.productDetails.productImage} alt="" />
+                                            </div>
+                                            <div style={{ textAlign: "start", fontSize: "16px" }} class="pl-3 col-md-9 bag-items-spec">
+                                              <div>
+                                                <span>{items.productDetails.productName}</span><span class="ml-1">{items.selectedStorage.storage}
+                                                </span>
+                                              </div>
+                                              <span className='d-block mt-1'>{items.color} </span>
+                                            </div>
+
+                                          </div>
+                                          <hr />
+                                          <div style={{ width: "100%", color: "white !important" }} className="mb-4 btn btn-primary text-white checkout-btn">Check Out</div>
+                                        </div>
+                                      )
+                                    })
+                                    :
                                     <div>
                                       {
                                         bag[0] ?
@@ -271,17 +271,15 @@ function Header() {
 
                                           :
                                           <div className='mb-4' style={{ display: "flex", justifyContent: "center", alignItems: "center" }}>
-                                            <PropagateLoader color={"#0066cc"} loading={bag[1]} size={10} />
+                                            <PropagateLoader color={"#0066cc"} loading={bag[0]} size={10} />
                                             <hr />
                                           </div>
                                       }
                                     </div>
-                                    :
-                                    ""
                                 }
                               </div>
-                            
-                            
+                              :
+                              ""
                           }
 
                           <a className="content-align" href="#"><i tyle={{ fontWeight: "100" }}
@@ -310,6 +308,7 @@ function Header() {
                             </a>
                           }
                         </div>
+
                       </div>
                     </div>
                   </li>
