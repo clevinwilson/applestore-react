@@ -102,16 +102,16 @@ function Header() {
             {/* <!-- Bag for sm devices --> */}
             <div id="dropdown-content-sm" className={bagState ? " p-3 mb-2 dropdown-content-sm " : " p-3 mb-2 dropdown-content-sm content-hide "} >
               {
-                bag[0]?
-                  bag.map((items)=>{
-                    return(
+                bag[0] ?
+                  bag.map((items) => {
+                    return (
                       <div style={{ marginLeft: "20px" }} className="mt-3  dag-items row">
 
                         <div className="col-md-3 col-3">
                           <img style={{ objectFit: "contain", height: "100%", width: "46px" }} src={items.productDetails.productImage}
                             alt="" />
                         </div>
-                        <div style={{display:"flex",justifyContent:"center",alignItems:"center"}} className="col-md-9 col-9 bag-items-spec">
+                        <div style={{ display: "flex", justifyContent: "center", alignItems: "center" }} className="col-md-9 col-9 bag-items-spec">
                           <span>{items.productDetails.productName}</span><span className="ml-1">{items.selectedStorage.storage}
                           </span>
                           <span className='ml-1' >{items.color} </span>
@@ -119,11 +119,11 @@ function Header() {
                       </div>
                     )
                   })
-                :
-                <div>
+                  :
+                  <div>
                     {
-                      username?
-                      <div>
+                      username ?
+                        <div>
                           {
                             bag[0] ?
                               <div>
@@ -137,13 +137,13 @@ function Header() {
                                 <hr />
                               </div>
                           }
-                      </div>
-                      :
-                      ""
+                        </div>
+                        :
+                        ""
                     }
-                </div>
+                  </div>
               }
-             
+
               <div className="bag-options p-1  pl-4 pr-4">
                 <hr />
                 <a className="content-align" href="/"><i className="mr-2 fa-solid fa-bag-shopping"></i>Bag</a>
@@ -253,16 +253,16 @@ function Header() {
 
                                     </div>
                                     <hr />
-                                    <div  style={{ width: "100%", color:"white !important"}} className="mb-4 btn btn-primary text-white checkout-btn">Check Out</div>
+                                    <div style={{ width: "100%", color: "white !important" }} className="mb-4 btn btn-primary text-white checkout-btn">Check Out</div>
                                   </div>
                                 )
                               })
                               :
                               <div>
                                 {
-                                  username?
-                                  <div>
-                                    {
+                                  username ?
+                                    <div>
+                                      {
                                         bag[0] ?
                                           <div>
                                             <p className="m-4 p-1" style={{ color: "#6e6e73", fontSize: "13px" }}>Your Bag is empty.</p>
@@ -274,12 +274,14 @@ function Header() {
                                             <PropagateLoader color={"#0066cc"} loading={bag[1]} size={10} />
                                             <hr />
                                           </div>
-                                    }
-                                  </div>
-                                  :
-                                  ""
+                                      }
+                                    </div>
+                                    :
+                                    ""
                                 }
                               </div>
+                            
+                            
                           }
 
                           <a className="content-align" href="#"><i tyle={{ fontWeight: "100" }}
