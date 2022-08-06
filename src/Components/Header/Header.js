@@ -2,16 +2,18 @@ import React from 'react';
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { setUserLoginDetails, setSignoutState, selectUserEmail, selectUserName, selectUserPhoto } from '../../features/user/userSlice';
-import { auth } from '../Firebase/Firebase'
+import { setUserLoginDetails, setSignoutState, selectUserEmail, selectUserName, selectuserId, selectUserPhoto } from '../../features/user/userSlice';
+import { auth, db } from '../Firebase/Firebase';
+import PropagateLoader from "react-spinners/PropagateLoader";
 
 function Header() {
   const navigate = useNavigate();
-  const [bag, setBag] = useState(false);
+  const [bagState, setBagStage] = useState(false);
   const [nav, setNav] = useState(false);
   const username = useSelector(selectUserName);
   const dispatch = useDispatch();
-
+  const userid = useSelector(selectuserId);
+  const [bag, setBag] = useState([]);
 
   function signOut() {
     auth.signOut().then(() => {
@@ -30,6 +32,16 @@ function Header() {
         userId: user.uid
       })
     )
+  }
+  const getBag = () => {
+    console.log(userid);
+
+    db.collection('bag').where("userid", "==", userid).get().then((snapshort) => {
+      const allPhones = snapshort.docs.map((product) => {
+        console.log(product.data());
+        setBag([...bag, product.data()])
+      })
+    })
   }
 
   useEffect(() => {
@@ -55,7 +67,15 @@ function Header() {
                   src="https://www.apple.com/ac/globalnav/6/en_IN/images/be15095f-5a20-57d0-ad14-cf4c638e223a/globalnav_apple_image__cxwwnrj0urau_large.svg"
                   style={{ height: "53px " }} alt="" /></a>
 
-                <a onClick={() => { setBag(!bag) }} id="sm-bag" className="text-light bag"><i class="fa-solid fa-bag-shopping"></i></a>
+                <a onClick={() => {
+                  if (username && !bagState) {
+
+                    console.log(bag);
+                    getBag();
+                  }
+                  setBag([]);
+                  setBagStage(!bagState)
+                }} id="sm-bag" className="text-light bag"><i class="fa-solid fa-bag-shopping"></i></a>
               </div>
 
               <input className="search-bar mb-3 p-3 mr-3 ml-3" type="text" placeholder="  🔍 Search apple.com" />
@@ -80,8 +100,50 @@ function Header() {
             </div>
 
             {/* <!-- Bag for sm devices --> */}
-            <div id="dropdown-content-sm" class={bag ? " p-3 mb-2 dropdown-content-sm " : " p-3 mb-2 dropdown-content-sm content-hide "} >
-              <p className="bag-items-list m-4 p-1" style={{ color: "#6e6e73", fontSize: "13px" }}>Your Bag is empty.</p>
+            <div id="dropdown-content-sm" className={bagState ? " p-3 mb-2 dropdown-content-sm " : " p-3 mb-2 dropdown-content-sm content-hide "} >
+              {
+                bag[0]?
+                  bag.map((items)=>{
+                    return(
+                      <div style={{ marginLeft: "20px" }} className="mt-3  dag-items row">
+
+                        <div className="col-md-3 col-3">
+                          <img style={{ objectFit: "contain", height: "100%", width: "46px" }} src={items.productDetails.productImage}
+                            alt="" />
+                        </div>
+                        <div style={{display:"flex",justifyContent:"center",alignItems:"center"}} className="col-md-9 col-9 bag-items-spec">
+                          <span>{items.productDetails.productName}</span><span className="ml-1">{items.selectedStorage.storage}
+                          </span>
+                          <span className='ml-1' >{items.color} </span>
+                        </div>
+                      </div>
+                    )
+                  })
+                :
+                <div>
+                    {
+                      username?
+                      <div>
+                          {
+                            bag[0] ?
+                              <div>
+                                <p className="m-4 p-1" style={{ color: "#6e6e73", fontSize: "13px" }}>Your Bag is empty.</p>
+                                <hr />
+                              </div>
+
+                              :
+                              <div className='mb-4' style={{ display: "flex", justifyContent: "center", alignItems: "center" }}>
+                                <PropagateLoader color={"#0066cc"} loading={bag[1]} size={10} />
+                                <hr />
+                              </div>
+                          }
+                      </div>
+                      :
+                      ""
+                    }
+                </div>
+              }
+             
               <div className="bag-options p-1  pl-4 pr-4">
                 <hr />
                 <a className="content-align" href="/"><i className="mr-2 fa-solid fa-bag-shopping"></i>Bag</a>
@@ -95,24 +157,24 @@ function Header() {
                 <a className="content-align" href="/"><i style={{ fontWeight: "100" }} className="mr-2 fas fa-cog"></i>
                   Account</a>
                 <hr />
-              
-                  {username ?
 
-                  <a className="content-align" onClick={() => { signOut(); setBag(!bag);  }}>
-                    <i style={{ fontWeight: "100" }} className="mr-2 fas fa-user-circle"></i> Sign out {username} 
+                {username ?
+
+                  <a className="content-align" onClick={() => { signOut(); setBagStage(!bagState); }}>
+                    <i style={{ fontWeight: "100" }} className="mr-2 fas fa-user-circle"></i> Sign out {username}
                   </a>
-                  : 
-                  
-                  <a className="content-align" onClick={() => {  setBag(!bag); }}>
+                  :
+
+                  <a className="content-align" onClick={() => { setBagStage(!bagState); }}>
                     <i style={{ fontWeight: "100" }} className="mr-2 fas fa-user-circle"></i>Sign in
                   </a>
-                  }
+                }
               </div>
             </div>
 
 
             <nav id="navbar" style={{ position: "fixed", width: "100%", zIndex: "1" }}
-              className={bag ? "navdbar navbar-expand-md nav-bg  navbar-dark nav-background" : "navdbar navbar-expand-md nav-bg  navbar-dark"}>
+              className={bagState ? "navdbar navbar-expand-md nav-bg  navbar-dark nav-background" : "navdbar navbar-expand-md nav-bg  navbar-dark"}>
               {/* <!-- Toggler/collapsibe Button --> */}
               <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
                 <span className="navbar-toggler-icon"></span>
@@ -157,37 +219,95 @@ function Header() {
                       className=" fa fa-search"></i></a>
                   </li>
                   {/* <!-- //bag section --> */}
-                  <li onClick={() => { setBag(!bag) }} class="nav-item-box nav-item" >
+                  <li onClick={() => {
+                    if (username && !bagState) {
+
+                      console.log(bag);
+                      getBag();
+                    }
+                    setBag([]);
+                    setBagStage(!bagState)
+                  }} class="nav-item-box nav-item" >
                     <div className=" dropdown">
                       <i class="text-white fa-solid fa-bag-shopping"></i>
-                      <div id="dropdown-content" className={bag ? "p-3 mb-2 dropdown-content display-content" : "p-3 mb-2 dropdown-content"}>
-                        <p className="m-4 p-1" style={{ color: "#6e6e73", fontSize: "13px" }}>Your Bag is empty.</p>
-                        <hr />
-                        <a className="content-align" href="#"><i tyle={{ fontWeight: "100" }}
-                          className="mr-2 fas fa-shopping-bag"></i>Bag</a>
-                        <hr />
-                        <a className="content-align" href="#"><i style={{ fontWeight: "100" }} className="mr-2 far fa-heart"></i>
-                          Favourites</a>
-                        <hr />
-                        <a className="content-align" href="#"><i tyle={{ fontWeight: "100" }} className="mr-2 fas fa-box"></i>
-                          Orders</a>
-                        <hr />
-                        <a className="content-align" href="#"><i tyle={{ fontWeight: "100" }} className="mr-2 fas fa-cog"></i>
-                          Account</a>
-                        <hr />
+                      <div id="dropdown-content" className={bagState ? "p-3 mb-2 dropdown-content display-content" : "p-3 mb-2 dropdown-content"}>
+                        <div class="account">
+                          {
+                            bag ?
+                              bag.map((items, key) => {
+                                return (
+                                  <div key={key}>
+                                    <div style={{ display: "flex", alignItems: "center" }} class="mt-3 dag-items row">
 
-                        {username ?
+                                      <div class="col-md-3">
+                                        <img style={{ objectFit: "contain", height: "100%", width: "32px" }}
+                                          src={items.productDetails.productImage} alt="" />
+                                      </div>
+                                      <div style={{ textAlign: "start", fontSize: "16px" }} class="pl-3 col-md-9 bag-items-spec">
+                                        <div>
+                                          <span>{items.productDetails.productName}</span><span class="ml-1">{items.selectedStorage.storage}
+                                          </span>
+                                        </div>
+                                        <span className='d-block mt-1'>{items.color} </span>
+                                      </div>
 
-                          < a className="content-align" onClick={signOut} ><i tyle={{ fontWeight: "100" }}
-                            className="mr-2 fas fa-user-circle"></i>Sign out {username} 
-                          </a>
+                                    </div>
+                                    <hr />
+                                    <div  style={{ width: "100%", color:"white !important"}} className="mb-4 btn btn-primary text-white checkout-btn">Check Out</div>
+                                  </div>
+                                )
+                              })
+                              :
+                              <div>
+                                {
+                                  username?
+                                  <div>
+                                    {
+                                        bag[0] ?
+                                          <div>
+                                            <p className="m-4 p-1" style={{ color: "#6e6e73", fontSize: "13px" }}>Your Bag is empty.</p>
+                                            <hr />
+                                          </div>
 
-                          :
+                                          :
+                                          <div className='mb-4' style={{ display: "flex", justifyContent: "center", alignItems: "center" }}>
+                                            <PropagateLoader color={"#0066cc"} loading={bag[1]} size={10} />
+                                            <hr />
+                                          </div>
+                                    }
+                                  </div>
+                                  :
+                                  ""
+                                }
+                              </div>
+                          }
 
-                          <a className="content-align" href="/signin"><i tyle={{ fontWeight: "100" }}
-                            className="mr-2 fas fa-user-circle"></i>Sign in
-                          </a>
-                        }
+                          <a className="content-align" href="#"><i tyle={{ fontWeight: "100" }}
+                            className="mr-2 fas fa-shopping-bag"></i>Bag</a>
+                          <hr />
+                          <a className="content-align" href="#"><i style={{ fontWeight: "100" }} className="mr-2 far fa-heart"></i>
+                            Favourites</a>
+                          <hr />
+                          <a className="content-align" href="#"><i tyle={{ fontWeight: "100" }} className="mr-2 fas fa-box"></i>
+                            Orders</a>
+                          <hr />
+                          <a className="content-align" href="#"><i tyle={{ fontWeight: "100" }} className="mr-2 fas fa-cog"></i>
+                            Account</a>
+                          <hr />
+
+                          {username ?
+
+                            < a className="content-align" onClick={signOut} ><i tyle={{ fontWeight: "100" }}
+                              className="mr-2 fas fa-user-circle"></i>Sign out {username}
+                            </a>
+
+                            :
+
+                            <a className="content-align" href="/signin"><i tyle={{ fontWeight: "100" }}
+                              className="mr-2 fas fa-user-circle"></i>Sign in
+                            </a>
+                          }
+                        </div>
                       </div>
                     </div>
                   </li>

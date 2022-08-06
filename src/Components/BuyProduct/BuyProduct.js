@@ -1,13 +1,14 @@
 import React, { useRef, useState, useEffect } from 'react'
 import styled from 'styled-components';
 import ScrollIntoView from 'react-scroll-into-view';
-import { useParams } from 'react-router-dom';
+import { useParams,useNavigate } from 'react-router-dom';
 import { db } from "../Firebase/Firebase";
 import { useDispatch, useSelector } from 'react-redux';
 import { selectUserEmail, selectUserName, selectuserId } from '../../features/user/userSlice';
 
 function BuyProduct() {
   const { id } = useParams();
+  const navigate=useNavigate();
   const username = useSelector(selectUserName);
   const userid = useSelector(selectuserId);
   const [productDetails, setProductDetails] = useState({});
@@ -16,7 +17,7 @@ function BuyProduct() {
   const [storageDiv, setStorageDiv] = useState(false);
   const [price, setPrice] = useState("");
   const [color, setColor] = useState("");
-  const [storagePrice,setStoragePrice]=useState("");
+  const [selectedStorage, setSelectedStorage]=useState("");
   const date = new Date();
 
   useEffect(() => {
@@ -40,16 +41,21 @@ function BuyProduct() {
   const addToBag = (e) => {
     e.preventDefault();
     console.log(userid);
-    db.collection('bag').add({
-      productId:id,
-      userid:userid,
-      price,
-      color,
-      storagePrice,
-      createdAt: date.toDateString(date),
-    }).then((data) => {
-      console.log('added');
-    })
+    if(username){
+      db.collection('bag').add({
+        productId: id,
+        userid: userid,
+        price,
+        productDetails,
+        color,
+        selectedStorage,
+        createdAt: date.toDateString(date),
+      }).then((data) => {
+        console.log('added');
+      })
+    }else{
+      navigate('/signin')
+    }
 
 
     // db.collection("products").doc(id)
@@ -210,7 +216,7 @@ function BuyProduct() {
                             return (
                               <label onClick={() => {
                                 setPrice(parseInt(storage.price) + parseInt(productDetails.productPrice));
-                                setStoragePrice(storage.price)
+                                setSelectedStorage(storage)
                                 console.log(price);
                                 console.log(color);
                               }} class="mt-3 poduct-container text-center col-md-6  col-6 ">
