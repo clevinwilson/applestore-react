@@ -114,16 +114,21 @@ function Header() {
                                 <img style={{ objectFit: "contain", height: "100%", width: "46px" }} src={items.productDetails.productImage}
                                   alt="" />
                               </div>
-                              <div style={{ display: "flex", justifyContent: "center", alignItems: "center" }} className="col-md-9 col-9 bag-items-spec">
-                                <span>{items.productDetails.productName}</span><span className="ml-1">{items.selectedStorage.storage}
-                                </span>
+                              <div style={{fontSize:"12px", display: "flex", justifyContent: "center", alignItems: "center" }} className="col-md-9 col-9 bag-items-spec">
+                                <span>{items.productDetails.productName}</span>
+                                <span className="ml-1 " >{items.selectedStorage.storage}</span>
                                 <span className='ml-1' >{items.color} </span>
                               </div>
+                              
                             </div>
                           )
                         })
                         :
                         <div>
+                          <div className='mb-4' style={{ display: "flex", justifyContent: "center", alignItems: "center" }}>
+                            <PropagateLoader color={"#0066cc"} loading={bag[0]} size={10} />
+                            <hr />
+                          </div>
                           {
                             bag[0] ?
                               <div>
@@ -132,10 +137,7 @@ function Header() {
                               </div>
 
                               :
-                              <div className='mb-4' style={{ display: "flex", justifyContent: "center", alignItems: "center" }}>
-                                <PropagateLoader color={"#0066cc"} loading={bag[0]} size={10} />
-                                <hr />
-                              </div>
+                             ""
                           }
                         </div>
                     }
@@ -165,7 +167,7 @@ function Header() {
                   </a>
                   :
 
-                  <a className="content-align" onClick={() => { setBagStage(!bagState); }}>
+                  <a className="content-align" onClick={() => { setBagStage(!bagState); navigate('/signin') }}>
                     <i style={{ fontWeight: "100" }} className="mr-2 fas fa-user-circle"></i>Sign in
                   </a>
                 }
@@ -262,18 +264,22 @@ function Header() {
                                     })
                                     :
                                     <div>
+                                      <div className='mb-4' style={{ display: "flex", justifyContent: "center", alignItems: "center" }}>
+                                        <PropagateLoader color={"#0066cc"} loading={bag[0]} size={10} />
+                                        <hr />
+                                      </div>
                                       {
+                                        
                                         bag[0] ?
                                           <div>
                                             <p className="m-4 p-1" style={{ color: "#6e6e73", fontSize: "13px" }}>Your Bag is empty.</p>
                                             <hr />
+                                            
                                           </div>
+                                          
 
                                           :
-                                          <div className='mb-4' style={{ display: "flex", justifyContent: "center", alignItems: "center" }}>
-                                            <PropagateLoader color={"#0066cc"} loading={bag[0]} size={10} />
-                                            <hr />
-                                          </div>
+                                         ""
                                       }
                                     </div>
                                 }
