@@ -808,7 +808,7 @@ hr.hamburger-hr {
 
 @media screen and (max-width: 768px) {
     .product-listing {
-        padding: 32px
+        padding: 29px
     }
 
     .typography-headline {
@@ -893,7 +893,7 @@ hr.hamburger-hr {
 }
 
 .product-link {
-    padding: 23px;
+    padding-top: 23px;
     margin-top: 45px;
     border-top: 1px solid #d2d2d7;
 }

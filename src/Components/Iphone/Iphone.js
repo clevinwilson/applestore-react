@@ -85,12 +85,12 @@ function Iphone() {
 
                         </div>
                     </div>
-                    <div id="iphones" class="row m-1">
+                    <div style={{ display: "flex", justifyContent: "center", alignItems: "end" }} id="iphones" class="row mt-3">
                         {
                             phones[0] ?
                                 phones.map((phone, key) => {
                                     return (
-                                        <div key={key} class="col-md-3 m-3 col-6 p-0 ">
+                                        <div key={key} class="col-md-3 m-3 col-4 p-0 ">
                                             <div class="product-image-outer text-center">
                                                 <img class="product-image image-compare-iphone-12-pro" src={phone.productImage} />
                                                 <div class="device-title ">
@@ -104,47 +104,49 @@ function Iphone() {
                                                         </Link>
                                                     </div>
                                                 </div>
-                                                <div class="mt-5 device-details">
-                                                    <h4 style={{ fontSize: "17px" }} class="device-details-head">{phone.display}</h4>
-                                                    <p class="device-details-text">all-screen OLED display1</p>
-                                                </div>
-                                                <div class="device-memory mt-5">
-                                                    <img src="/images/icon_5g__ew2qs88wie4i_large.png" alt="" />
-                                                    <p class="mt-2 device-details-text">5G capable</p>
-                                                </div>
-                                                <div class="device-chip mt-5 ">
-                                                    <img src={phone.processorImage} alt="" />
-                                                    <p class="mt-2 device-details-text">{phone.processor}</p>
-                                                    <p class="device-subtext">Fastest chip in a smartphone</p>
-                                                </div>
-                                                <div class="mt-5 device-details">
-                                                    <h4 class="device-details-head">{phone.storageOptions[0].storage}</h4>
-                                                    <p class="device-details-text">Maximum configurable storage2</p>
-                                                </div>
-                                                <div class="device-memory mt-5">
-                                                    <img src="/images/icon_triple_camera__e6vgz42wpwom_large.png" alt="" />
-                                                    <p class="mt-2 device-details-text">Pro camera system</p>
-                                                    <p class="device-subtext">Ultra Wide, Wide, Telephoto
+                                                <div>
+                                                    <div class="mt-5 device-details">
+                                                        <h4 style={{ fontSize: "17px" }} class="device-details-head">{phone.display}</h4>
+                                                        <p class="device-details-text">all-screen OLED display1</p>
+                                                    </div>
+                                                    <div class="device-memory mt-5">
+                                                        <img src="/images/icon_5g__ew2qs88wie4i_large.png" alt="" />
+                                                        <p class="mt-2 device-details-text">5G capable</p>
+                                                    </div>
+                                                    <div class="device-chip mt-5 ">
+                                                        <img src={phone.processorImage} alt="" />
+                                                        <p class="mt-2 device-details-text">{phone.processor}</p>
+                                                        <p class="device-subtext">Fastest chip in a smartphone</p>
+                                                    </div>
+                                                    <div class="mt-5 device-details">
+                                                        <h4 class="device-details-head">{phone.storageOptions[0].storage}</h4>
+                                                        <p class="device-details-text">Maximum configurable storage2</p>
+                                                    </div>
+                                                    <div class="device-memory mt-5">
+                                                        <img src="/images/icon_triple_camera__e6vgz42wpwom_large.png" alt="" />
+                                                        <p class="mt-2 device-details-text">Pro camera system</p>
+                                                        <p class="device-subtext">Ultra Wide, Wide, Telephoto
 
-                                                    </p>
-                                                </div>
-                                                <div class="device-chip mt-5 ">
-                                                    <img src="/images/icon_lidar__f6bhejsvbdqy_large.png" alt="" />
-                                                    <p class="mt-2 device-details-text">LiDAR Scanner</p>
-                                                    <p class="device-subtext">For Night mode portraits and next‑level AR </p>
-                                                </div>
-                                                <div class="device-memory mt-5">
-                                                    <img src="/images/icon_magsafe__ibh1kzdigzqm_large.png" alt="" />
-                                                    <p class="mt-2 device-details-text">Compatible with</p>
-                                                    <p class="device-subtext">MagSafe accessories </p>
-                                                </div>
-                                                <div class="product-link">
-                                                    <Link to={'/buy-product/' + phone.id}>
-                                                        <a style={{ fontSize: "14px", letterSpacing: "0.02em" }} > Learn more <span
-                                                            style={{ fontSize: "9px" }} class="fas fa-chevron-right"></span></a>
-                                                    </Link>
-                                                </div>
+                                                        </p>
+                                                    </div>
+                                                    <div class="device-chip mt-5 ">
+                                                        <img src="/images/icon_lidar__f6bhejsvbdqy_large.png" alt="" />
+                                                        <p class="mt-2 device-details-text">LiDAR Scanner</p>
+                                                        <p class="device-subtext">For Night mode portraits and next‑level AR </p>
+                                                    </div>
+                                                    <div class="device-memory mt-5">
+                                                        <img src="/images/icon_magsafe__ibh1kzdigzqm_large.png" alt="" />
+                                                        <p class="mt-2 device-details-text">Compatible with</p>
+                                                        <p class="device-subtext">MagSafe accessories </p>
+                                                    </div>
+                                                    <div class="product-link">
+                                                        <Link to={'/buy-product/' + phone.id}>
+                                                            <a style={{ fontSize: "14px", letterSpacing: "0.02em" }} > Learn more <span
+                                                                style={{ fontSize: "9px" }} class="fas fa-chevron-right"></span></a>
+                                                        </Link>
+                                                    </div>
 
+                                                </div>
                                             </div>
                                         </div>
                                     )

@@ -114,12 +114,12 @@ function Header() {
                                 <img style={{ objectFit: "contain", height: "100%", width: "46px" }} src={items.productDetails.productImage}
                                   alt="" />
                               </div>
-                              <div style={{fontSize:"12px", display: "flex", justifyContent: "center", alignItems: "center" }} className="col-md-9 col-9 bag-items-spec">
+                              <div style={{ fontSize: "12px", display: "flex", justifyContent: "center", alignItems: "center" }} className="col-md-9 col-9 bag-items-spec">
                                 <span>{items.productDetails.productName}</span>
                                 <span className="ml-1 " >{items.selectedStorage.storage}</span>
                                 <span className='ml-1' >{items.color} </span>
                               </div>
-                              
+
                             </div>
                           )
                         })
@@ -137,7 +137,7 @@ function Header() {
                               </div>
 
                               :
-                             ""
+                              ""
                           }
                         </div>
                     }
@@ -269,17 +269,17 @@ function Header() {
                                         <hr />
                                       </div>
                                       {
-                                        
+
                                         bag[0] ?
                                           <div>
                                             <p className="m-4 p-1" style={{ color: "#6e6e73", fontSize: "13px" }}>Your Bag is empty.</p>
                                             <hr />
-                                            
+
                                           </div>
-                                          
+
 
                                           :
-                                         ""
+                                          ""
                                       }
                                     </div>
                                 }
