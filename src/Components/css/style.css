@@ -680,9 +680,19 @@ hr.hamburger-hr {
     position: fixed;
 }
 
+.bottem-checkout-btn-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
 @media (min-width:768px) {
     .dropdown-content-sm {
         display: none !important;
+    }
+
+    .bottem-checkout-btn-container {
+        justify-content: flex-end !important;
     }
 }
 
@@ -717,7 +727,7 @@ hr.hamburger-hr {
 
 .imac-header-text {
     color: black;
-    font-size: 56px;
+    font-size: 34px;
     line-height: 1.07143;
     font-weight: 600;
     letter-spacing: -.005em;
@@ -754,7 +764,7 @@ hr.hamburger-hr {
     }
 
     .imac-header-text {
-        font-size: 32px;
+        font-size: 28px;
     }
 
     .imac-sub-text {
