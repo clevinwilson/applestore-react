@@ -74,7 +74,7 @@ function Bag() {
                                                 <h2 className="checkout-header-text imac-header-text bag-empty-text text-center ">Your bag is empty.</h2>
                                             </div>
                                             <div className=" m-4 text-center bag-header-btn">
-                                                <a style={{ backgroundColor: "#ebebeb !important", borderRadius: "12px" }} className="text-black p-3 btn btn-light checkout-btn">Continue Shopping</a>
+                                                <a onClick={()=>{navigate('/')}} style={{ backgroundColor: "#ebebeb !important", borderRadius: "12px" }} className="text-black p-3 btn btn-light checkout-btn">Continue Shopping</a>
                                             </div>
                                         </div>
                                 }
