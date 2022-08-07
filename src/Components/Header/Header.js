@@ -107,9 +107,11 @@ function Header() {
                   <div>
                     {
                       bag[0] ?
-                        bag.map((items) => {
-                          return (
-                            <div style={{ marginLeft: "20px" }} className="mt-3  dag-items row">
+                      <div>
+
+                       { bag.map((items) => {
+                         return (
+                           <div style={{ marginLeft: "20px" }} className="mt-3  dag-items row">
 
                               <div className="col-md-3 col-3">
                                 <img style={{ objectFit: "contain", height: "100%", width: "46px" }} src={items.productDetails.productImage}
@@ -124,6 +126,10 @@ function Header() {
                             </div>
                           )
                         })
+                        }
+                          <hr />
+                          <div style={{ width: "100%", color: "white !important" }} onClick={() => { navigate('/bag') }} className="mb-4 btn btn-primary text-white checkout-btn">Check Out</div>
+                        </div>
                         :
                         <div>
                           <div className='mb-4' style={{ display: "flex", justifyContent: "center", alignItems: "center" }}>
@@ -266,7 +272,7 @@ function Header() {
                                         })
                                       }
                                       <hr />
-                                      <div style={{ width: "100%", color: "white !important" }} className="mb-4 btn btn-primary text-white checkout-btn">Check Out</div>
+                                      <div style={{ width: "100%", color: "white !important" }} onClick={()=>{navigate('/bag')}} className="mb-4 btn btn-primary text-white checkout-btn">Check Out</div>
                                     </div>
                                     :
                                     <div>
