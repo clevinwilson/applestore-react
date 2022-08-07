@@ -157,13 +157,13 @@ function Header() {
                 <hr />
                 <a className="content-align" onClick={()=>{navigate('/bag')}}><i className="mr-2 fa-solid fa-bag-shopping"></i>Bag</a>
                 <hr />
-                <a className="content-align" ><i style={{ fontWeight: "100" }} className="mr-2 far fa-heart"></i>
+                <a onClick={() => { navigate('/favorite') }} className="content-align" ><i style={{ fontWeight: "100" }} className="mr-2 far fa-heart"></i>
                   Favourites</a>
                 <hr />
                 <a className="content-align" ><i style={{ fontWeight: "100" }} className="mr-2 fas fa-box"></i>
                   Orders</a>
                 <hr />
-                <a className="content-align" ><i style={{ fontWeight: "100" }} className="mr-2 fas fa-cog"></i>
+                <a onClick={() => { navigate('/account')}} className="content-align" ><i style={{ fontWeight: "100" }} className="mr-2 fas fa-cog"></i>
                   Account</a>
                 <hr />
 
@@ -303,13 +303,13 @@ function Header() {
                           <a className="content-align" onClick={()=>{navigate('/bag')}}><i tyle={{ fontWeight: "100" }}
                             className="mr-2 fas fa-shopping-bag"></i>Bag</a>
                           <hr />
-                          <a className="content-align" ><i style={{ fontWeight: "100" }} className="mr-2 far fa-heart"></i>
+                          <a onClick={() => { navigate('/favorite')}} className="content-align" ><i style={{ fontWeight: "100" }} className="mr-2 far fa-heart"></i>
                             Favourites</a>
                           <hr />
                           <a className="content-align" ><i tyle={{ fontWeight: "100" }} className="mr-2 fas fa-box"></i>
                             Orders</a>
                           <hr />
-                          <a className="content-align" ><i tyle={{ fontWeight: "100" }} className="mr-2 fas fa-cog"></i>
+                          <a onClick={() => { navigate('/account') }} className="content-align" ><i tyle={{ fontWeight: "100" }} className="mr-2 fas fa-cog"></i>
                             Account</a>
                           <hr />
 

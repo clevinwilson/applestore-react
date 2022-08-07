@@ -5,6 +5,7 @@ import Dashboard from './Components/Admin/Dashboard/Dashboard';
 import Login from './Components/Admin/Login/Login';
 import Bag from './Components/Bag/Bag';
 import BuyProduct from './Components/BuyProduct/BuyProduct';
+import Favorites from './Components/Favorites/Favorites';
 import Footer from './Components/Footer/Footer';
 import Header from './Components/Header/Header';
 import Home from './Components/Home/Home';
@@ -35,6 +36,9 @@ function App() {
       </Routes>
       <Routes>
         <Route path='/account' element={<Account/>} />
+      </Routes>
+      <Routes>
+        <Route path='/favorite' element={<Favorites/>} />
       </Routes>
 
       <Routes>
