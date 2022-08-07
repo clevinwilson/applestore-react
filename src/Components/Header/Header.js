@@ -128,7 +128,7 @@ function Header() {
                         })
                         }
                           <hr />
-                          <div style={{ width: "100%", color: "white !important" }} onClick={() => { navigate('/bag') }} className="mb-4 btn btn-primary text-white checkout-btn">Check Out</div>
+                          <div style={{ width: "100%", color: "white !important" }} onClick={() => { navigate('/bag'); setBagStage(false); }} className="mb-4 btn btn-primary text-white checkout-btn">Check Out</div>
                         </div>
                         :
                         <div>
@@ -272,7 +272,7 @@ function Header() {
                                         })
                                       }
                                       <hr />
-                                      <div style={{ width: "100%", color: "white !important" }} onClick={()=>{navigate('/bag')}} className="mb-4 btn btn-primary text-white checkout-btn">Check Out</div>
+                                      <div style={{ width: "100%", color: "white !important" }} onClick={() => { navigate('/bag'); setBagStage(false); }} className="mb-4 btn btn-primary text-white checkout-btn">Check Out</div>
                                     </div>
                                     :
                                     <div>
