@@ -52,6 +52,7 @@ function BuyProduct() {
         createdAt: date.toDateString(date),
       }).then((data) => {
         console.log('added');
+        navigate('/bag')
       })
     }else{
       navigate('/signin')
