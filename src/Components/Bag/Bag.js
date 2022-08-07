@@ -146,8 +146,6 @@ function Bag() {
 
                             </div>
 
-
-                            <div>
                                 <div className=" col-md-8 col-12">
                                     <div style={{ borderBottom: "1px solid #d2d2d7" }} className="pb-3 row">
                                         <div className="col-md-6 col-6">
@@ -200,7 +198,6 @@ function Bag() {
                                         </div>
                                     </div>
                                 </div>
-                            </div>
 
                         </div>
                     </div>
