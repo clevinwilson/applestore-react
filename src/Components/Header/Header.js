@@ -34,12 +34,14 @@ function Header() {
     )
   }
   const getBag = () => {
-
     db.collection('bag').where("userid", "==", userid).get().then((snapshort) => {
-      const allPhones = snapshort.docs.map((product) => {
-        console.log(product.data());
-        setBag([...bag, product.data()])
+      const bagDetails = snapshort.docs.map((product) => {
+        return (
+          product.data()
+        )
+
       })
+      setBag(bagDetails)
     })
   }
 
@@ -238,29 +240,34 @@ function Header() {
                               <div>
                                 {
                                   bag[0] ?
-                                    bag.map((items, key) => {
-                                      return (
-                                        <div key={key}>
-                                          <div style={{ display: "flex", alignItems: "center" }} class="mt-3 dag-items row">
+                                    <div>
+                                      {
+                                        bag.map((items, key) => {
+                                          return (
+                                            <div key={key}>
+                                              <div style={{ display: "flex", alignItems: "center" }} class="mt-3 dag-items row">
 
-                                            <div class="col-md-3">
-                                              <img style={{ objectFit: "contain", height: "100%", width: "32px" }}
-                                                src={items.productDetails.productImage} alt="" />
-                                            </div>
-                                            <div style={{ textAlign: "start", fontSize: "16px" }} class="pl-3 col-md-9 bag-items-spec">
-                                              <div>
-                                                <span>{items.productDetails.productName}</span><span class="ml-1">{items.selectedStorage.storage}
-                                                </span>
+                                                <div class="col-md-3">
+                                                  <img style={{ objectFit: "contain", height: "100%", width: "32px" }}
+                                                    src={items.productDetails.productImage} alt="" />
+                                                </div>
+                                                <div style={{ textAlign: "start", fontSize: "16px" }} class="pl-3 col-md-9 bag-items-spec">
+                                                  <div>
+                                                    <span>{items.productDetails.productName}</span><span class="ml-1">{items.selectedStorage.storage}
+                                                    </span>
+                                                  </div>
+                                                  <span className='d-block mt-1'>{items.color} </span>
+                                                </div>
+
                                               </div>
-                                              <span className='d-block mt-1'>{items.color} </span>
+                                              
                                             </div>
-
-                                          </div>
-                                          <hr />
-                                          <div style={{ width: "100%", color: "white !important" }} className="mb-4 btn btn-primary text-white checkout-btn">Check Out</div>
-                                        </div>
-                                      )
-                                    })
+                                          )
+                                        })
+                                      }
+                                      <hr />
+                                      <div style={{ width: "100%", color: "white !important" }} className="mb-4 btn btn-primary text-white checkout-btn">Check Out</div>
+                                    </div>
                                     :
                                     <div>
                                       <div className='mb-4' style={{ display: "flex", justifyContent: "center", alignItems: "center" }}>
