@@ -160,7 +160,7 @@ function Header() {
                 <a onClick={() => { navigate('/favorite') }} className="content-align" ><i style={{ fontWeight: "100" }} className="mr-2 far fa-heart"></i>
                   Favourites</a>
                 <hr />
-                <a className="content-align" ><i style={{ fontWeight: "100" }} className="mr-2 fas fa-box"></i>
+                <a onClick={() => { navigate('/order')}} className="content-align" ><i style={{ fontWeight: "100" }} className="mr-2 fas fa-box"></i>
                   Orders</a>
                 <hr />
                 <a onClick={() => { navigate('/account')}} className="content-align" ><i style={{ fontWeight: "100" }} className="mr-2 fas fa-cog"></i>
@@ -306,7 +306,7 @@ function Header() {
                           <a onClick={() => { navigate('/favorite')}} className="content-align" ><i style={{ fontWeight: "100" }} className="mr-2 far fa-heart"></i>
                             Favourites</a>
                           <hr />
-                          <a className="content-align" ><i tyle={{ fontWeight: "100" }} className="mr-2 fas fa-box"></i>
+                          <a onClick={() => { navigate('/order') }} className="content-align" ><i tyle={{ fontWeight: "100" }} className="mr-2 fas fa-box"></i>
                             Orders</a>
                           <hr />
                           <a onClick={() => { navigate('/account') }} className="content-align" ><i tyle={{ fontWeight: "100" }} className="mr-2 fas fa-cog"></i>

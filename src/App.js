@@ -10,6 +10,7 @@ import Footer from './Components/Footer/Footer';
 import Header from './Components/Header/Header';
 import Home from './Components/Home/Home';
 import Iphone from './Components/Iphone/Iphone';
+import Order from './Components/Order/Order';
 import Signin from './Components/Signin/Signin';
 import Signup from './Components/Signup/Signup';
 function App() {
@@ -39,6 +40,9 @@ function App() {
       </Routes>
       <Routes>
         <Route path='/favorite' element={<Favorites/>} />
+      </Routes>
+      <Routes>
+        <Route path='/order' element={<Order/>} />
       </Routes>
 
       <Routes>
