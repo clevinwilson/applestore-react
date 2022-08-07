@@ -1,4 +1,5 @@
 import { Route, Routes, BrowserRouter } from 'react-router-dom'
+import Account from './Components/Account/Account';
 import AddProduct from './Components/Admin/AddProduct/AddProduct';
 import Dashboard from './Components/Admin/Dashboard/Dashboard';
 import Login from './Components/Admin/Login/Login';
@@ -31,6 +32,9 @@ function App() {
       </Routes>
       <Routes>
         <Route path='/bag' element={<Bag/>} />
+      </Routes>
+      <Routes>
+        <Route path='/account' element={<Account/>} />
       </Routes>
 
       <Routes>
