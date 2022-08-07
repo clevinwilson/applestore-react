@@ -19,17 +19,17 @@ function Bag() {
                         id: product.id
                     }
                 )
-               
+
 
             })
-            
+
             const totalPrice = bagDetails.reduce((prev, next) => parseInt(prev) + parseInt(next.price), 0);
             setTotalCost(totalPrice)
             setBag(bagDetails)
             console.log(bagDetails);
         })
     }, [userid])
-    const removeFromBag=(id)=>{
+    const removeFromBag = (id) => {
         console.log(id);
         db.collection("bag").doc(id).delete().then(() => {
             console.log("Document successfully deleted!");
@@ -109,7 +109,7 @@ function Bag() {
                                                         <h4 className="text-end checkout-price">₹ {product.price}</h4>
                                                     </div>
                                                     <div className="col-md-12 text-end checkout-remove-container">
-                                                        <a className="mt-2 checkout-remove text-primary" onClick={()=>{
+                                                        <a className="mt-2 checkout-remove text-primary" onClick={() => {
                                                             removeFromBag(product.id)
                                                         }} >Remove</a>
                                                     </div>
@@ -138,69 +138,76 @@ function Bag() {
                 </div>
             </section>
 
+            {bag[0] ?
+                <section>
+                    <div className="container mt-5 ">
+                        <div className="row">
+                            <div className="col-md-4">
 
-            <section>
-                <div className="container mt-5 ">
-                    <div className="row">
-                        <div className="col-md-4">
+                            </div>
 
-                        </div>
 
-                        <div className=" col-md-8 col-12">
-                            <div style={{ borderBottom: "1px solid #d2d2d7" }} className="pb-3 row">
-                                <div className="col-md-6 col-6">
-                                    <div className="col-md-3 col-3">
-                                        <div className="shipping">
-                                            <h4 style={{ fontSize: " 17px" }}>Subtotal</h4>
+                            <div>
+                                <div className=" col-md-8 col-12">
+                                    <div style={{ borderBottom: "1px solid #d2d2d7" }} className="pb-3 row">
+                                        <div className="col-md-6 col-6">
+                                            <div className="col-md-3 col-3">
+                                                <div className="shipping">
+                                                    <h4 style={{ fontSize: " 17px" }}>Subtotal</h4>
+                                                </div>
+                                            </div>
+                                            <div className="col-md-3 col-3">
+                                                <div className="shipping">
+                                                    <h4 style={{ fontSize: " 17px" }}>Shipping</h4>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div className="col-md-6 col-6">
+                                            <div style={{ float: "right" }} className="col-md-12">
+                                                <div style={{ float: "right" }} className="shipping">
+                                                    <h4 style={{ color: "black", fontSize: " 17px" }}>₹ {totalCost}</h4>
+                                                </div>
+                                            </div>
+                                            <div className="col-md-12 col-12">
+                                                <div className="shipping">
+                                                    <h4 style={{ float: "right", color: "black", fontSize: "17px" }}>FREE</h4>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
-                                    <div className="col-md-3 col-3">
-                                        <div className="shipping">
-                                            <h4 style={{ fontSize: " 17px" }}>Shipping</h4>
-                                        </div>
-                                    </div>
-                                </div>
 
-                                <div className="col-md-6 col-6">
-                                    <div style={{ float: "right" }} className="col-md-12">
-                                        <div style={{ float: "right" }} className="shipping">
-                                            <h4 style={{ color: "black", fontSize: " 17px" }}>₹ {totalCost}</h4>
+                                    <div className="pb-3 mt-4 row">
+                                        <div className="col-md-6 col-6">
+                                            <div className="col-md-3 col-3">
+                                                <div className="shipping">
+                                                    <h4 className="checkout-product-name">Total</h4>
+                                                </div>
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div className="col-md-12 col-12">
-                                        <div className="shipping">
-                                            <h4 style={{ float: "right", color: "black", fontSize: "17px" }}>FREE</h4>
+                                        <div className="col-md-6 col-6">
+                                            <div style={{ float: "right" }} className="col-md-12">
+                                                <div style={{ float: "right" }} className="shipping">
+                                                    <h4 className="checkout-price">₹ {totalCost} </h4>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                        <div className='col-md-12'>
+                                            <div className="bottem-checkout-btn-container ">
+                                                <a style={{ width: "260px", backgroundColor: "#0071e3", borderColor: "#0071e3" }} href="/shipping" className="btn btn-primary bottem-checkout-btn checkout-btn mt-4 ">Check Out</a>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
 
-                            <div className="pb-3 mt-4 row">
-                                <div className="col-md-6 col-6">
-                                    <div className="col-md-3 col-3">
-                                        <div className="shipping">
-                                            <h4 className="checkout-product-name">Total</h4>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div className="col-md-6 col-6">
-                                    <div style={{ float: "right" }} className="col-md-12">
-                                        <div style={{ float: "right" }} className="shipping">
-                                            <h4 className="checkout-price">₹ {totalCost} </h4>
-                                        </div>
-                                    </div>
-
-                                </div>
-                                <div className='col-md-12'>
-                                    <div className="bottem-checkout-btn-container ">
-                                        <a style={{ width: "260px", backgroundColor: "#0071e3", borderColor: "#0071e3" }} href="/shipping" className="btn btn-primary bottem-checkout-btn checkout-btn mt-4 ">Check Out</a>
-                                    </div>
-                                </div>
-                            </div>
                         </div>
                     </div>
-                </div>
-            </section>
+                </section>
+                :
+                ""
+            }
         </div>
     )
 }
