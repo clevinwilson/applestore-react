@@ -81,7 +81,7 @@ function Header() {
 
               <input className="search-bar mb-3 p-3 mr-3 ml-3" type="text" placeholder="  🔍 Search apple.com" />
               <hr className=" hamburger-hr" />
-              <a href="mac.html">iMac</a>
+              <a >iMac</a>
               <hr style={{ marginLleft: "20px", marginRight: "20px " }} />
               <hr className="ml-4 mr-4 hamburger-hr" />
 
@@ -89,15 +89,15 @@ function Header() {
               <hr style={{ marginLeft: "20px", marginRight: "20px" }} />
               <hr className="ml-4 mr-4 hamburger-hr" />
 
-              <a href="#">Watch</a>
+              <a >Watch</a>
               <hr style={{ marginLeft: "20px", marginRight: "20px" }} />
               <hr className="ml-4 mr-4 hamburger-hr" />
 
-              <a href="support.html">Support</a>
+              <a >Support</a>
               <hr style={{ marginLeft: "20px", marginRight: "20px" }} />
               <hr className="ml-4 mr-4 hamburger-hr" />
 
-              <a href="#">iPad</a>
+              <a >iPad</a>
             </div>
 
             {/* <!-- Bag for sm devices --> */}
@@ -155,15 +155,15 @@ function Header() {
 
               <div className="bag-options p-1  pl-4 pr-4">
                 <hr />
-                <a className="content-align" href="/"><i className="mr-2 fa-solid fa-bag-shopping"></i>Bag</a>
+                <a className="content-align" onClick={()=>{navigate('/bag')}}><i className="mr-2 fa-solid fa-bag-shopping"></i>Bag</a>
                 <hr />
-                <a className="content-align" href="/"><i style={{ fontWeight: "100" }} className="mr-2 far fa-heart"></i>
+                <a className="content-align" ><i style={{ fontWeight: "100" }} className="mr-2 far fa-heart"></i>
                   Favourites</a>
                 <hr />
-                <a className="content-align" href="/"><i style={{ fontWeight: "100" }} className="mr-2 fas fa-box"></i>
+                <a className="content-align" ><i style={{ fontWeight: "100" }} className="mr-2 fas fa-box"></i>
                   Orders</a>
                 <hr />
-                <a className="content-align" href="/"><i style={{ fontWeight: "100" }} className="mr-2 fas fa-cog"></i>
+                <a className="content-align" ><i style={{ fontWeight: "100" }} className="mr-2 fas fa-cog"></i>
                   Account</a>
                 <hr />
 
@@ -198,7 +198,7 @@ function Header() {
                         alt="" /></a>
                   </li>
                   <li className="nav-item-box nav-item">
-                    <a className="nav-link" href="mac.html"><img
+                    <a className="nav-link" ><img
                       src="https://www.apple.com/ac/globalnav/6/en_IN/images/be15095f-5a20-57d0-ad14-cf4c638e223a/globalnav_links_mac_image__fv4ktb435mum_large.svg"
                       alt="" /></a>
                   </li>
@@ -209,22 +209,22 @@ function Header() {
                       alt="" /></a>
                   </li>
                   <li className="nav-item-box nav-item">
-                    <a className="nav-link" href="#"><img
+                    <a className="nav-link" ><img
                       src="https://www.apple.com/ac/globalnav/6/en_IN/images/be15095f-5a20-57d0-ad14-cf4c638e223a/globalnav_links_watch_image__dfo5u4bhooqe_large.svg"
                       alt="" /></a>
                   </li>
                   <li className="nav-item-box nav-item">
-                    <a className="nav-link" href="support.html"><img
+                    <a className="nav-link" ><img
                       src="https://www.apple.com/ac/globalnav/6/en_IN/images/be15095f-5a20-57d0-ad14-cf4c638e223a/globalnav_links_support_image__b24reo1n4fbm_large.svg"
                       alt="" /></a>
                   </li>
                   <li className="nav-item-box nav-item">
-                    <a className="text-white nav-link " href="#"><img
+                    <a className="text-white nav-link " ><img
                       src="https://www.apple.com/ac/globalnav/6/en_IN/images/be15095f-5a20-57d0-ad14-cf4c638e223a/globalnav_links_ipad_image__fefum478f4uq_large.svg"
                       alt="" /></a>
                   </li>
                   <li className="nav-item-box nav-item">
-                    <a className="text-white nav-icon nav-link " href="#"><i tyle={{ fontWeight: "100" }}
+                    <a className="text-white nav-icon nav-link " ><i tyle={{ fontWeight: "100" }}
                       className=" fa fa-search"></i></a>
                   </li>
                   {/* <!-- //bag section --> */}
@@ -300,16 +300,16 @@ function Header() {
                               ""
                           }
 
-                          <a className="content-align" href="#"><i tyle={{ fontWeight: "100" }}
+                          <a className="content-align" onClick={()=>{navigate('/bag')}}><i tyle={{ fontWeight: "100" }}
                             className="mr-2 fas fa-shopping-bag"></i>Bag</a>
                           <hr />
-                          <a className="content-align" href="#"><i style={{ fontWeight: "100" }} className="mr-2 far fa-heart"></i>
+                          <a className="content-align" ><i style={{ fontWeight: "100" }} className="mr-2 far fa-heart"></i>
                             Favourites</a>
                           <hr />
-                          <a className="content-align" href="#"><i tyle={{ fontWeight: "100" }} className="mr-2 fas fa-box"></i>
+                          <a className="content-align" ><i tyle={{ fontWeight: "100" }} className="mr-2 fas fa-box"></i>
                             Orders</a>
                           <hr />
-                          <a className="content-align" href="#"><i tyle={{ fontWeight: "100" }} className="mr-2 fas fa-cog"></i>
+                          <a className="content-align" ><i tyle={{ fontWeight: "100" }} className="mr-2 fas fa-cog"></i>
                             Account</a>
                           <hr />
 
