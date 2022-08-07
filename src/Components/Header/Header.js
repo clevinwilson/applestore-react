@@ -49,7 +49,7 @@ function Header() {
         setUser(user);
       }
     })
-  }, [username])
+  }, [userid])
 
   return (
     <div>
