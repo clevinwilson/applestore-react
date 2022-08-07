@@ -14,16 +14,30 @@ function Bag() {
         db.collection('bag').where("userid", "==", userid).get().then((snapshort) => {
             const bagDetails = snapshort.docs.map((product) => {
                 return (
-                    product.data()
+                    {
+                        ...product.data(),
+                        id: product.id
+                    }
                 )
+               
 
             })
+            
             const totalPrice = bagDetails.reduce((prev, next) => parseInt(prev) + parseInt(next.price), 0);
             setTotalCost(totalPrice)
             setBag(bagDetails)
             console.log(bagDetails);
         })
     }, [userid])
+    const removeFromBag=(id)=>{
+        console.log(id);
+        db.collection("bag").doc(id).delete().then(() => {
+            console.log("Document successfully deleted!");
+            window.location.reload(false);
+        }).catch((error) => {
+            console.error("Error removing document: ", error);
+        });
+    }
     return (
         <div>
             <section className="bg-white ribbon">
@@ -95,7 +109,9 @@ function Bag() {
                                                         <h4 className="text-end checkout-price">₹ {product.price}</h4>
                                                     </div>
                                                     <div className="col-md-12 text-end checkout-remove-container">
-                                                        <a className="mt-2 checkout-remove" href="/remove-bag-item/{{this.product.deviceId}}">Remove</a>
+                                                        <a className="mt-2 checkout-remove text-primary" onClick={()=>{
+                                                            removeFromBag(product.id)
+                                                        }} >Remove</a>
                                                     </div>
                                                 </div>
                                             </div>
