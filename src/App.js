@@ -10,7 +10,9 @@ import Footer from './Components/Footer/Footer';
 import Header from './Components/Header/Header';
 import Home from './Components/Home/Home';
 import Iphone from './Components/Iphone/Iphone';
+import Iphone12 from './Components/Iphone12/Iphone12';
 import Order from './Components/Order/Order';
+import Shipping from './Components/Shipping/Shipping';
 import Signin from './Components/Signin/Signin';
 import Signup from './Components/Signup/Signup';
 function App() {
@@ -44,6 +46,13 @@ function App() {
       <Routes>
         <Route path='/order' element={<Order/>} />
       </Routes>
+      <Routes>
+        <Route path='/iphone12' element={<Iphone12/>} />
+      </Routes>
+      <Routes>
+        <Route path='/shipping' element={<Shipping/>} />
+      </Routes>
+      
 
       <Routes>
         <Route path='/admin' element={<Login />} />
