@@ -2,14 +2,21 @@ import React, { useEffect, useState } from 'react'
 import styled from 'styled-components'
 import { selectuserId } from '../../features/user/userSlice';
 import { useSelector } from 'react-redux';
-import { db } from '../Firebase/Firebase'
+import { db } from '../Firebase/Firebase';
+import { async } from '@firebase/util';
+import { useNavigate } from 'react-router-dom';
+
 
 function Shipping() {
+    const navigate = useNavigate();
     const [addressDiv, setAddressDiv] = useState(false);
     const [newAddressDiv, setNewAddressDiv] = useState(false);
     const [defaultAddress, setDefaultAddress] = useState(true);
+
     const userid = useSelector(selectuserId);
     const [userDetails, setUserDetails] = useState({});
+    const [productDetails, setProductDetails] = useState();
+
     const [firstName, setFirstName] = useState();
     const [lastName, setLastName] = useState();
     const [address1, setAddress1] = useState();
@@ -17,8 +24,8 @@ function Shipping() {
     const [landmark, setLandMark] = useState();
     const [pincode, setPinCode] = useState();
     const [cityState, setCityState] = useState();
-
-
+    const [phoneNumber, setPhoneNumber] = useState();
+    const date = new Date();
 
     useEffect(() => {
         db.collection('users').where("id", "==", userid).get().then((snapshort) => {
@@ -32,39 +39,138 @@ function Shipping() {
                 )
             })
             setUserDetails(user[0])
+        })
 
+        db.collection('bag').where("userid", "==", userid).get().then((snapshort) => {
+            const bagDetails = snapshort.docs.map((product) => {
+                return (
+                    {
+                        ...product.data(),
+                        id: product.id
+                    }
+                )
+            })
+            bagDetails.totalPrice = bagDetails.reduce((prev, next) => parseInt(prev) + parseInt(next.price), 0);
+            setProductDetails(bagDetails)
         })
     }, [userid])
+    const createOrder = (address) => {
+        return new Promise((resolve, reject) => {
+            db.collection('orders').add({
+                userid,
+                orderedDate: date.toDateString(date),
+                address,
+                totalPrice: productDetails.totalPrice,
+                productDetails,
+                paymentStatus: "pending"
+            }).then((docRef) => {
+                console.log("Document written with ID: ", docRef.id);
+                resolve(docRef.id)
+            }).catch((error) => {
+                console.error("Error adding document: ", error);
+            });
+        })
+    }
+    const razorpay = (orderId) => {
+        return new Promise((resolve, reject) => {
+            var options = {
+                key: "rzp_test_W0uqgk1VTLITu8",
+                key_secret: "POeBAM2O0IcZmWXlXbQpQYHm",
+                amount: productDetails.totalPrice * 100,
+                currency: "INR",
+                name: "Apple store",
+                description: "For testing purpose",
+                handler: function (response) {
+                    resolve(response.razorpay_payment_id)
+                },
+                prefill: {
+                    name: userDetails.firstName,
+                    email: userDetails.email,
+                    contact: phoneNumber
+                },
+                notes: {
+                    address: "Razorpay Corporate office"
+                },
+                theme: {
+                    color: "black"
+                }
+            };
+            var pay = new window.Razorpay(options);
+            pay.open();
+        })
+    }
+    const changePaymentStatus = (orderId) => {
+        return new Promise((resolve, reject) => {
+            db.collection('orders').doc(orderId).update({
+                paymentStatus: "paid"
+            }).then(() => {
+                resolve(true)
+            })
+                .catch((error) => {
+                    console.error("Error writing document: ", error);
+                });
 
-    const doPayment = () => {
-        console.log(userDetails.address.hasOwnProperty('defaultAddress'));
+        })
+    }
+    const removeProductsFromBag=()=>{
+        console.log(productDetails[0].id);
+        return new Promise((resolve,reject)=>{
+            db.collection("bag").doc(productDetails[0].id).delete().then(() => {
+                resolve(true)
+            }).catch((error) => {
+                console.error("Error removing document: ", error);
+            });
+        })
+    }
+
+    const doPayment = async () => {
         if (defaultAddress) {
             if (userDetails.address.hasOwnProperty('defaultAddress')) {
+                if (phoneNumber) {
+                    const orderId = await createOrder(userDetails.address.defaultAddress)
+                    const paymentId = await razorpay(orderId);
+                    const paymentStatus = await changePaymentStatus(orderId)
+                    const removeProducts = await removeProductsFromBag();
+                    if (paymentStatus && removeProducts) {
+                        navigate('/')
+                    }
 
+                } else {
+                    alert("Fill all fields")
+                }
             } else {
                 setDefaultAddress(false);
                 window.scrollTo(0, 0)
             }
         } else if (newAddressDiv) {
-
+            if (firstName && lastName && address1 && pincode && cityState && phoneNumber) {
+                const orderId = await createOrder({ firstName, lastName, address1, address2, landmark, pincode, cityState, country: "India" });
+                const paymentId = await razorpay(orderId);
+                const paymentStatus = await changePaymentStatus(orderId)
+                const removeProducts = await removeProductsFromBag();
+                if (paymentStatus && removeProducts) {
+                    navigate('/')
+                }
+            } else {
+                alert("Fill all fields")
+            }
         }
     }
-    const addDefaultAddress=()=>{
-        const useraddress={
-            firstName,
-            lastName,
-            address1,
-            address2,
-            landmark,
-            pincode,
-            cityState,
-            country:"India"
-        }
+    const addDefaultAddress = () => {
         db.collection('users').doc(userDetails.userdocid).update({
-           "address":{
-                "defaultAddress":useraddress
-           }
-           
+            "address": {
+                "defaultAddress": {
+                    firstName,
+                    lastName,
+                    address1,
+                    address2,
+                    landmark,
+                    pincode,
+                    cityState,
+                    country: "India"
+                }
+            }
+
         })
             .then(() => {
                 console.log("Document successfully written!");
@@ -120,15 +226,20 @@ function Shipping() {
                                         <input onClick={() => { setNewAddressDiv(false); setDefaultAddress(true); }} type="radio" onclick="hideAddressForm()" className="radio-btn" id="address-option"
                                             name="addressOption" value="defaultAddress" required />
                                         <div className="device-model-select product-model">
-                                            {userDetails.id ?
+                                            {userDetails.address ?
                                                 <div className="device-radio">
                                                     <span className="device-price-right">Default</span>
-                                                    <span className="model-title">{userDetails.firstName} {userDetails.lastName} </span>
+                                                    <span className="model-title">{userDetails.address.defaultAddress.firstName} {userDetails.address.defaultAddress.lastName} </span>
                                                     <span className="screen-size pb-3 ">{userDetails.address.defaultAddress.address1} {userDetails.address.defaultAddress.cityState} {userDetails.address.defaultAddress.country} </span>
 
                                                 </div>
-                                                :""
-                                           }
+                                                :
+                                                <div className="device-radio">
+                                                    <span className="device-price-right">Default</span>
+                                                    <span className="model-title">No Address </span>
+
+                                                </div>
+                                            }
                                         </div>
                                     </label>
 
@@ -139,7 +250,7 @@ function Shipping() {
                                           className="content-align" >Edit this address</a>
                                   </div> */}
 
-                                    <div onClick={() => { setNewAddressDiv(false); setAddressDiv(true); defaultAddress(false); }} className="edit-address">
+                                    <div onClick={() => { setNewAddressDiv(false); setAddressDiv(true); }} className="edit-address">
                                         <a style={{ fontSize: " 15px", color: " #267af7" }}
                                             className={defaultAddress ? "content-align" : "content-align text-danger"} href="#">Edit this address</a>
                                     </div>
@@ -154,7 +265,7 @@ function Shipping() {
 
                             <div className="row">
                                 <di className="col-md-6">
-                                    <label onClick={() => { setNewAddressDiv(true) }} className="mt-3 poduct-container col-md-12 p-0 ">
+                                    <label onClick={() => { setNewAddressDiv(true); setDefaultAddress(false) }} className="mt-3 poduct-container col-md-12 p-0 ">
                                         <input type="radio" onclick="showAddressForm()" className="radio-btn" id="addressOption"
                                             name="addressOption" value="newAddress" required />
                                         <div className="device-model-select  new-address product-model">
@@ -267,8 +378,13 @@ function Shipping() {
                                             placeholder="Email Address" value={userDetails.email} required />
                                     </div>
                                     <div className="number ">
-                                        <input style={{ borderRadius: "10px" }} type="text" className="mt-3 form-input-padding form-control"
-                                            id="number" name="number" value={userDetails.phone} placeholder="India Mobile Number"
+                                        <input
+                                            onChange={(e) => {
+                                                setPhoneNumber(e.target.value);
+                                            }}
+                                            value={phoneNumber}
+                                            style={{ borderRadius: "10px" }} type="text" className="mt-3 form-input-padding form-control"
+                                            id="number" name="number" placeholder="India Mobile Number"
                                             required />
                                     </div>
                                     {/* <input type="text" name="userId" value="{{user._id}}" hidden> */}
@@ -390,8 +506,8 @@ function Shipping() {
 
                             <div className="bottem-checkout-btn-container col-md-12 p-3  ">
                                 <a
-                                onClick={addDefaultAddress}
-                                 type="submit" id="submit"
+                                    onClick={addDefaultAddress}
+                                    type="submit" id="submit"
                                     className="text-white col-md-12 btn btn-primary bottem-shipping-btn checkout-btn mb-4  ">Save
                                     Changes</a>
                             </div>

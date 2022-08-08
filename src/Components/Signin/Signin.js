@@ -31,7 +31,7 @@ function Signin() {
                     id: result.user.uid,
                     firstName: result.user.displayName,
                     phone: result.user.phoneNumber,
-                    address: {},
+                    address: false,
                     email: result.user.email
                 }).then((docRef) => {
                     setUser(result.user)

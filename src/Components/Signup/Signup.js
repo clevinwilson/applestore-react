@@ -52,7 +52,7 @@ function Signup() {
                   lastName: lastName,
                   phone: phone,
                   email: email,
-                  address:{}
+                  address:false
               }).then((docRef) => {
                   console.log("Document written with ID: ", docRef.id);
                   navigate('/signin')
