@@ -1,7 +1,8 @@
-import React from 'react'
+import React, { useState } from 'react'
 import styled from 'styled-components'
 
 function Shipping() {
+    const [addressDiv,setAddressDiv]=useState(false);
   return (
     <Container>
           {/* <!-- ribborn --> */}
@@ -58,11 +59,11 @@ function Shipping() {
                                   
 
                                   <div class="edit-address">
-                                      <a style={{fontSize: "15px" ,color: "red" }} data-toggle="modal" data-target="#defaultAddress"
-                                          class="content-align" href="#">Edit this address</a>
+                                      <a onClick={() => { setAddressDiv(true); }} style={{fontSize: "15px" ,color: "red" }} 
+                                          class="content-align" >Edit this address</a>
                                   </div>
                                   
-                                  <div class="edit-address">
+                                  <div onClick={() => { setAddressDiv(true) }} class="edit-address">
                                       <a style={{fontSize:" 15px" ,color:" #267af7"}} data-toggle="modal"
                                           data-target="#defaultAddress" class="content-align" href="#">Edit this address</a>
                                   </div>
@@ -191,13 +192,13 @@ function Shipping() {
           </div>
 
           {/* <!-- default address Modal--> */}
-          <div style={{ backgroundColor: "#000000c9", display: "block", overflow: " auto" }} class="modal fade" id="defaultAddressModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+          <div  class={addressDiv ? "modal fade modal-show" :"modal fade"} id="defaultAddressModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
               aria-hidden="true">
               <div style={{marginTop: "88px"}} class="text-center modal-dialog" role="document">
                   <div class="modal-content">
                       <div class="modal-header">
                           <h2 style={{color: "black",}}  class="modal-title text-black " id="exampleModalLabel">Edit Address</h2>
-                          <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                          <button onClick={() => { setAddressDiv(false) }} class="close" type="button" data-dismiss="modal" aria-label="Close">
                               <span aria-hidden="true">×</span>
                           </button>
                       </div>
@@ -257,6 +258,12 @@ function Shipping() {
 const Container=styled.div`
 #defaultAddressModal::-webkit-scrollbar {
     display: none !important;
+}
+.modal-show{
+    opacity:1;
+    background-color: #000000c9;
+    display: block;
+    overflow: auto 
 }
 `
 
