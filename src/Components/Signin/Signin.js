@@ -1,7 +1,7 @@
 import React,{useState} from 'react'
 import styled from 'styled-components';
 import {useNavigate} from 'react-router-dom';
-import { auth, provider } from '../Firebase/Firebase';
+import { auth, provider,db } from '../Firebase/Firebase';
 import { useDispatch, useSelector } from 'react-redux';
 import { setUserLoginDetails, setSignoutState, selectUserEmail, selectUserName, selectUserPhoto } from '../../features/user/userSlice';
 
@@ -19,6 +19,7 @@ function Signin() {
                 name: user.displayName,
                 email: user.email,
                 photo: user.photoURL,
+                userId: user.uid
             })
         )
     }
@@ -26,10 +27,18 @@ function Signin() {
         auth
             .signInWithPopup(provider)
             .then((result) => {
-
-                setUser(result.user)
-                navigate('/');
-
+                db.collection("users").add({
+                    id: result.user.uid,
+                    firstName: result.user.displayName,
+                    phone: result.user.phoneNumber,
+                    address: {},
+                    email: result.user.email
+                }).then((docRef) => {
+                    setUser(result.user)
+                    navigate('/');
+                }).catch((error) => {
+                    console.error("Error adding document: ", error);
+                });
             }).catch((error) => {
                 alert("Error");
             });
@@ -46,6 +55,7 @@ function Signin() {
                     name: userCredential.user._delegate.displayName,
                     email: userCredential.user._delegate.email,
                     photo: "",
+                    uid: userCredential.user._delegate.uid
                 }
                 setUser(user);
                 navigate('/');

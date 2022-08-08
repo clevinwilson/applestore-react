@@ -22,6 +22,7 @@ function Signup() {
                 name: user.displayName,
                 email: user.email,
                 photo: user.photoURL,
+                userId: user.uid
             })
         )
     }
@@ -49,7 +50,9 @@ function Signup() {
                   id: userCredential.user._delegate.uid,
                   firstName: firstName,
                   lastName: lastName,
-                  phone: phone
+                  phone: phone,
+                  email: email,
+                  address:{}
               }).then((docRef) => {
                   console.log("Document written with ID: ", docRef.id);
                   navigate('/signin')
