@@ -62,7 +62,8 @@ function Shipping() {
                 address,
                 totalPrice: productDetails.totalPrice,
                 productDetails,
-                paymentStatus: "pending"
+                paymentStatus: "pending",
+                orderStatus:"0"
             }).then((docRef) => {
                 console.log("Document written with ID: ", docRef.id);
                 resolve(docRef.id)
@@ -102,7 +103,8 @@ function Shipping() {
     const changePaymentStatus = (orderId) => {
         return new Promise((resolve, reject) => {
             db.collection('orders').doc(orderId).update({
-                paymentStatus: "paid"
+                paymentStatus: "paid",
+                orderStatus:"1"
             }).then(() => {
                 resolve(true)
             })
@@ -132,7 +134,7 @@ function Shipping() {
                     const paymentStatus = await changePaymentStatus(orderId)
                     const removeProducts = await removeProductsFromBag();
                     if (paymentStatus && removeProducts) {
-                        navigate('/')
+                        navigate('/order')
                     }
 
                 } else {
@@ -149,7 +151,7 @@ function Shipping() {
                 const paymentStatus = await changePaymentStatus(orderId)
                 const removeProducts = await removeProductsFromBag();
                 if (paymentStatus && removeProducts) {
-                    navigate('/')
+                    navigate('/order')
                 }
             } else {
                 alert("Fill all fields")
