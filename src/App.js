@@ -9,6 +9,7 @@ import Favorites from './Components/Favorites/Favorites';
 import Footer from './Components/Footer/Footer';
 import Header from './Components/Header/Header';
 import Home from './Components/Home/Home';
+import Ipad from './Components/Ipad/Ipad';
 import Iphone from './Components/Iphone/Iphone';
 import Iphone12 from './Components/Iphone12/Iphone12';
 import Order from './Components/Order/Order';
@@ -55,6 +56,9 @@ function App() {
       </Routes>
       <Routes>
         <Route path='/watch' element={<Watch/>}/>
+      </Routes>
+      <Routes>
+        <Route path='/ipad' element={<Ipad/>} />
       </Routes>
       
 

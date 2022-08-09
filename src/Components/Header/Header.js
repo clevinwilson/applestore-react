@@ -97,7 +97,7 @@ function Header() {
               <hr style={{ marginLeft: "20px", marginRight: "20px" }} />
               <hr className="ml-4 mr-4 hamburger-hr" />
 
-              <a >iPad</a>
+              <a onClick={()=>{navigate('/ipad')}} >iPad</a>
             </div>
 
             {/* <!-- Bag for sm devices --> */}
@@ -219,7 +219,7 @@ function Header() {
                       alt="" /></a>
                   </li>
                   <li className="nav-item-box nav-item">
-                    <a className="text-white nav-link " ><img
+                    <a onClick={() => { navigate("/ipad")}} className="text-white nav-link " ><img
                       src="https://www.apple.com/ac/globalnav/6/en_IN/images/be15095f-5a20-57d0-ad14-cf4c638e223a/globalnav_links_ipad_image__fefum478f4uq_large.svg"
                       alt="" /></a>
                   </li>
