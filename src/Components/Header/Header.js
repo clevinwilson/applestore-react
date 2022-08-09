@@ -325,11 +325,9 @@ function Header() {
                               < a className="content-align" onClick={signOut} ><i tyle={{ fontWeight: "100" }}
                                 className="mr-2 fas fa-user-circle"></i>Sign out {username}
                               </a>
-                              <hr />
                             </div>
 
                             :
-
                             <a className="content-align" href="/signin"><i tyle={{ fontWeight: "100" }}
                               className="mr-2 fas fa-user-circle"></i>Sign in
                             </a>
