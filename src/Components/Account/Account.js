@@ -1,6 +1,21 @@
 import React from 'react'
+import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+import { setUserLoginDetails, setSignoutState, selectUserEmail, selectUserName, selectuserId, selectUserPhoto } from '../../features/user/userSlice';
+import { auth, db } from '../Firebase/Firebase';
 
 function Account() {
+    const username = useSelector(selectUserName);
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
+    function signOut() {
+        auth.signOut().then(() => {
+            dispatch(setSignoutState());
+            navigate('/');
+        }).catch((error) => {
+            alert('Error')
+        });
+    }
   return (
     <div>
           <section class="bg-white ribbon">
@@ -10,14 +25,14 @@ function Account() {
                           <p class="text-center shipping-ribbon-text">Account </p>
                       </div>
                       <div class="pt-3 bg-white ribbon-covid-19 col-md-8 col-8">
-                          <a style={{float: "right"}} class="content-align" href="/logout"><i style={{fontWeight: "100"}}></i>Sign out
+                          <a onClick={signOut} style={{float: "right"}} class="content-align" ><i style={{fontWeight: "100"}}></i>Sign out
                           </a>
                       </div>
                   </div>
                   <div class="row">
                       <div class="col-md-4 mb-3">
                           <div class="text-center username-container">
-                              <h2 class="rs-header-welcome-text">Hi, Clevin</h2>
+                              <h2 class="rs-header-welcome-text">Hi, {username ? username:""}</h2>
                           </div>
                       </div>
                   </div>

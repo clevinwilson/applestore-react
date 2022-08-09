@@ -59,7 +59,7 @@ function Header() {
         <div className="row">
           <div className="col-md-12">
             {/* <!-- hamburger menu for small devices --> */}
-            <div id="mySidenav" className={nav ? "sidenav sidenav-open" : "sidenav "}>
+            <div id="mySidenav" className={nav ? "sidenav sidenav-open text-white" : "text-white sidenav "}>
               <a id="closebtn" className="closebtn" onClick={() => { setNav(!nav) }}><i
                 style={{ fontSize: "26px" }} className={!nav ? "text-white fas fa-equals " : "text-white fa-solid fa-xmark"}></i></a>
 
@@ -81,11 +81,11 @@ function Header() {
 
               <input className="search-bar mb-3 p-3 mr-3 ml-3" type="text" placeholder="  🔍 Search apple.com" />
               <hr className=" hamburger-hr" />
-              <a >iMac</a>
+              <a  >iMac</a>
               <hr style={{ marginLleft: "20px", marginRight: "20px " }} />
               <hr className="ml-4 mr-4 hamburger-hr" />
 
-              <a style={{ color: "#818181" }} onClick={() => { navigate('/iphone'); setNav(!nav) }}>iPhone</a>
+              <a style={{ color: "white" }} onClick={() => { navigate('/iphone'); setNav(!nav) }}>iPhone</a>
               <hr style={{ marginLeft: "20px", marginRight: "20px" }} />
               <hr className="ml-4 mr-4 hamburger-hr" />
 
@@ -154,7 +154,12 @@ function Header() {
               }
 
               <div className="bag-options p-1  pl-4 pr-4">
-                <hr />
+                
+
+                {username ?
+
+                <div>
+                  <hr />
                 <a className="content-align" onClick={()=>{navigate('/bag')}}><i className="mr-2 fa-solid fa-bag-shopping"></i>Bag</a>
                 <hr />
                 <a onClick={() => { navigate('/favorite') }} className="content-align" ><i style={{ fontWeight: "100" }} className="mr-2 far fa-heart"></i>
@@ -166,12 +171,12 @@ function Header() {
                 <a onClick={() => { navigate('/account')}} className="content-align" ><i  className="mr-2 fas fa-cog"></i>
                   Account</a>
                 <hr />
+                    <a className="content-align" onClick={() => { signOut(); setBagStage(!bagState); }}>
+                      <i style={{ fontWeight: "100" }} className="mr-2 fas fa-user-circle"></i> Sign out {username}
+                    </a>
+                </div>
 
-                {username ?
-
-                  <a className="content-align" onClick={() => { signOut(); setBagStage(!bagState); }}>
-                    <i style={{ fontWeight: "100" }} className="mr-2 fas fa-user-circle"></i> Sign out {username}
-                  </a>
+                 
                   :
 
                   <a className="content-align" onClick={() => { setBagStage(!bagState); navigate('/signin') }}>
@@ -300,24 +305,27 @@ function Header() {
                               ""
                           }
 
-                          <a className="content-align" onClick={()=>{navigate('/bag')}}><i tyle={{ fontWeight: "100" }}
-                            className="mr-2 fas fa-shopping-bag"></i>Bag</a>
-                          <hr />
-                          <a onClick={() => { navigate('/favorite')}} className="content-align" ><i style={{ fontWeight: "100" }} className="mr-2 far fa-heart"></i>
-                            Favourites</a>
-                          <hr />
-                          <a onClick={() => { navigate('/order') }} className="content-align" ><i tyle={{ fontWeight: "100" }} className="mr-2 fas fa-box"></i>
-                            Orders</a>
-                          <hr />
-                          <a onClick={() => { navigate('/account') }} className="content-align" ><i tyle={{ fontWeight: "100" }} className="mr-2 fas fa-cog"></i>
-                            Account</a>
-                          <hr />
+                         
 
                           {username ?
 
-                            < a className="content-align" onClick={signOut} ><i tyle={{ fontWeight: "100" }}
-                              className="mr-2 fas fa-user-circle"></i>Sign out {username}
-                            </a>
+                            <div>
+                              <a className="content-align" onClick={() => { navigate('/bag') }}><i tyle={{ fontWeight: "100" }}
+                                className="mr-2 fas fa-shopping-bag"></i>Bag</a>
+                              <hr />
+                              <a onClick={() => { navigate('/favorite') }} className="content-align" ><i style={{ fontWeight: "100" }} className="mr-2 far fa-heart"></i>
+                                Favourites</a>
+                              <hr />
+                              <a onClick={() => { navigate('/order') }} className="content-align" ><i tyle={{ fontWeight: "100" }} className="mr-2 fas fa-box"></i>
+                                Orders</a>
+                              <hr />
+                              <a onClick={() => { navigate('/account') }} className="content-align" ><i tyle={{ fontWeight: "100" }} className="mr-2 fas fa-cog"></i>
+                                Account</a>
+                              < a className="content-align" onClick={signOut} ><i tyle={{ fontWeight: "100" }}
+                                className="mr-2 fas fa-user-circle"></i>Sign out {username}
+                              </a>
+                              <hr />
+                            </div>
 
                             :
 
