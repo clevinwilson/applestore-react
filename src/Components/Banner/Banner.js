@@ -12,10 +12,10 @@ function Banner() {
               <h4 className="imac-promo-title">New</h4>
               <h2 className="imac-header-text  ">iPhone 13 Pro</h2>
               <div className="mt-1 banner-links">
-                <a href="/buy-product/614f5e54a197c8334c2b35bd">Learn more <i
+                <a >Learn more <i
                   className="banner-links-icons fa-solid fa-angle-right"></i></a>
               </div>
-              <a href="/buy-product/614f5e54a197c8334c2b35bd">
+              <a >
                 <div className="mt-5 banner-image-box imac-banner">
                   <img id="imacImage" class="imac-image iphone13pro-index-image"
                     src="/images/13_pro_endframe__e2ilgjcwisuq_large.jpg" alt=""/>
@@ -37,7 +37,7 @@ function Banner() {
                 <a style={{color: "#daa6cb"}} href="/iphone">Learn more <i
                   class="banner-links-icons font-weight-normal fas fa-chevron-right"></i></a>
               </div>
-              <a href="/buy-product/614a329df73af142d88716f7">
+              <a >
                 <div class="mt-5 banner-image-box imac-banner">
                   <img id="imacImage" class="imac-image iphone13pro-index-image"
                     src="/images/iphone_13_hero__fy4bx6w0wfma_large.jpg" alt=""/>
