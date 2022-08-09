@@ -6,7 +6,7 @@ function Watch() {
           {/* <!-- ribborn --> */}
           <section  class="mt-5 ribbon">
               <div class="bg-light container">
-                  <div class="row ">
+                  <div style={{ width: "100%" }} class="row ">
                       <div class="pt-3 ribbon-covid-19 col-md-12">
                           <p class="text-center ribbon-text">Shop now at the Apple Store online with many great ways to buy.
                               Get free,
@@ -19,7 +19,7 @@ function Watch() {
 
           {/* <!-- watch banner --> */}
           <section class="pt-5 bg-white">
-              <div class="row">
+              <div style={{width:"100%"}} class="row">
                   <div class="pt-2 col-md-12">
                       <div class="text-center text-light text">
                           <img style={{objectFit: "contain",width: "132px",height: "51px"}} src="/images/logo_watch_s7__dnxp9zoaom82_medium_2x.png" alt=""/>
@@ -38,7 +38,7 @@ function Watch() {
           </section>  
           {/* <!-- watch banner --> */}
           <section style={{backgroundColor: "#fafafa"}} class="p-3 macos-section">
-              <div class="row mt-5">
+              <div style={{ width: "100%" }} class="row mt-5">
                   <div class="col-md-6 macos">
 
                       <img class="mb-3"
