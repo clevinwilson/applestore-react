@@ -321,6 +321,7 @@ function Header() {
                               <hr />
                               <a onClick={() => { navigate('/account') }} className="content-align" ><i tyle={{ fontWeight: "100" }} className="mr-2 fas fa-cog"></i>
                                 Account</a>
+                              <hr />
                               < a className="content-align" onClick={signOut} ><i tyle={{ fontWeight: "100" }}
                                 className="mr-2 fas fa-user-circle"></i>Sign out {username}
                               </a>
