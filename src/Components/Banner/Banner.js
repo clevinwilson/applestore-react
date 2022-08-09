@@ -4,6 +4,52 @@ import styled from 'styled-components'
 function Banner() {
   return (
     <Container>
+      {/* <!-- iphone13pro banner --> */}
+      <section className="pt-5 bg-white">
+        <div style={{width:"100%"}} className="row">
+          <div className="pt-2 col-md-12">
+            <div className="text-center text-light text">
+              <h4 className="imac-promo-title">New</h4>
+              <h2 className="imac-header-text  ">iPhone 13 Pro</h2>
+              <div className="mt-1 banner-links">
+                <a href="/buy-product/614f5e54a197c8334c2b35bd">Learn more <i
+                  className="banner-links-icons fa-solid fa-angle-right"></i></a>
+              </div>
+              <a href="/buy-product/614f5e54a197c8334c2b35bd">
+                <div className="mt-5 banner-image-box imac-banner">
+                  <img id="imacImage" class="imac-image iphone13pro-index-image"
+                    src="/images/13_pro_endframe__e2ilgjcwisuq_large.jpg" alt=""/>
+                </div>
+              </a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* <!-- iphone banner --> */}
+      <section style={{backgroundColor: "#35283c"}} class="pt-5 ">
+        <div style={{width:"100%"}} class="row">
+          <div class="pt-2 col-md-12">
+            <div class="text-center text-light text">
+              <h1 style={{fontSize: "109px",fontWeight: "600"}}>13</h1>
+              <h2 class="imac-header-text  text-white ">iPhone 13</h2>
+              <div class="mt-1 banner-links">
+                <a style={{color: "#daa6cb"}} href="/iphone">Learn more <i
+                  class="banner-links-icons font-weight-normal fas fa-chevron-right"></i></a>
+              </div>
+              <a href="/buy-product/614a329df73af142d88716f7">
+                <div class="mt-5 banner-image-box imac-banner">
+                  <img id="imacImage" class="imac-image iphone13pro-index-image"
+                    src="/images/iphone_13_hero__fy4bx6w0wfma_large.jpg" alt=""/>
+                </div>
+              </a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+
+
       {/* <!-- ipad banner --> */}
       <section className="pt-4 banner">
         <div className="text-center text-light text">
