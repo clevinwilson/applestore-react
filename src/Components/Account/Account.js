@@ -59,7 +59,7 @@ function Account() {
                                   <h2 class="p-1 rs-account-link-tile-title">Your Favorites</h2>
                               </div>
                               <h3 class="p-1 rs-account-link-tile-description ">You favorite products.</h3>
-                              <a class="p-1" style={{ fontSize: "17px" }} href="/favorites">See your Favorites <i style={{ fontSize: "11px" }}
+                              <a class="p-1" style={{ fontSize: "17px" }} href="/favorite">See your Favorites <i style={{ fontSize: "11px" }}
                                   class="fas fa-chevron-right"></i></a>
                           </div>
                       </div>
