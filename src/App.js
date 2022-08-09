@@ -15,6 +15,7 @@ import Order from './Components/Order/Order';
 import Shipping from './Components/Shipping/Shipping';
 import Signin from './Components/Signin/Signin';
 import Signup from './Components/Signup/Signup';
+import Watch from './Components/Watch/Watch';
 function App() {
   return (
     <BrowserRouter>
@@ -51,6 +52,9 @@ function App() {
       </Routes>
       <Routes>
         <Route path='/shipping' element={<Shipping/>} />
+      </Routes>
+      <Routes>
+        <Route path='/watch' element={<Watch/>}/>
       </Routes>
       
 

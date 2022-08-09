@@ -89,7 +89,7 @@ function Header() {
               <hr style={{ marginLeft: "20px", marginRight: "20px" }} />
               <hr className="ml-4 mr-4 hamburger-hr" />
 
-              <a >Watch</a>
+              <a onClick={()=>{navigate('/watch')}} >Watch</a>
               <hr style={{ marginLeft: "20px", marginRight: "20px" }} />
               <hr className="ml-4 mr-4 hamburger-hr" />
 
@@ -209,7 +209,7 @@ function Header() {
                       alt="" /></a>
                   </li>
                   <li className="nav-item-box nav-item">
-                    <a className="nav-link" ><img
+                    <a onClick={() => { navigate('/watch') }} className="nav-link" ><img
                       src="https://www.apple.com/ac/globalnav/6/en_IN/images/be15095f-5a20-57d0-ad14-cf4c638e223a/globalnav_links_watch_image__dfo5u4bhooqe_large.svg"
                       alt="" /></a>
                   </li>
