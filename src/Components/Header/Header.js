@@ -60,11 +60,11 @@ function Header() {
           <div className="col-md-12">
             {/* <!-- hamburger menu for small devices --> */}
             <div id="mySidenav" className={nav ? "sidenav sidenav-open text-white" : "text-white sidenav "}>
-              <a id="closebtn" className="closebtn" onClick={() => { setNav(!nav) }}><i
+              <a id="closebtn" className="closebtn" onClick={() => { setNav(!nav); setBagStage(false); }}><i
                 style={{ fontSize: "26px" }} className={!nav ? "text-white fas fa-equals " : "text-white fa-solid fa-xmark"}></i></a>
 
               <div className="sm-header">
-                <a id="apple-logo" onClick={() => { navigate('/') }} className="apple-logo"><img
+                <a id="apple-logo" onClick={() => { navigate('/'); setNav(!nav) }} className="apple-logo"><img
                   src="https://www.apple.com/ac/globalnav/6/en_IN/images/be15095f-5a20-57d0-ad14-cf4c638e223a/globalnav_apple_image__cxwwnrj0urau_large.svg"
                   style={{ height: "53px " }} alt="" /></a>
 
@@ -76,6 +76,7 @@ function Header() {
                   }
                   setBag([]);
                   setBagStage(!bagState)
+                  setNav(false);
                 }} id="sm-bag" className="text-light bag"><i class="fa-solid fa-bag-shopping"></i></a>
               </div>
 
@@ -89,7 +90,7 @@ function Header() {
               <hr style={{ marginLeft: "20px", marginRight: "20px" }} />
               <hr className="ml-4 mr-4 hamburger-hr" />
 
-              <a onClick={()=>{navigate('/watch')}} >Watch</a>
+              <a onClick={() => { navigate('/watch'); setNav(!nav) } } >Watch</a>
               <hr style={{ marginLeft: "20px", marginRight: "20px" }} />
               <hr className="ml-4 mr-4 hamburger-hr" />
 
@@ -97,7 +98,7 @@ function Header() {
               <hr style={{ marginLeft: "20px", marginRight: "20px" }} />
               <hr className="ml-4 mr-4 hamburger-hr" />
 
-              <a onClick={()=>{navigate('/ipad')}} >iPad</a>
+              <a onClick={() => { navigate('/ipad'); setNav(!nav) }} >iPad</a>
             </div>
 
             {/* <!-- Bag for sm devices --> */}
