@@ -44,8 +44,7 @@ function Bag() {
                 <div className="bg-white container">
                     <div className="row ">
                         <div className="pt-3 bg-white ribbon-covid-19 col-md-12">
-                            <p className="text-center ribbon-text">Free contactless delivery. Some deliveries may be affected by local
-                                Covid-19 restrictions. See checkout for details. </p>
+                            <p className="text-center ribbon-text">Free contactless delivery. See checkout for details. </p>
                         </div>
                     </div>
                 </div>
